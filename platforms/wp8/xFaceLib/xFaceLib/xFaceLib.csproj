@@ -1,0 +1,402 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>10.0.20506</ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{D01A27BC-9837-4CD5-BEA5-4BD36FC83154}</ProjectGuid>
+    <ProjectTypeGuids>{C089C8C0-30E0-4E22-80C0-CE093F111A43};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>xFaceLib</RootNamespace>
+    <AssemblyName>xFaceLib</AssemblyName>
+    <TargetFrameworkIdentifier>WindowsPhone</TargetFrameworkIdentifier>
+    <TargetFrameworkVersion>v8.0</TargetFrameworkVersion>
+    <SilverlightVersion>$(TargetFrameworkVersion)</SilverlightVersion>
+    <SilverlightApplication>false</SilverlightApplication>
+    <ValidateXaml>true</ValidateXaml>
+    <MinimumVisualStudioVersion>11.0</MinimumVisualStudioVersion>
+    <ThrowErrorsInValidation>true</ThrowErrorsInValidation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\Debug</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;XFACE_LIB</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE;XFACE_LIB</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|x86' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\x86\Debug</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;XFACE_LIB</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|x86' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\x86\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE;XFACE_LIB</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|ARM' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>Bin\ARM\Debug</OutputPath>
+    <DefineConstants>TRACE;DEBUG;SILVERLIGHT;WINDOWS_PHONE;XFACE_LIB</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|ARM' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>Bin\ARM\Release</OutputPath>
+    <DefineConstants>TRACE;SILVERLIGHT;WINDOWS_PHONE;XFACE_LIB</DefineConstants>
+    <NoStdLib>true</NoStdLib>
+    <NoConfig>true</NoConfig>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Compile Include="..\src\ams\XAppInstaller.cs">
+      <Link>ams\XAppInstaller.cs</Link>
+    </Compile>
+    <Compile Include="..\src\ams\XAppInstallListener.cs">
+      <Link>ams\XAppInstallListener.cs</Link>
+    </Compile>
+    <Compile Include="..\src\ams\XAppManagement.cs">
+      <Link>ams\XAppManagement.cs</Link>
+    </Compile>
+    <Compile Include="..\src\ams\XInstallListener.cs">
+      <Link>ams\XInstallListener.cs</Link>
+    </Compile>
+    <Compile Include="..\src\ams\XPreinstalledAppBatchInstaller.cs">
+      <Link>ams\XPreinstalledAppBatchInstaller.cs</Link>
+    </Compile>
+    <Compile Include="..\src\ams\XPreInstallListener.cs">
+      <Link>ams\XPreInstallListener.cs</Link>
+    </Compile>
+    <Compile Include="..\src\ams\XStartAppInstaller.cs">
+      <Link>ams\XStartAppInstaller.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Log\XDebugLogListener.cs">
+      <Link>Log\XDebugLogListener.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Log\XLog.cs">
+      <Link>Log\XLog.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Log\XLogListener.cs">
+      <Link>Log\XLogListener.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Log\XSocketLogListener.cs">
+      <Link>Log\XSocketLogListener.cs</Link>
+    </Compile>
+    <Compile Include="..\src\mode\XAppRunningMode.cs">
+      <Link>mode\XAppRunningMode.cs</Link>
+    </Compile>
+    <Compile Include="..\src\mode\XLocalMode.cs">
+      <Link>mode\XLocalMode.cs</Link>
+    </Compile>
+    <Compile Include="..\src\mode\XOnlineMode.cs">
+      <Link>mode\XOnlineMode.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XAmsDelegate.cs">
+      <Link>runtime\XAmsDelegate.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XAppConfigParser.cs">
+      <Link>xmlParser\XAppConfigParser.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XAppConfigParserFactory.cs">
+      <Link>xmlParser\XAppConfigParserFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XAppConfigParserSchema1_0.cs">
+      <Link>xmlParser\XAppConfigParserSchema1_0.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XAppConfigParserW3C.cs">
+      <Link>xmlParser\XAppConfigParserW3C.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XAppController.cs">
+      <Link>runtime\XAppController.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XAppInfo.cs">
+      <Link>runtime\XAppInfo.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XApplication.cs">
+      <Link>runtime\XApplication.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XApplicationCreator.cs">
+      <Link>runtime\XApplicationCreator.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XApplicationList.cs">
+      <Link>runtime\XApplicationList.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XAppWebView.cs">
+      <Link>runtime\XAppWebView.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XCommand.cs">
+      <Link>runtime\XCommand.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XDOMStorageHelper.cs">
+      <Link>runtime\XDOMStorageHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XGeneralSystemBootstrap.cs">
+      <Link>runtime\XGeneralSystemBootstrap.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XJavaScriptEvaluator.cs">
+      <Link>runtime\XJavaScriptEvaluator.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XNativeApplication.cs">
+      <Link>runtime\XNativeApplication.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XPlayerSystemBootstrap.cs">
+      <Link>runtime\XPlayerSystemBootstrap.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XPushNotificationHelper.cs">
+      <Link>runtime\XPushNotificationHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XRuntime.cs">
+      <Link>runtime\XRuntime.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XSystemBootstrap.cs">
+      <Link>runtime\XSystemBootstrap.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XSystemConfiguration.cs">
+      <Link>runtime\XSystemConfiguration.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XUriMapper.cs">
+      <Link>runtime\XUriMapper.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XWebApplication.cs">
+      <Link>runtime\XWebApplication.cs</Link>
+    </Compile>
+    <Compile Include="..\src\runtime\XWhitelist.cs">
+      <Link>runtime\XWhitelist.cs</Link>
+    </Compile>
+    <Compile Include="..\src\SplashScreenControl\XSplashScreenControl.cs">
+      <Link>SplashScreenControl\XSplashScreenControl.cs</Link>
+      <DependentUpon>XSplashScreenControl.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\src\Util\XApplicationPersistence.cs">
+      <Link>Util\XApplicationPersistence.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Util\XConstant.cs">
+      <Link>Util\XConstant.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Util\XFile.cs">
+      <Link>Util\XFile.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Util\XResolutionHelper.cs">
+      <Link>Util\XResolutionHelper.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Util\XSafeBrowserScriptInvoker.cs">
+      <Link>Util\XSafeBrowserScriptInvoker.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Util\XSplashScreen.cs">
+      <Link>Util\XSplashScreen.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Util\XSystemTask.cs">
+      <Link>Util\XSystemTask.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Util\XUtils.cs">
+      <Link>Util\XUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\src\xFacePage.xaml.cs">
+      <Link>xFacePage.xaml.cs</Link>
+      <DependentUpon>xFacePage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="..\src\Zip\Checksums\Adler32.cs">
+      <Link>zip\Adler32.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Checksums\CRC32.cs">
+      <Link>zip\CRC32.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Checksums\IChecksum.cs">
+      <Link>zip\IChecksum.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Checksums\StrangeCRC.cs">
+      <Link>zip\StrangeCRC.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Core\FileSystemScanner.cs">
+      <Link>zip\FileSystemScanner.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Core\INameTransform.cs">
+      <Link>zip\INameTransform.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Core\IScanFilter.cs">
+      <Link>zip\IScanFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Core\NameFilter.cs">
+      <Link>zip\NameFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Core\PathFilter.cs">
+      <Link>zip\PathFilter.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Core\StreamUtils.cs">
+      <Link>zip\StreamUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Core\WindowsPathUtils.cs">
+      <Link>zip\WindowsPathUtils.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Encryption\PkzipClassic.cs">
+      <Link>zip\PkzipClassic.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\SharpZipBaseException.cs">
+      <Link>zip\SharpZipBaseException.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\Compression\Deflater.cs">
+      <Link>zip\Deflater.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\Compression\DeflaterConstants.cs">
+      <Link>zip\DeflaterConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\Compression\DeflaterEngine.cs">
+      <Link>zip\DeflaterEngine.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\Compression\DeflaterHuffman.cs">
+      <Link>zip\DeflaterHuffman.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\Compression\DeflaterPending.cs">
+      <Link>zip\DeflaterPending.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\Compression\Inflater.cs">
+      <Link>zip\Inflater.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\Compression\InflaterDynHeader.cs">
+      <Link>zip\InflaterDynHeader.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\Compression\InflaterHuffmanTree.cs">
+      <Link>zip\InflaterHuffmanTree.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\Compression\PendingBuffer.cs">
+      <Link>zip\PendingBuffer.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\Compression\Streams\DeflaterOutputStream.cs">
+      <Link>zip\DeflaterOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\Compression\Streams\InflaterInputStream.cs">
+      <Link>zip\InflaterInputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\Compression\Streams\OutputWindow.cs">
+      <Link>zip\OutputWindow.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\Compression\Streams\StreamManipulator.cs">
+      <Link>zip\StreamManipulator.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\IEntryFactory.cs">
+      <Link>zip\IEntryFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\WindowsNameTransform.cs">
+      <Link>zip\WindowsNameTransform.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\ZipConstants.cs">
+      <Link>zip\ZipConstants.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\ZipEntry.cs">
+      <Link>zip\ZipEntry.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\ZipEntryFactory.cs">
+      <Link>zip\ZipEntryFactory.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\ZipException.cs">
+      <Link>zip\ZipException.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\ZipExtraData.cs">
+      <Link>zip\ZipExtraData.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\ZipHelperStream.cs">
+      <Link>zip\ZipHelperStream.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\ZipInputStream.cs">
+      <Link>zip\ZipInputStream.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\ZipNameTransform.cs">
+      <Link>zip\ZipNameTransform.cs</Link>
+    </Compile>
+    <Compile Include="..\src\Zip\Zip\ZipOutputStream.cs">
+      <Link>zip\ZipOutputStream.cs</Link>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="..\src\SplashScreenControl\XSplashScreenControl.xaml">
+      <Link>SplashScreenControl\XSplashScreenControl.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="..\src\xFacePage.xaml">
+      <Link>xFacePage.xaml</Link>
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="..\src\resources\notification-beep.wav">
+      <Link>resources\notification-beep.wav</Link>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="..\src\WPToolKit\Toolkit.Content\ApplicationBar.Cancel.png">
+      <Link>Toolkit.Content\ApplicationBar.Cancel.png</Link>
+    </Content>
+    <Content Include="..\src\WPToolKit\Toolkit.Content\ApplicationBar.Check.png">
+      <Link>Toolkit.Content\ApplicationBar.Check.png</Link>
+    </Content>
+    <Content Include="..\src\WPToolKit\Toolkit.Content\ApplicationBar.Delete.png">
+      <Link>Toolkit.Content\ApplicationBar.Delete.png</Link>
+    </Content>
+    <Content Include="..\src\WPToolKit\Toolkit.Content\ApplicationBar.Select.png">
+      <Link>Toolkit.Content\ApplicationBar.Select.png</Link>
+    </Content>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\src\WPToolKit\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+    </Reference>
+    <Reference Include="UmengClassLibrary, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
+      <SpecificVersion>False</SpecificVersion>
+      <HintPath>..\src\UmengSDK\UmengClassLibrary.dll</HintPath>
+    </Reference>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\cordovalib\WPCordovaClassLib.csproj">
+      <Project>{FC6A1A70-892D-46AD-9E4A-9793F72AF780}</Project>
+      <Name>WPCordovaClassLib</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
+  <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
+  <ProjectExtensions />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target>
+  <Target Name="AfterBuild">
+  </Target>
+  -->
+</Project>

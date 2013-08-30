@@ -1,0 +1,152 @@
+<!--
+
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,maximum-scale=1.0,initial-scale=1.0" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"> <!-- ISO-8859-1 -->
+    <title>xFace Mobile Spec</title>
+    <link rel="stylesheet" href="../master.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" charset="utf-8" src="../base.js"></script>
+
+
+<script type="text/javascript" charset="utf-8">
+
+    var deviceReady = false;
+
+    /**
+     * Function called when page has finished loading.
+     */
+    function init() {
+        document.addEventListener("deviceready", function() {
+            deviceReady = true;
+            console.log("Device="+device.platform+" "+device.version);
+        }, false);
+        window.setTimeout(function() {
+            if (!deviceReady) {
+                alert("Error: xFace did not initialize.  Demo will not run correctly.");
+            }
+        },1000);
+    }
+
+    function getById(id) {
+        return document.querySelector(id);
+    }
+
+    function updateStatus(status) {
+        getById("#status").innerText = status;
+    }
+
+    function logit(s) {
+        getById("#content").innerHTML = s;
+    }
+
+    function findMessage(folderType) {
+        updateStatus("");
+        xFace.Messaging.createMessage(xFace.MessageTypes.SMSMessage, find, fail);
+        function find(message) {
+            message.body=getById("#body").value;
+            message.destinationAddresses=getById("#addr").value;
+            xFace.Messaging.findMessages(message, folderType, 0, 9, success, fail);
+            function success(messages) {
+                updateStatus("success");
+                var folderName;
+                if("inbox" == folderType) {
+                    folderName="收件箱";
+                }
+                else if("outbox" == folderType) {
+                    folderName="发件箱";
+                }
+                else if("sent" == folderType) {
+                    folderName="已发送信息";
+                }
+                else{
+                    folderName="草稿箱";
+                }
+                var len = messages.length;
+                if(len == 0) {
+                    logit(folderName+"中没有满足条件的短信");
+                }
+                else {
+                    var s = "在" +folderName+"找到了" + len + "条满足条件的短信<p/>";
+                    for(i=0; i<messages.length; i++){
+                        if("outbox" == folderType || "sent" == folderType){
+                            s += "收件人：";
+                        }
+                        else{
+                            s += "发件人：";
+                        }
+                        s += messages[i].destinationAddresses;
+                        s += "<br/>短信内容为:";
+                        s += messages[i].body;
+                        s += "<br/>信息的日期为：";
+                        s += messages[i].date;
+                        s += "<p/>"
+                        logit(s);
+                    }
+                }
+
+            }
+        }
+    }
+
+    function fail() {
+        updateStatus ("fail");
+    }
+
+</script>
+
+  </head>
+  <body onload="init();" id="stage" class="theme">
+
+    <h1>findMessages</h1>
+    <div id="descr">
+        测试说明: <br/>
+        <h3>测试查找短信的方法 </h3>
+        <h4>输入要查找的条件（支持模糊匹配"*"），输出符合条件的记录（没有输入条件代表没有限制，这里最多能查出10条满足条件的记录）</h4>
+    </div>
+    <div id="info">
+        status: <span id="status"></span><br/>
+    </div>
+
+    请输入要查找的条件:<br/>
+    目的地址:<br/>
+    <input type="text" name="addr" id="addr"/>
+    <br/>
+    短信内容:<br/>
+    <input type="text" name="body" id="body"/>
+    <br />
+
+    请选择要查找的短信所在的文件夹:<br/>
+    <h2>Action</h2>
+    <form>
+        <input type="radio" name="folderType" value="inbox" onclick="findMessage(this.value)" id="inbox">收件箱</input><br/>
+        <input type="radio" name="folderType" value="outbox" onclick="findMessage(this.value)" id="outbox">发件箱</input><br/>
+        <input type="radio" name="folderType" value="draft" onclick="findMessage(this.value)" id="draft">草稿箱</input><br/>
+        <input type="radio" name="folderType" value="sent" onclick="findMessage(this.value)" id="sentbox">发出的信息</input>
+    </form>
+    <br />
+    <div id="content"></div>
+    <h2> </h2><div class="backBtn" onclick="backHome();">Back</div>
+  </body>
+</html>
+

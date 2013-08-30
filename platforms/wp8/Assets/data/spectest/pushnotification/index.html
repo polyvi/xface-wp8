@@ -1,0 +1,102 @@
+<!--
+
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,maximum-scale=1.0,initial-scale=1.0" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"> <!-- ISO-8859-1 -->
+    <title>xFace Mobile Spec</title>
+    <link rel="stylesheet" href="../master.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" charset="utf-8" src="../base.js"></script>
+
+
+<script type="text/javascript" charset="utf-8">
+
+    var deviceReady = false;
+
+    /**
+     * Function called when page has finished loading.
+     */
+    function init() {
+        document.addEventListener("deviceready", function() {
+                deviceReady = true;
+                console.log("Device="+device.platform+" "+device.version);
+            }, false);
+        window.setTimeout(function() {
+            if (!deviceReady) {
+                alert("Error: xFace did not initialize.  Demo will not run correctly.");
+            }
+        },1000);
+    }
+
+    function success(deviceToken){
+        document.getElementById('result').innerText = "success:" + deviceToken;
+    };
+
+    function error(err){
+        document.getElementById('result').innerText = "error:" + err;
+    };
+
+    function printPushData(info){
+        document.getElementById('result').innerText = info;
+    };
+
+    function getDeviceToken() {
+        document.getElementById('status').innerText = "getDeviceToken";
+        xFace.PushNotification.getDeviceToken(success, error);
+    }
+
+	function openPush() {
+        document.getElementById('status').innerText = "openPush";
+        xFace.PushNotification.open("polyvi.net","5222",success, error);
+    }
+
+    function registerOnReceivedListener() {
+        document.getElementById('status').innerText = "registerOnReceivedListener";
+        xFace.PushNotification.registerOnReceivedListener(printPushData);
+    }
+
+</script>
+
+  </head>
+  <body onload="init();" id="stage" class="theme">
+
+    <h1>PushNotification </h1>
+    <div id="descr">
+        测试说明: <br/>
+        用户应该测试以下情况: <br/>
+        1.getDeviceToken 显示DeviceToken值，成功在info的result上显示显示DeviceToken值，失败则显示错误信息<br/>
+        2.registerOnReceivedListener后,当收到通知，点击通知，获取通知的内容，在info的result中显示结果状态<br/>
+		3.openPush通过服务器地址端口号手动的打开push<br/>
+    </div>
+    <div id="info">
+        status: <span id="status"></span><br/>
+        result: <span id="result"></span><br/>
+    </div>
+    <h2>Action</h2>
+    <div class="btn large" value="getDeviceToken" onclick="getDeviceToken();">getDeviceToken</div>
+    <div class="btn large" value="registerOnReceivedListener" onclick="registerOnReceivedListener();">registerOnReceivedListener</div>
+    <div class="btn large" value="openPush" onclick="openPush();">openPush</div>
+	<h2> </h2><div class="backBtn" onclick="backHome();">Back</div>
+  </body>
+</html>
+

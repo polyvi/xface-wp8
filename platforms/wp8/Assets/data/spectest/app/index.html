@@ -1,0 +1,317 @@
+﻿<!--
+
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,maximum-scale=1.0,initial-scale=1.0" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"> <!-- ISO-8859-1 -->
+    <title>xFace Mobile Spec</title>
+    <link rel="stylesheet" href="../master.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" charset="utf-8" src="../base.js"></script>
+
+
+<script type="text/javascript" charset="utf-8">
+
+    var deviceReady = false;
+
+    /**
+     * Function called when page has finished loading.
+     */
+    function init() {
+        document.addEventListener("deviceready", function() {
+        deviceReady = true;
+        console.log("Device="+device.platform+" "+device.version);}, false);
+        window.setTimeout(function() {
+            if (!deviceReady) {
+                alert("Error: xFace did not initialize.  Demo will not run correctly.");
+            }
+        },1000);
+    }
+
+    function openUrl() {
+        document.getElementById('status').innerText = "openUrl";
+		document.getElementById('result').innerText = "";
+        //获取输入的url
+        var url = document.querySelector("#url").value;
+        navigator.app.openUrl(url, win, fail);
+    }
+
+    function startWorkspaceApp() {
+        document.getElementById('status').innerText = "startWorkspaceApp";
+		document.getElementById('result').innerText = "";
+        var url;
+        if(isAndroid())
+        {
+            url = "test.apk";
+        }
+        else
+        {
+            url = "http://itunes.apple.com/cn/app/xin-tong-jiao-yu-wu-xian/id501656736?mt=8";
+        }
+        navigator.app.openUrl(url, win, fail);
+    }
+
+
+    function exit() {
+        document.getElementById('status').innerText = "";
+        navigator.app.exitApp();
+    }
+
+    function install() {
+		document.getElementById('status').innerText = "install";
+        document.getElementById('result').innerText = "";
+        navigator.app.install("/test.apk",win, fail);
+    }
+
+    function startVpn() {
+        document.getElementById('status').innerText = "startVpn";
+		document.getElementById('result').innerText = "";
+        var componentName = SysComponent.VPN;//vpn设置界面
+        navigator.app.startSystemComponent(componentName,win,fail);
+    }
+
+    function startInternet() {
+        document.getElementById('status').innerText = "startInternet";
+        document.getElementById('result').innerText = "";
+        var componentName = SysComponent.WIRELESS;//网络设置界面
+        navigator.app.startSystemComponent(componentName,win,fail);
+    }
+
+    function startGps() {
+        document.getElementById('status').innerText = "startGps";
+        document.getElementById('result').innerText = "";
+        var componentName = SysComponent.GPS;//gps设置界面
+        navigator.app.startSystemComponent(componentName,win,fail);
+    }
+
+    function openDoc() {
+        document.getElementById('status').innerText = "openDoc";
+		document.getElementById('result').innerText = "";
+        var url = "test.doc";
+        navigator.app.openUrl(url,win,fail);
+    }
+
+    function openPdf() {
+        document.getElementById('status').innerText = "openPdf";
+		document.getElementById('result').innerText = "";
+        var url = "test.pdf";
+        navigator.app.openUrl(url,win,fail);
+    }
+
+    function setWifiSleepDefault() {
+        document.getElementById('status').innerText = "setWifiSleepDefault";
+        document.getElementById('result').innerText = "";
+        var wifi_sleep_policy = "wifi_sleep_policy_default";
+        navigator.app.setWifiSleepPolicy(wifi_sleep_policy,win,fail);
+    }
+
+    function setWifiSleepNeverWhilePlugged() {
+        document.getElementById('status').innerText = "setWifiSleepNeverWhilePlugged";
+        document.getElementById('result').innerText = "";
+        var wifi_sleep_policy = "wifi_sleep_policy_never_while_plugged";
+        navigator.app.setWifiSleepPolicy(wifi_sleep_policy,win,fail);
+    }
+
+    function setWifiSleepNever() {
+        document.getElementById('status').innerText = "setWifiSleepNever";
+        document.getElementById('result').innerText = "";
+        var wifi_sleep_policy = "wifi_sleep_policy_never";
+        navigator.app.setWifiSleepPolicy(wifi_sleep_policy,win,fail);
+    }
+
+    function loadUrlByxFace() {
+        document.getElementById('status').innerText = "loadUrlByxFace";
+        document.getElementById('result').innerText = "";
+        var url = "http://www.baidu.com"
+        var openexternal = false;
+        var clearhistory = false;
+        navigator.app.loadUrl(url,openexternal,clearhistory,win,fail);
+    }
+
+    function loadUrlByBrowser() {
+        document.getElementById('status').innerText = "loadUrlByBrowser";
+        document.getElementById('result').innerText = "";
+        var url = "http://www.baidu.com"
+        var openexternal = true;
+        var clearhistory = false;
+        navigator.app.loadUrl(url,openexternal,clearhistory,win,fail);
+    }
+
+    function loadUrlByAppCleanHistory() {
+        document.getElementById('status').innerText = "loadUrlByAppCleanHistory";
+        document.getElementById('result').innerText = "";
+        var url = window.location.href.substring(0,window.location.href.lastIndexOf("app/index.html")) + "index.html";
+        var openexternal = false;
+        var clearhistory = true;
+        navigator.app.loadUrl(url,openexternal,clearhistory,win,fail);
+    }
+
+    function loadUrlByAppNotCleanHistory() {
+        document.getElementById('status').innerText = "loadUrlByAppNotCleanHistory";
+        document.getElementById('result').innerText = "";
+		var url = window.location.href.substring(0,window.location.href.lastIndexOf("app/index.html")) + "index.html";
+        var openexternal = false;
+        var clearhistory = false;
+        navigator.app.loadUrl(url,openexternal,clearhistory,win,fail);
+    }
+
+    function backHistory() {
+        document.getElementById('status').innerText = "backHistory";
+        document.getElementById('result').innerText = "";
+        navigator.app.backHistory(win,fail);
+    }
+
+    function clearHistory() {
+        document.getElementById('status').innerText = "clearHistory";
+        document.getElementById('result').innerText = "";
+        navigator.app.clearHistory(win,fail);
+    }
+
+    function startNativeApp() {
+        document.getElementById('status').innerText = "startNativeApp";
+        document.getElementById('result').innerText = "";
+        var url;
+        var parameter;
+        if(isAndroid())
+        {
+            url = "com.polyvi.largeFileTest";
+            parameter = "";
+        }
+        else if(isWindowsPhone())
+        {
+            url = "tel:13900000000";
+            parameter = "";
+        }
+        else
+        {
+            url = "mailto:test@polyvi.com?subject=openURLtest";
+            parameter = "";
+        }
+        navigator.app.startNativeApp(url, parameter, win, fail);
+    }
+
+    function isNativeAppInstalled() {
+        document.getElementById('status').innerText = "isNativeAppInstalled";
+        document.getElementById('result').innerText = "";
+        var appId = "com.polyvi.largeFileTest"
+        navigator.app.isNativeAppInstalled(appId,
+            function(result) {
+                if(result == true) {
+                    document.getElementById('result').innerText = "installed";
+                } else {
+                    document.getElementById('result').innerText = "not install";
+                }
+            },
+            fail);
+    }
+
+    function setTelLinkEnable() {
+        document.getElementById('status').innerText = "setTelLinkEnable";
+        document.getElementById('result').innerText = "";
+        var isTelLinkEnable = document.getElementById('isTelLinkEnable').value;
+        navigator.app.telLinkEnable(isTelLinkEnable === 'true', win, fail);
+    }
+
+    function win() {
+        // 在inner html页面中显示结果
+		document.getElementById('result').innerText = "success";
+    }
+
+    function fail() {
+        document.getElementById('result').innerText = "fail";
+    }
+
+</script>
+
+  </head>
+  <body onload="init();" id="stage" class="theme">
+
+    <h1>App</h1>
+    <div id="descr" data-platform="ios">
+        测试说明: <br/>
+        <ios>
+        1.openUrl 输入url连接地址，点击openUrl 通过系统浏览器打开<br/>
+        2.startWorkspaceApp 点击startWorkspaceApp，进入app store，表示测试通过<br/>
+        3.startInstalledApp,点击startInstalledApp, 启动ios的邮件应用。<br/>
+        </ios>
+        <android>
+        1.openUrl 输入url连接地址，点击openUrl 通过系统浏览器打开<br/>
+        2.startWorkspaceApp 点击startWorkspaceApp，系统浏览器被调用，下载apk并安装成功，表示测试通过<br/>
+        3.installApp 点击installApp，安装workspace下的test.apk,apk正常安装，表示测试通过<br/>
+        4.startInstalledApp,点击startInstalledApp, 启动上一步4安装的应用。<br/>
+        5.startVpn 点击startVpn，开启vpn设置界面<br/>
+        6.startInternet 点击startInternet，开启internet设置界面<br/>
+        7.startGps 点击startGps，开启gps设置界面<br/>
+        8.openDoc  测试本案例前请安装wps office，再点击openDoc，弹出打开doc界面<br/>
+        9.openPdf  测试前请安装Adobe Reader(pdf阅读软件), 再点击openPdf，弹出打开openPdf界面<br/>
+        10.setWifiSleepDefault  setWifiSleepDefault，设置wifi屏幕关闭时休眠，观察wifi设置如果相符合，则测试通过<br/>
+        11.setWifiSleepNeverWhilePlugged  点击setWifiSleepNeverWhilePlugged，设置wifi充电时永不休眠，观察wifi设置如果相符合，则测试通过<br/>
+        12.setWifiSleepNever  点击setWifiSleepNever，设置wifi永不休眠，观察wifi设置如果相符合，则测试通过<br/>
+        13.loadUrl 点击loadUrlByxFace，xFace来加载百度页面，则测试通过，注意：当百度不在app.xml的白名单时候则在系统浏览器上加载<br/>
+        点击loadUrlByBrowser，如果系统浏览器被调用，则测试通过<br/>
+        14.loadUrl 点击loadUrlByAppCleanHistory，xFace载入测试主页，再按手机上的back按钮回到app测试页面，如果再按back按钮无效，则测试通过<br/>
+        15.loadUrl 点击loadUrlByAppNotCleanHistory，xFace载入测试主页，然后回退到app页面测试，如果按back按钮有效，则测试通过<br/>
+        16.backHistory,点击backHistory，xFace返回到上一页面，和按手机的back功能一样，则测试通过
+        17.clearHistory,点击clearHistory，无法用back按钮或者backHistory返回到上一页面。<br/>
+        18.exitApp 点击exitApp，观察是否成功退出应用<br/>
+        19.isNativeAppInstalled, 查看给定appId的应用是否被安装。点击startWorkspaceApp按钮，安装计算器应用，再点击isNativeAppInstalled显示success，则测试通过<br/>
+        20.setTelLinkEnable设置是否支持点击view上的数字触发联系人添加操作,如果选true，点击添加123456能弹出联系人添加操作，否则不弹出<br/>
+    </android>
+    </div>
+    <div id="info">
+        status: <span id="status"></span><br/>
+        result: <span id="result"></span><br/>
+    </div>
+    <android>
+    <label>设置是否支持点击view上的数字触发联系人添加操作: <select id="isTelLinkEnable"><option>true</option><option>false</option></select><br></label>
+    <a href="tel:123456">添加123456到联系人</a><br/>
+    </android>
+      输入要打开的URL:<br/>
+      网址<input type="text" name="url" id="url"/>
+      <br />
+
+    <h2>Action</h2>
+    <div class="btn large" onclick="openUrl();">openUrl</div>
+    <div class="btn large" onclick="startWorkspaceApp();">startWorkspaceApp</div>
+    <div class="btn large" data-platform="android" onclick="install();">installApp</div>
+    <div class="btn large" onclick="startNativeApp();">startInstalledApp</div>
+    <div class="btn large" data-platform="android" onclick="startVpn();">startVpn</div>
+    <div class="btn large" data-platform="android" onclick="startInternet();">startInternet</div>
+    <div class="btn large" data-platform="android" onclick="startGps();">startGps</div>
+    <div class="btn large" data-platform="android" onclick="openDoc();">openDoc</div>
+    <div class="btn large" data-platform="android" onclick="openPdf();">openPdf</div>
+    <div class="btn large" data-platform="android" onclick="setWifiSleepDefault();">setWifiSleepDefault</div>
+    <div class="btn large" data-platform="android" onclick="setWifiSleepNeverWhilePlugged();">setWifiSleepNeverWhilePlugged</div>
+    <div class="btn large" data-platform="android" onclick="setWifiSleepNever();">setWifiSleepNever</div>
+    <div class="btn large" data-platform="android" onclick="loadUrlByxFace();">loadUrlByxFace</div>
+    <div class="btn large" data-platform="android" onclick="loadUrlByBrowser();">loadUrlByBrowser</div>
+    <div class="btn large" data-platform="android" onclick="loadUrlByAppCleanHistory();">loadUrlByAppCleanHistory</div>
+    <div class="btn large" data-platform="android" onclick="loadUrlByAppNotCleanHistory();">loadUrlByAppNotCleanHistory</div>
+    <div class="btn large" data-platform="android" onclick="backHistory();">backHistory</div>
+    <div class="btn large" data-platform="android" onclick="clearHistory();">clearHistory</div>
+    <div class="btn large" data-platform="android" onclick="exit();">exitApp</div>
+    <div class="btn large" data-platform="android" onclick="isNativeAppInstalled();">isNativeAppInstalled</div>
+    <div class="btn large" data-platform="android" onclick="setTelLinkEnable();">setTelLinkEnable</div>
+    <h2> </h2><div class="backBtn" onclick="backHome();">Back</div>
+  </body>
+</html>
+

@@ -6,17 +6,14 @@ using System.Resources;
 // General Information about an assembly is controlled through the following 
 // set of attributes. Change these attribute values to modify the information
 // associated with an assembly.
-[assembly: AssemblyTitle("CordovaAppProj")]
-[assembly: AssemblyDescription("2.0.0.0")]
+[assembly: AssemblyTitle("xFace")]
+[assembly: AssemblyDescription("")]
 [assembly: AssemblyConfiguration("")]
-[assembly: AssemblyCompany("Apache Cordova")]
-[assembly: AssemblyProduct("CordovaAppProj")]
-[assembly: AssemblyCopyright("Copyright © Apache Cordova 2013")]
-[assembly: AssemblyTrademark("Apache Cordova")]
+[assembly: AssemblyCompany("Polyvi")]
+[assembly: AssemblyProduct("xFace")]
+[assembly: AssemblyCopyright("Copyright ©  2013")]
+[assembly: AssemblyTrademark("")]
 [assembly: AssemblyCulture("")]
-
-
-[assembly: NeutralResourcesLanguageAttribute("en-US")]
 
 // Setting ComVisible to false makes the types in this assembly not visible 
 // to COM components.  If you need to access a type in this assembly from 
@@ -24,7 +21,7 @@ using System.Resources;
 [assembly: ComVisible(false)]
 
 // The following GUID is for the ID of the typelib if this project is exposed to COM
-[assembly: Guid("9e27b972-0825-4386-ba17-63c695262c3d")]
+[assembly: Guid("bde60082-4e9d-4c84-a98f-d144e177648e")]
 
 // Version information for an assembly consists of the following four values:
 //
@@ -37,3 +34,4 @@ using System.Resources;
 // by using the '*' as shown below:
 [assembly: AssemblyVersion("1.0.0.0")]
 [assembly: AssemblyFileVersion("1.0.0.0")]
+[assembly: NeutralResourcesLanguageAttribute("en-US")]

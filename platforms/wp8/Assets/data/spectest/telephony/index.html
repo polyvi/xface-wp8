@@ -1,0 +1,95 @@
+<!--
+
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,maximum-scale=1.0,initial-scale=1.0" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"> <!-- ISO-8859-1 -->
+    <title>xFace Mobile Spec</title>
+    <link rel="stylesheet" href="../master.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" charset="utf-8" src="../base.js"></script>
+
+
+<script type="text/javascript" charset="utf-8">
+
+    var deviceReady = false;
+
+    /**
+     * Function called when page has finished loading.
+     */
+    function init() {
+        document.addEventListener("deviceready", function() {
+                deviceReady = true;
+                console.log("Device="+device.platform+" "+device.version);
+            }, false);
+        window.setTimeout(function() {
+            if (!deviceReady) {
+                alert("Error: xFace did not initialize.  Demo will not run correctly.");
+            }
+        },1000);
+    }
+
+	function makeCall(){
+        var phoneNo = document.querySelector("#phoneNumber").value;
+        if("" == phoneNo)
+        {
+            alert("请输入电话号码");
+        }
+        document.getElementById('status').innerText = "initiateVoiceCall";
+        xFace.Telephony.initiateVoiceCall(phoneNo,callSuccess,callError);
+    }
+
+	function callSuccess(){
+		document.getElementById('result').innerText = "success";
+	}
+
+	function callError(){
+		document.getElementById('result').innerText = "error";
+	}
+
+</script>
+
+  </head>
+  <body onload="init();" id="stage" class="theme">
+
+    <h1>Telephony </h1>
+    <div id="descr">
+        测试说明: <br/>
+		用户应该测试以下情况: <br/>
+        1.makeCall 拨打正确号码，调出系统的电话拨打界面，在info的status中显示结果状态<br/>
+        2.makeCall 异常参数输入(电话号码中包含字母)，系统电话拨打界面不会被调用，在info的status中显示结果状态<br/>
+        3.makeCall 异常参数输入(电话号码为空)，系统电话拨打界面不会被调用，在info的status中显示结果状态<br/>
+        4.makeCall 异常参数输入(电话号码包含空格)，系统电话拨打界面不会被调用，在info的status中显示结果状态<br/>
+        5.makeCall 异常参数输入(电话号码包含中文)，系统电话拨打界面不会被调用，在info的status中显示结果状态<br/>
+    </div>
+    <div id="info">
+        status: <span id="status"></span><br/>
+        result: <span id="result"></span><br/>
+    </div>
+    输入电话号码:<br/>
+    电话号码<input type="tel" name="phoneNumber" id="phoneNumber"/>
+    <h2>Action</h2>
+    <div class="btn large" value="用户打电话" onclick="makeCall();">用户打电话</div>
+    <h2> </h2><div class="backBtn" onclick="backHome();">Back</div>
+  </body>
+</html>
+

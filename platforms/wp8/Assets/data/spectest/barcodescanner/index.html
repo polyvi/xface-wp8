@@ -1,0 +1,93 @@
+<!--
+
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,maximum-scale=1.0,initial-scale=1.0" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"> <!-- ISO-8859-1 -->
+    <title>xFace Mobile Spec</title>
+    <link rel="stylesheet" href="../master.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" charset="utf-8" src="../base.js"></script>
+
+
+<script type="text/javascript" charset="utf-8">
+
+    var deviceReady = false;
+    /**
+     * Function called when page has finished loading.
+     */
+    function init() {
+        document.addEventListener("deviceready", onDeviceReady, false);
+        window.setTimeout(function() {
+            if (!deviceReady) {
+                alert("Error: xFace did not initialize.  Demo will not run correctly.");
+            }
+        },1000);
+    }
+
+    // xFace is ready
+    function onDeviceReady() {
+        deviceReady = true;
+        console.log("Device="+device.platform+" "+device.version);
+
+    }
+
+    function updateStatus(status){
+        document.getElementById('status').innerText = status;
+    }
+
+    function updateBarcode(barcode){
+        document.getElementById('barcode').innerText = barcode;
+    }
+
+    function start() {
+        xFace.BarcodeScanner.start(success, fail);
+    }
+
+    function success(barcode) {
+        updateBarcode(barcode);
+        updateStatus("success");
+    };
+
+    function fail(error) {
+        updateStatus("fail to scanner barcode" );
+    }
+</script>
+
+  </head>
+  <body onload="init();" id="stage" class="theme">
+
+    <h1>Barcode Scanner </h1>
+    <div id="descr">
+          测试目的：测试条形码扫描<br/>
+          测试通过条件：点击start，摄相机启动，对准某个条形码，能扫描成功且显示扫描结果则表示测试成功<br/>
+    </div>
+    <div id="info">
+        barcode: <span id="barcode"></span><br/>
+        status: <span id="status"></span><br/>
+    </div>
+    <h2>Action</h2>
+    <div class="btn large" onclick="start();">start scanner</div>
+    <h2> </h2><div class="backBtn" onclick="backHome();">Back</div>
+  </body>
+</html>
+

@@ -1,0 +1,140 @@
+<!--
+
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements.  See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership.  The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License.  You may obtain a copy of the License at
+
+   http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied.  See the License for the
+ specific language governing permissions and limitations
+ under the License.
+
+-->
+
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,maximum-scale=1.0,initial-scale=1.0" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"> <!-- ISO-8859-1 -->
+    <title>xFace Mobile Spec</title>
+    <link rel="stylesheet" href="../master.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" charset="utf-8" src="../base.js"></script>
+
+
+<script type="text/javascript" charset="utf-8">
+
+    var deviceReady = false;
+    /**
+     * Function called when page has finished loading.
+     */
+    function init() {
+        document.addEventListener("deviceready", function() {
+                deviceReady = true;
+                console.log("Device="+device.platform+" "+device.version);
+            }, false);
+        window.setTimeout(function() {
+            if (!deviceReady) {
+                alert("Error: xFace did not initialize.  Demo will not run correctly.");
+            }
+        },1000);
+    }
+
+    function digest(){
+        document.getElementById('status').innerText = "digest";
+        document.getElementById('result').innerText = "";
+        var data = "test1234567890";
+        xFace.Security.digest(data, successCallback, errorCallback);
+        function successCallback(MD5Value) {
+            document.getElementById('result').innerText = "MD5 value success:" + MD5Value;
+        }
+        function errorCallback(error) {
+            document.getElementById('result').innerText = "digest error:" + error;
+        }
+    }
+
+    function encryptRSABase64(){
+        document.getElementById('status').innerText = "encryptRSA";
+        document.getElementById('result').innerText = "";
+        var data = "test1234567890!@#$^%&*())__)+_|}{><一二三";
+        var key = "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQCYU/+I0+z1aBl5X6DUUOHQ7FZpmBSDbKTtx89J"+
+                  "EcB64jFCkunELT8qiKly7fzEqD03g8ALlu5XvX+bBqHFy7YPJJP0ekE2X3wjUnh2NxlqpH3/B/xm"+
+                  "1ZdSlCwDIkbijhBVDjA/bu5BObhZqQmDwIxlQInL9oVz+o6FbAZCyHBd7wIDAQAB";
+        var options = new SecurityOptions();
+        options.CryptAlgorithm = SecurityOptions.CryptAlgorithm.RSA;
+        options.EncodeDataType = StringEncodeType.Base64;
+        options.EncodeKeyType = StringEncodeType.Base64;
+        xFace.Security.encrypt(key, data, successCallback, errorCallback, options)
+        function successCallback(encryptData) {
+            alert("RSA encrypt data success:" + encryptData);
+        }
+        function errorCallback(error) {
+            document.getElementById('result').innerText = "RSA encrypt error:" + error;
+        }
+    }
+
+    function decryptRSABase64(){
+        document.getElementById('status').innerText = "encryptRSA";
+        document.getElementById('result').innerText = "";
+        var data = "EzTrFwra8L7pdXnR+vxXQdF/arbZ9KUpV7DEoY/6+m6j8pybQph/WgxdpDiRmc79o6oVjjnVOgoaA"+
+                "1RJn4229TornAHYgJZY2v7jf5Z1KISfO8q+ypoG+dqsj5tlIh7LqTVjXrv+2xKpLs6YPJ/F3d4I4r2kz"+
+                "LOnbVTG3SA27o8=";
+        var key = "MIICdgIBADANBgkqhkiG9w0BAQEFAASCAmAwggJcAgEAAoGBAJhT/4jT7PVoGXlfoNRQ4dDsVmmY"+
+                "FINspO3Hz0kRwHriMUKS6cQtPyqIqXLt/MSoPTeDwAuW7le9f5sGocXLtg8kk/R6QTZffCNSeHY3"+
+                "GWqkff8H/GbVl1KULAMiRuKOEFUOMD9u7kE5uFmpCYPAjGVAicv2hXP6joVsBkLIcF3vAgMBAAEC"+
+                "gYBvZHWoZHmS2EZQqKqeuGr58eobG9hcZzWQoJ4nq/CarBAjw/VovUHE490uK3S9ht4FW7Yzg3LV"+
+                "/MB06Huifh6qf/X9NQA7SeZRRC8gnCQk6JuDIEVJOud5jU+9tyumJakDKodQ3Jf2zQtNr+5ZdEPl"+
+                "uwWgv9c4kmpjhAdyMuQmYQJBANn6pcgvyYaia52dnu+yBUsGkaFfwXkzFSExIbi0MXTkhEb/ER/D"+
+                "rLytukkUu5S5ecz/KBa8U4xIslZDYQbLz5ECQQCy5dutt7RsxN4+dxCWn0/1FrkWl2G329Ucewm3"+
+                "QU9CKu4D+7Kqdj+Ha3lXP8F0Etaaapi7+EfkRUpukn2ItZV/AkEAlk+I0iphxT1rCB0Q5CjWDY5S"+
+                "Df2B5JmdEG5Y2o0nLXwG2w44OLct/k2uD4cEcuITY5Dvi/4BftMCZwm/dnhEgQJACIktJSnJwxLV"+
+                "o9dchENPtlsCM9C/Sd2EWpqISSUlmfugZbJBwR5pQ5XeMUqKeXZYpP+HEBj1nS+tMH9u2/IGEwJA"+
+                "fL8mZiZXan/oBKrblAbplNcKWGRVD/3y65042PAEeghahlJMiYquV5DzZajuuT0wbJ5xQuZB01+X"+
+                "nfpFpBJ2dw==";
+        var options = new SecurityOptions();
+        options.CryptAlgorithm = SecurityOptions.CryptAlgorithm.RSA;
+        options.EncodeDataType = StringEncodeType.Base64;
+        options.EncodeKeyType = StringEncodeType.Base64;
+        xFace.Security.decrypt(key, data, successCallback, errorCallback, options)
+        function successCallback(encryptData) {
+            alert("RSA decrypt data success:" + encryptData);
+        }
+        function errorCallback(error) {
+            document.getElementById('result').innerText = "RSA decrypt error:" + error;
+        }
+    }
+</script>
+
+  </head>
+  <body onload="init();" id="stage" class="theme">
+
+    <h1>Security </h1>
+
+     <div id="descr">
+        测试说明: <br/>
+        测试目的：安全测试<br/>
+        1.digest按钮，测试求md5值，成功返回求出的md5值，失败返回错误码<br/>
+        2.encryptRSA_Base64按钮，测试Base64编码的RSA加密，成功返回加密后的数据，失败返回错误码<br/>
+        <android>
+        3.decryptRSA_Base64按钮，测试Base64编码的RSA解密，成功返回解密后的数据"test1234567890!@#$^%&*())__)+_|}{><一二三"，失败返回错误码<br/>
+        </android>
+    </div>
+    <div id="info">
+    status: <span id="status"></span><br/>
+    result: <span id="result"></span><br/>
+    </div>
+    <h2>Action</h2>
+    <div class="btn large" onclick="digest();">digest</div>
+    <div class="btn large" onclick="encryptRSABase64();" data-platform="android_ios">encryptRSA_Base64</div>
+    <div class="btn large" onclick="decryptRSABase64();"  data-platform="android">decryptRSA_Base64</div>
+    <h2> </h2><div class="backBtn" onclick="backHome();">Back</div>
+  </body>
+</html>
+

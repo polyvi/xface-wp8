@@ -1,49 +1,61 @@
-<?xml version='1.0' encoding='utf-8'?>
-<Deployment AppPlatformVersion="8.0" xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment">
-    <DefaultLanguage code="en-US" xmlns="" />
-    <Languages xmlns="">
-        <Language code="en-US" />
-    </Languages>
-    <App Author="xFace author" BitsPerPixel="32" Description="Apache Cordova for Windows Phone" Genre="apps.normal" ProductID="{823E1B6D-EB19-431A-A8F6-28BDE52FE946}" Publisher="xFace" PublisherID="{db093ed5-53b1-45f7-af72-751e8f36ab80}" RuntimeType="Silverlight" Title="xFace" Version="0.0.1" xmlns="">
-        <IconPath IsRelative="true" IsResource="false">ApplicationIcon.png</IconPath>
-        <Capabilities>
-            <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
-            <Capability Name="ID_CAP_IDENTITY_DEVICE" />
-            <Capability Name="ID_CAP_NETWORKING" />
-            <Capability Name="ID_CAP_SENSORS" />
-            <Capability Name="ID_CAP_LOCATION" />
-            <Capability Name="ID_CAP_ISV_CAMERA" />
-            <Capability Name="ID_CAP_MEDIALIB_PHOTO" />
-            <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
-            <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
-            <Capability Name="ID_CAP_MICROPHONE" />
-            <Capability Name="ID_CAP_CONTACTS" />
-        </Capabilities>
-        <Tasks>
-            <DefaultTask Name="_default" NavigationPage="MainPage.xaml" />
-        </Tasks>
-        <Tokens>
-            <PrimaryToken TaskName="_default" TokenID="xFaceToken">
-                <TemplateFlip>
-                    <SmallImageURI IsRelative="true" IsResource="false">Background.png</SmallImageURI>
-                    <Count>0</Count>
-                    <BackgroundImageURI IsRelative="true" IsResource="false">Background.png</BackgroundImageURI>
-                    <Title>xFace</Title>
-                    <BackContent />
-                    <BackBackgroundImageURI />
-                    <BackTitle />
-                    <LargeBackgroundImageURI />
-                    <LargeBackContent />
-                    <LargeBackBackgroundImageURI />
-                    <DeviceLockImageURI />
-                    <HasLarge>false</HasLarge>
-                </TemplateFlip>
-            </PrimaryToken>
-        </Tokens>
-        <ScreenResolutions>
-            <ScreenResolution Name="ID_RESOLUTION_WVGA" />
-            <ScreenResolution Name="ID_RESOLUTION_WXGA" />
-            <ScreenResolution Name="ID_RESOLUTION_HD720P" />
-        </ScreenResolutions>
-    </App>
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
+  <DefaultLanguage xmlns="" code="en-US" />
+  <App xmlns="" ProductID="{b2e2570e-92cc-47a2-9c28-c837d53e439f}" Title="xFace" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="xFace author" Description="Sample description" Publisher="xFace" PublisherID="{c23c72f3-516f-4628-9187-f0444ae055f4}">
+    <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
+    <Capabilities>
+      <Capability Name="ID_CAP_NETWORKING" />
+      <Capability Name="ID_CAP_MEDIALIB_AUDIO" />
+      <Capability Name="ID_CAP_MEDIALIB_PLAYBACK" />
+      <Capability Name="ID_CAP_SENSORS" />
+      <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
+      <Capability Name="ID_CAP_IDENTITY_DEVICE" />
+      <Capability Name="ID_CAP_ISV_CAMERA" />
+      <Capability Name="ID_CAP_LOCATION" />
+      <Capability Name="ID_CAP_PHONEDIALER" />
+      <Capability Name="ID_CAP_CONTACTS" />
+      <Capability Name="ID_CAP_REMOVABLE_STORAGE" />
+      <Capability Name="ID_CAP_MICROPHONE" />
+      <Capability Name="ID_CAP_IDENTITY_USER" />
+      <Capability Name="ID_CAP_MEDIALIB_PHOTO" />
+      <Capability Name="ID_CAP_PUSH_NOTIFICATION" />
+    </Capabilities>
+    <Tasks>
+      <DefaultTask Name="_default" NavigationPage="xFaceLib;component/xFacePage.xaml" ActivationPolicy="Resume" />
+    </Tasks>
+    <Tokens>
+      <PrimaryToken TokenID="xFaceToken" TaskName="_default">
+        <TemplateFlip>
+          <SmallImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileSmall.png</SmallImageURI>
+          <Count>0</Count>
+          <BackgroundImageURI IsRelative="true" IsResource="false">Assets\Tiles\FlipCycleTileMedium.png</BackgroundImageURI>
+          <Title>xFace</Title>
+          <BackContent>
+          </BackContent>
+          <BackBackgroundImageURI>
+          </BackBackgroundImageURI>
+          <BackTitle>
+          </BackTitle>
+          <DeviceLockImageURI>
+          </DeviceLockImageURI>
+          <HasLarge>
+          </HasLarge>
+        </TemplateFlip>
+      </PrimaryToken>
+    </Tokens>
+    <Extensions>
+      <FileTypeAssociation TaskID="default" Name="xFace support FileType" NavUriFragment="fileToken=%s">
+        <SupportedFileTypes>
+          <FileType ContentType="application/xpa">.xpa</FileType>
+          <FileType ContentType="application/xspa">.xspa</FileType>
+        </SupportedFileTypes>
+      </FileTypeAssociation>
+      <Protocol Name="xface" NavUriFragment="encodedLaunchUri=%s" TaskID="_default" />
+    </Extensions>
+    <ScreenResolutions>
+      <ScreenResolution Name="ID_RESOLUTION_WVGA" />
+      <ScreenResolution Name="ID_RESOLUTION_WXGA" />
+      <ScreenResolution Name="ID_RESOLUTION_HD720P" />
+    </ScreenResolutions>
+  </App>
 </Deployment>

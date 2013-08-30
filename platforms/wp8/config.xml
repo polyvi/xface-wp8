@@ -1,6 +1,33 @@
-<?xml version='1.0' encoding='utf-8'?>
+﻿<?xml version='1.0' encoding='utf-8'?>
+<!-- 平台相关的配置-->
 <widget>
+    <xFace>
+        <!-- Preferences for WP -->
+        <preference name="LogLevel" value="DEBUG" />
+        <!-- 配置是否显示全屏 -->
+        <preference name="FullScreen" value="false" />
+        <preference name="ShowSplashScreen" value="true" />
+        <!-- 配置splash显示的时间 单位ms -->
+        <preference name="SplashScreenDelayDuration" value="500" />
+        <!-- 配置splash是否自动隐藏 -->
+        <preference name="AutoHideSplashScreen" value="true" />
+        <!-- 工作目录设定策略，1：仅手机内存;2：仅外部存储（FlashROM及SD/TF扩展卡）;3：外部存储优先 -->
+        <preference name="WorkDir" value="3" />
+        <preference name="EngineVersion" value="3.1.0" />
+        <preference name="EngineBuild" value="12345" />
+        <!-- 配置xFace启动模式，true为Player模式从SD卡拷贝应用资源启动，false为普通模式，应用资源打包到程序 -->
+        <preference name="UsePlayerMode" value="false" />
+        <!-- 配置检测更新的服务器地址 -->
+        <preference name="CheckUpdate" value="false" />
+        <preference name="UpdateAddress" value="" />
+    </xFace>
+    <pre_install_packages>
+        <app_package id= "spectest">spectest</app_package>
+    </pre_install_packages>
+    <!-- Cordova config -->
+    <!-- Cordova Whitelist -->
     <access origin="*" />
+    <!-- Cordova plugin -->
     <feature name="Device">
         <param name="wp-package" value="Device" />
     </feature>
