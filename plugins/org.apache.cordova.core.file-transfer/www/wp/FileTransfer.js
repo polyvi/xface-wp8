@@ -1,4 +1,4 @@
-/*
+cordova.define("org.apache.cordova.core.file-transfer.FileTransfer1", function(require, exports, module) {/*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -20,7 +20,7 @@
 */
 
 var exec = require('cordova/exec'),
-    FileTransferError = require('cordova/plugin/FileTransferError');
+    FileTransferError = require('org.apache.cordova.core.file-transfer.FileTransferError');
 
 // Note that the only difference between this and the default implementation is the
 // object literal passed to exec() in upload - jm
@@ -99,10 +99,10 @@ FileTransfer.prototype.download = function(source, target, successCallback, erro
     var win = function(result) {
         var entry = null;
         if (result.isDirectory) {
-            entry = new (require('cordova/plugin/DirectoryEntry'))();
+            entry = new (require('org.apache.cordova.core.file.DirectoryEntry'))();
         }
         else if (result.isFile) {
-            entry = new (require('cordova/plugin/FileEntry'))();
+            entry = new (require('org.apache.cordova.core.file.FileEntry'))();
         }
         entry.isDirectory = result.isDirectory;
         entry.isFile = result.isFile;
@@ -121,3 +121,4 @@ FileTransfer.prototype.download = function(source, target, successCallback, erro
 
 
 module.exports = FileTransfer;
+});
