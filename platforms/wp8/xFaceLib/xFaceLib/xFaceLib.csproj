@@ -355,29 +355,6 @@
     </Page>
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="..\src\resources\notification-beep.wav">
-      <Link>resources\notification-beep.wav</Link>
-    </Resource>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="..\src\WPToolKit\Toolkit.Content\ApplicationBar.Cancel.png">
-      <Link>Toolkit.Content\ApplicationBar.Cancel.png</Link>
-    </Content>
-    <Content Include="..\src\WPToolKit\Toolkit.Content\ApplicationBar.Check.png">
-      <Link>Toolkit.Content\ApplicationBar.Check.png</Link>
-    </Content>
-    <Content Include="..\src\WPToolKit\Toolkit.Content\ApplicationBar.Delete.png">
-      <Link>Toolkit.Content\ApplicationBar.Delete.png</Link>
-    </Content>
-    <Content Include="..\src\WPToolKit\Toolkit.Content\ApplicationBar.Select.png">
-      <Link>Toolkit.Content\ApplicationBar.Select.png</Link>
-    </Content>
-  </ItemGroup>
-  <ItemGroup>
-    <Reference Include="Microsoft.Phone.Controls.Toolkit, Version=8.0.0.0, Culture=neutral, PublicKeyToken=b772ad94eb9ca604, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>..\src\WPToolKit\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
-    </Reference>
     <Reference Include="UmengClassLibrary, Version=1.3.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
       <HintPath>..\src\UmengSDK\UmengClassLibrary.dll</HintPath>
