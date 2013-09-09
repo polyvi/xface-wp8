@@ -89,4 +89,7 @@
     <feature name="Messaging">
         <param name="wp-package" value="Messaging" />
     </feature>
+    <feature name="PushNotification">
+        <param name="wp-package" value="PushNotification" />
+    </feature>
 </widget>

@@ -359,6 +359,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins\\com.polyvi.xface.extension.push\\www\\PushNotification.js",
+        "id": "com.polyvi.xface.extension.push.PushNotification",
+        "clobbers": [
+            "window.xFace.PushNotification"
+        ]
+    },
+    {
         "file": "plugins\\org.apache.cordova.core.file\\www\\DirectoryEntry.js",
         "id": "org.apache.cordova.core.file.DirectoryEntry",
         "clobbers": [

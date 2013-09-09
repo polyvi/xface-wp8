@@ -250,6 +250,9 @@
         <Compile Include="Plugins\com.polyvi.xface.extension.message\XMessagingExt.cs" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Plugins\com.polyvi.xface.extension.push\XPushNotificationExt.cs" />
+    </ItemGroup>
+    <ItemGroup>
         <Content Include="www\plugins\org.apache.cordova.core.device\www\device.js" />
     </ItemGroup>
     <ItemGroup>
@@ -401,6 +404,9 @@
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\com.polyvi.xface.extension.message\www\MessageTypes.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.polyvi.xface.extension.push\www\PushNotification.js" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\org.apache.cordova.core.file\www\DirectoryEntry.js" />
