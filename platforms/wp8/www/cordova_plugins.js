@@ -380,6 +380,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins\\com.polyvi.xface.extension.telephony\\www\\Telephony.js",
+        "id": "com.polyvi.xface.extension.telephony.Telephony",
+        "clobbers": [
+            "window.xFace.Telephony"
+        ]
+    },
+    {
         "file": "plugins\\org.apache.cordova.core.file\\www\\DirectoryEntry.js",
         "id": "org.apache.cordova.core.file.DirectoryEntry",
         "clobbers": [
