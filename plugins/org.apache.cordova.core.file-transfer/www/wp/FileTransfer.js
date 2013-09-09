@@ -1,4 +1,4 @@
-cordova.define("org.apache.cordova.core.file-transfer.FileTransfer1", function(require, exports, module) {/*
+/*
  *
  * Licensed to the Apache Software Foundation (ASF) under one
  * or more contributor license agreements.  See the NOTICE file
@@ -121,4 +121,3 @@ FileTransfer.prototype.download = function(source, target, successCallback, erro
 
 
 module.exports = FileTransfer;
-});
