@@ -221,6 +221,9 @@
         <Compile Include="Plugins\com.polyvi.xface.extension.ams\XAmsImpl.cs" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Plugins\com.polyvi.xface.extension.app\XAppExt.cs" />
+    </ItemGroup>
+    <ItemGroup>
         <Content Include="www\plugins\org.apache.cordova.core.device\www\device.js" />
     </ItemGroup>
     <ItemGroup>
@@ -354,6 +357,12 @@
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\com.polyvi.xface.extension.ams\www\AmsState.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.polyvi.xface.extension.app\www\app.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.polyvi.xface.extension.app\www\wp8\app.js" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\org.apache.cordova.core.file\www\DirectoryEntry.js" />

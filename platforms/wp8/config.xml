@@ -80,4 +80,7 @@
     <feature name="AMS">
         <param name="wp-package" value="AMS" />
     </feature>
+    <feature name="App">
+        <param name="wp-package" value="App" />
+    </feature>
 </widget>

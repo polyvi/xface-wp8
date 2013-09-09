@@ -317,6 +317,20 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins\\com.polyvi.xface.extension.app\\www\\app.js",
+        "id": "com.polyvi.xface.extension.app.app",
+        "clobbers": [
+            "navigator.app"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.app\\www\\wp8\\app.js",
+        "id": "com.polyvi.xface.extension.app.app",
+        "merges": [
+            "navigator.app"
+        ]
+    },
+    {
         "file": "plugins\\org.apache.cordova.core.file\\www\\DirectoryEntry.js",
         "id": "org.apache.cordova.core.file.DirectoryEntry",
         "clobbers": [
