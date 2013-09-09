@@ -366,6 +366,20 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins\\com.polyvi.xface.extension.security\\www\\Security.js",
+        "id": "com.polyvi.xface.extension.security.Security",
+        "clobbers": [
+            "window.xFace.Security"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.security\\www\\SecurityOptions.js",
+        "id": "com.polyvi.xface.extension.security.SecurityOptions",
+        "clobbers": [
+            "SecurityOptions"
+        ]
+    },
+    {
         "file": "plugins\\org.apache.cordova.core.file\\www\\DirectoryEntry.js",
         "id": "org.apache.cordova.core.file.DirectoryEntry",
         "clobbers": [

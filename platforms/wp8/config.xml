@@ -92,4 +92,7 @@
     <feature name="PushNotification">
         <param name="wp-package" value="PushNotification" />
     </feature>
+    <feature name="Security">
+        <param name="wp-package" value="Security" />
+    </feature>
 </widget>

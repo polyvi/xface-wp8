@@ -253,6 +253,14 @@
         <Compile Include="Plugins\com.polyvi.xface.extension.push\XPushNotificationExt.cs" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Plugins\com.polyvi.xface.extension.security\XSecurityExt.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="BouncyCastleLibrary">
+            <HintPath>Plugins\com.polyvi.xface.extension.security\BouncyCastleLibrary.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
         <Content Include="www\plugins\org.apache.cordova.core.device\www\device.js" />
     </ItemGroup>
     <ItemGroup>
@@ -407,6 +415,12 @@
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\com.polyvi.xface.extension.push\www\PushNotification.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.polyvi.xface.extension.security\www\Security.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.polyvi.xface.extension.security\www\SecurityOptions.js" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\org.apache.cordova.core.file\www\DirectoryEntry.js" />
