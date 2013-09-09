@@ -289,6 +289,34 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins\\com.polyvi.xface.extension.ams\\www\\ams.js",
+        "id": "com.polyvi.xface.extension.ams.AMS",
+        "clobbers": [
+            "window.xFace.AMS"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.ams\\www\\AmsError.js",
+        "id": "com.polyvi.xface.extension.ams.AmsError",
+        "clobbers": [
+            "AmsError"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.ams\\www\\AmsOperationType.js",
+        "id": "com.polyvi.xface.extension.ams.AmsOperationType",
+        "clobbers": [
+            "AmsOperationType"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.ams\\www\\AmsState.js",
+        "id": "com.polyvi.xface.extension.ams.AmsState",
+        "clobbers": [
+            "AmsState"
+        ]
+    },
+    {
         "file": "plugins\\org.apache.cordova.core.file\\www\\DirectoryEntry.js",
         "id": "org.apache.cordova.core.file.DirectoryEntry",
         "clobbers": [

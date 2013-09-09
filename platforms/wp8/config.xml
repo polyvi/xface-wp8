@@ -76,4 +76,8 @@
     <feature name="Console">
         <param name="wp-package" value="DebugConsole" />
     </feature>
+    <!-- xFace plugin -->
+    <feature name="AMS">
+        <param name="wp-package" value="AMS" />
+    </feature>
 </widget>
