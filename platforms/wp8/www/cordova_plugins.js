@@ -338,6 +338,27 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins\\com.polyvi.xface.extension.message\\www\\Messaging.js",
+        "id": "com.polyvi.xface.extension.message.Messaging",
+        "clobbers": [
+            "window.xFace.Messaging"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.message\\www\\Message.js",
+        "id": "com.polyvi.xface.extension.message.Message",
+        "clobbers": [
+            "window.xFace.Message"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.message\\www\\MessageTypes.js",
+        "id": "com.polyvi.xface.extension.message.MessageTypes",
+        "clobbers": [
+            "window.xFace.MessageTypes"
+        ]
+    },
+    {
         "file": "plugins\\org.apache.cordova.core.file\\www\\DirectoryEntry.js",
         "id": "org.apache.cordova.core.file.DirectoryEntry",
         "clobbers": [

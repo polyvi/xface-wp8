@@ -247,6 +247,9 @@
         <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Plugins\com.polyvi.xface.extension.message\XMessagingExt.cs" />
+    </ItemGroup>
+    <ItemGroup>
         <Content Include="www\plugins\org.apache.cordova.core.device\www\device.js" />
     </ItemGroup>
     <ItemGroup>
@@ -389,6 +392,15 @@
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\com.polyvi.xface.extension.calendar\www\Calendar.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.polyvi.xface.extension.message\www\Messaging.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.polyvi.xface.extension.message\www\Message.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.polyvi.xface.extension.message\www\MessageTypes.js" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\org.apache.cordova.core.file\www\DirectoryEntry.js" />
