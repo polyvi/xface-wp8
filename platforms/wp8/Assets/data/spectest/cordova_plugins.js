@@ -527,22 +527,22 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins\\com.polyvi.xface.plugin.zbar\\www\\BarcodeScanner.js",
-        "id": "com.polyvi.xface.plugin.zbar.BarcodeScanner",
+        "file": "plugins\\com.polyvi.xface.extension.zbar\\www\\BarcodeScanner.js",
+        "id": "com.polyvi.xface.extension.zbar.BarcodeScanner",
         "clobbers": [
             "window.xFace.BarcodeScanner"
         ]
     },
     {
-        "file": "plugins\\com.polyvi.xface.plugin.security\\www\\Security.js",
-        "id": "com.polyvi.xface.plugin.security.Security",
+        "file": "plugins\\com.polyvi.xface.extension.security\\www\\Security.js",
+        "id": "com.polyvi.xface.extension.security.Security",
         "clobbers": [
             "window.xFace.Security"
         ]
     },
     {
-        "file": "plugins\\com.polyvi.xface.plugin.security\\www\\SecurityOptions.js",
-        "id": "com.polyvi.xface.plugin.security.SecurityOptions",
+        "file": "plugins\\com.polyvi.xface.extension.security\\www\\SecurityOptions.js",
+        "id": "com.polyvi.xface.extension.security.SecurityOptions",
         "clobbers": [
             "SecurityOptions"
         ]

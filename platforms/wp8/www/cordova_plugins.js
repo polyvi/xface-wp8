@@ -177,15 +177,15 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins\\org.apache.cordova.core.dialogs\\www\\notification.js",
-        "id": "org.apache.cordova.core.dialogs.notification",
+        "file": "plugins\\org.apache.cordova.core.vibration\\www\\vibration.js",
+        "id": "org.apache.cordova.core.vibration.notification",
         "merges": [
             "navigator.notification"
         ]
     },
     {
-        "file": "plugins\\org.apache.cordova.core.vibration\\www\\vibration.js",
-        "id": "org.apache.cordova.core.vibration.notification",
+        "file": "plugins\\org.apache.cordova.core.dialogs\\www\\notification.js",
+        "id": "org.apache.cordova.core.dialogs.notification",
         "merges": [
             "navigator.notification"
         ]
@@ -286,132 +286,6 @@ module.exports = [
         "id": "org.apache.cordova.core.console.logger",
         "clobbers": [
             "cordova.logger"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.ams\\www\\ams.js",
-        "id": "com.polyvi.xface.extension.ams.AMS",
-        "clobbers": [
-            "window.xFace.AMS"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.ams\\www\\AmsError.js",
-        "id": "com.polyvi.xface.extension.ams.AmsError",
-        "clobbers": [
-            "AmsError"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.ams\\www\\AmsOperationType.js",
-        "id": "com.polyvi.xface.extension.ams.AmsOperationType",
-        "clobbers": [
-            "AmsOperationType"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.ams\\www\\AmsState.js",
-        "id": "com.polyvi.xface.extension.ams.AmsState",
-        "clobbers": [
-            "AmsState"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.app\\www\\app.js",
-        "id": "com.polyvi.xface.extension.app.app",
-        "clobbers": [
-            "navigator.app"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.app\\www\\wp8\\app.js",
-        "id": "com.polyvi.xface.extension.app.app",
-        "merges": [
-            "navigator.app"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.calendar\\www\\Calendar.js",
-        "id": "com.polyvi.xface.extension.calendar.Calendar",
-        "clobbers": [
-            "window.xFace.ui.Calendar"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.message\\www\\Messaging.js",
-        "id": "com.polyvi.xface.extension.message.Messaging",
-        "clobbers": [
-            "window.xFace.Messaging"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.message\\www\\Message.js",
-        "id": "com.polyvi.xface.extension.message.Message",
-        "clobbers": [
-            "window.xFace.Message"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.message\\www\\MessageTypes.js",
-        "id": "com.polyvi.xface.extension.message.MessageTypes",
-        "clobbers": [
-            "window.xFace.MessageTypes"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.push\\www\\PushNotification.js",
-        "id": "com.polyvi.xface.extension.push.PushNotification",
-        "clobbers": [
-            "window.xFace.PushNotification"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.security\\www\\Security.js",
-        "id": "com.polyvi.xface.extension.security.Security",
-        "clobbers": [
-            "window.xFace.Security"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.security\\www\\SecurityOptions.js",
-        "id": "com.polyvi.xface.extension.security.SecurityOptions",
-        "clobbers": [
-            "SecurityOptions"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.telephony\\www\\Telephony.js",
-        "id": "com.polyvi.xface.extension.telephony.Telephony",
-        "clobbers": [
-            "window.xFace.Telephony"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.zbar\\www\\BarcodeScanner.js",
-        "id": "com.polyvi.xface.extension.zbar.BarcodeScanner",
-        "clobbers": [
-            "window.xFace.BarcodeScanner"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.zip\\www\\Zip.js",
-        "id": "com.polyvi.xface.extension.zip.Zip",
-        "clobbers": [
-            "window.xFace.Zip"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.zip\\www\\ZipError.js",
-        "id": "com.polyvi.xface.extension.zip.ZipError",
-        "clobbers": [
-            "ZipError"
-        ]
-    },
-    {
-        "file": "plugins\\com.polyvi.xface.extension.zip\\www\\ZipOptions.js",
-        "id": "com.polyvi.xface.extension.zip.ZipOptions",
-        "clobbers": [
-            "ZipOptions"
         ]
     },
     {
@@ -538,6 +412,139 @@ module.exports = [
         "id": "org.apache.cordova.core.file.FileUploadOptions1",
         "merges": [
             "window.FileUploadOptions"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.ams\\www\\ams.js",
+        "id": "com.polyvi.xface.extension.ams.AMS",
+        "clobbers": [
+            "window.xFace.AMS"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.ams\\www\\AmsError.js",
+        "id": "com.polyvi.xface.extension.ams.AmsError",
+        "clobbers": [
+            "AmsError"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.ams\\www\\AmsOperationType.js",
+        "id": "com.polyvi.xface.extension.ams.AmsOperationType",
+        "clobbers": [
+            "AmsOperationType"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.ams\\www\\AmsState.js",
+        "id": "com.polyvi.xface.extension.ams.AmsState",
+        "clobbers": [
+            "AmsState"
+        ]
+    },
+    {
+        "file": "plugins/com.polyvi.xface.core.xapp/www/app.js",
+        "id": "com.polyvi.xface.core.xapp.app",
+        "clobbers": [
+            "xFace.app"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.telephony\\www\\Telephony.js",
+        "id": "com.polyvi.xface.extension.telephony.Telephony",
+        "clobbers": [
+            "window.xFace.Telephony"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.zip\\www\\Zip.js",
+        "id": "com.polyvi.xface.extension.zip.Zip",
+        "clobbers": [
+            "window.xFace.Zip"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.zip\\www\\ZipError.js",
+        "id": "com.polyvi.xface.extension.zip.ZipError",
+        "clobbers": [
+            "ZipError"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.zip\\www\\ZipOptions.js",
+        "id": "com.polyvi.xface.extension.zip.ZipOptions",
+        "clobbers": [
+            "ZipOptions"
+        ]
+    },
+	{
+        "file": "plugins\\com.polyvi.xface.extension.push\\www\\PushNotification.js",
+        "id": "com.polyvi.xface.extension.push.PushNotification",
+        "clobbers": [
+            "window.xFace.PushNotification"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.app\\www\\app.js",
+        "id": "com.polyvi.xface.extension.app.app",
+        "clobbers": [
+            "navigator.app"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.app\\www\\wp8\\app.js",
+        "id": "com.polyvi.xface.extension.app.app1",
+        "merges": [
+            "navigator.app"
+        ]
+    },
+	{
+        "file": "plugins\\com.polyvi.xface.extension.message\\www\\Message.js",
+        "id": "com.polyvi.xface.extension.message.Message",
+        "clobbers": [
+            "window.xFace.Message"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.message\\www\\MessageTypes.js",
+        "id": "com.polyvi.xface.extension.message.MessageTypes",
+        "clobbers": [
+            "window.xFace.MessageTypes"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.message\\www\\Messaging.js",
+        "id": "com.polyvi.xface.extension.message.Messaging",
+        "clobbers": [
+            "window.xFace.Messaging"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.calendar\\www\\Calendar.js",
+        "id": "com.polyvi.xface.extension.calendar.Calendar",
+        "clobbers": [
+            "window.xFace.ui.Calendar"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.zbar\\www\\BarcodeScanner.js",
+        "id": "com.polyvi.xface.extension.zbar.BarcodeScanner",
+        "clobbers": [
+            "window.xFace.BarcodeScanner"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.security\\www\\Security.js",
+        "id": "com.polyvi.xface.extension.security.Security",
+        "clobbers": [
+            "window.xFace.Security"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.security\\www\\SecurityOptions.js",
+        "id": "com.polyvi.xface.extension.security.SecurityOptions",
+        "clobbers": [
+            "SecurityOptions"
         ]
     }
 ]

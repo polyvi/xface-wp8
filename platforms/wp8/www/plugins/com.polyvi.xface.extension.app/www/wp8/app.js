@@ -1,4 +1,4 @@
-cordova.define("com.polyvi.xface.extension.app.app", function(require, exports, module) {cordova.define("com.polyvi.xface.extension.app.app1", function(require, exports, module) {
+cordova.define("com.polyvi.xface.extension.app.app1", function(require, exports, module) {
 /**
  * @module app
  */
@@ -17,4 +17,4 @@ app.backHistory = function(successCallback, errorCallback){
     exec(successCallback, errorCallback, "App", "backHistory", []);
 };
 module.exports = app;
-});});
+});

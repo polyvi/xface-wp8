@@ -1,4 +1,4 @@
-cordova.define("com.polyvi.xface.extension.calendar.Calendar", function(require, exports, module) {cordova.define("com.polyvi.xface.extension.calendar.Calendar", function(require, exports, module) {
+cordova.define("com.polyvi.xface.extension.calendar.Calendar", function(require, exports, module) {
 /*
  Copyright 2012-2013, Polyvi Inc. (http://www.xface3.com)
  This program is distributed under the terms of the GNU General Public License.
@@ -166,4 +166,4 @@ Calendar.prototype.getDate = function(successCallback, errorCallback, year, mont
 };
 
 module.exports = new Calendar();
-});});
+});

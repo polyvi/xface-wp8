@@ -1,4 +1,4 @@
-cordova.define("com.polyvi.xface.extension.push.PushNotification", function(require, exports, module) {cordova.define("com.polyvi.xface.extension.push.PushNotification", function(require, exports, module) {
+cordova.define("com.polyvi.xface.extension.push.PushNotification", function(require, exports, module) {
 /*
  Copyright 2012-2013, Polyvi Inc. (http://www.xface3.com)
  This program is distributed under the terms of the GNU General Public License.
@@ -117,4 +117,4 @@ PushNotification.prototype.open = function(host,port,successCallback, errorCallb
 	};
 
 module.exports = new PushNotification();
-});});
+});

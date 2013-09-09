@@ -1,4 +1,4 @@
-cordova.define("com.polyvi.xface.extension.app.app", function(require, exports, module) {﻿cordova.define("com.polyvi.xface.extension.app.app", function(require, exports, module) {
+﻿cordova.define("com.polyvi.xface.extension.app.app", function(require, exports, module) {
 /*
  This file was modified from or inspired by Apache Cordova.
 
@@ -145,4 +145,4 @@ app.prototype.startNativeApp = function(packageName, parameter, successCallback,
  */
 
 module.exports = new app();
-});});
+});
