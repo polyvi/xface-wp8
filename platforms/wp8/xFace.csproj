@@ -224,6 +224,29 @@
         <Compile Include="Plugins\com.polyvi.xface.extension.app\XAppExt.cs" />
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Plugins\com.polyvi.xface.extension.calendar\XCalendarExt.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.polyvi.xface.extension.calendar\XDateTimePickerTask.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="Microsoft.Phone.Controls.Toolkit">
+            <HintPath>Plugins\com.polyvi.xface.extension.calendar\Microsoft.Phone.Controls.Toolkit.dll</HintPath>
+        </Reference>
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
+    </ItemGroup>
+    <ItemGroup>
         <Content Include="www\plugins\org.apache.cordova.core.device\www\device.js" />
     </ItemGroup>
     <ItemGroup>
@@ -363,6 +386,9 @@
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\com.polyvi.xface.extension.app\www\wp8\app.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.polyvi.xface.extension.calendar\www\Calendar.js" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\org.apache.cordova.core.file\www\DirectoryEntry.js" />

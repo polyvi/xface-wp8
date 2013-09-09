@@ -331,6 +331,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins\\com.polyvi.xface.extension.calendar\\www\\Calendar.js",
+        "id": "com.polyvi.xface.extension.calendar.Calendar",
+        "clobbers": [
+            "window.xFace.ui.Calendar"
+        ]
+    },
+    {
         "file": "plugins\\org.apache.cordova.core.file\\www\\DirectoryEntry.js",
         "id": "org.apache.cordova.core.file.DirectoryEntry",
         "clobbers": [

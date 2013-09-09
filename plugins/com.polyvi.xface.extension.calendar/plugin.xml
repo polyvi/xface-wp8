@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<plugin xmlns="http://apache.org/cordova/ns/plugins/1.0"
+           id="com.polyvi.xface.extension.calendar"
+      version="0.2.0">
+
+    <name>Calendar</name>
+    <author>PolyVi Inc.</author>
+    <description>xFace Calendar Plugin</description>
+    <license>Apache 2.0</license>
+    <keywords>cordova,Calendar</keywords>
+
+    <js-module src="www/Calendar.js" name="Calendar">
+        <clobbers target="window.xFace.ui.Calendar" />
+    </js-module>
+
+    <!-- wp8 -->
+    <platform name="wp8">
+        <config-file target="config.xml" parent="/*">
+            <feature name="Calendar">
+                <param name="wp-package" value="Calendar"/>
+            </feature>
+        </config-file>
+
+        <source-file src="src/wp/XCalendarExt.cs" />
+        <source-file src="src/wp/XDateTimePickerTask.cs" />
+        <!-- dll -->
+        <source-file src="src/wp/Microsoft.Phone.Controls.Toolkit.dll" />
+        <!-- resource -->
+        <!-- target-dir A directory into which the files should be copied, relative to the root of the Cordova project -->
+        <source-file src="src/wp/Toolkit.Content/ApplicationBar.Cancel.png" target-dir="../../Toolkit.Content"/>
+        <source-file src="src/wp/Toolkit.Content/ApplicationBar.Check.png" target-dir="../../Toolkit.Content"/>
+        <source-file src="src/wp/Toolkit.Content/ApplicationBar.Delete.png" target-dir="../../Toolkit.Content"/>
+        <source-file src="src/wp/Toolkit.Content/ApplicationBar.Select.png" target-dir="../../Toolkit.Content"/>
+    </platform>
+
+    <!-- android -->
+
+
+    <!-- ios -->
+
+
+</plugin>
