@@ -83,6 +83,9 @@
     <feature name="App">
         <param name="wp-package" value="App" />
     </feature>
+    <feature name="BarcodeScanner">
+        <param name="wp-package" value="BarcodeScanner" />
+    </feature>
     <feature name="Calendar">
         <param name="wp-package" value="Calendar" />
     </feature>

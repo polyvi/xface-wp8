@@ -130,6 +130,10 @@
         <Compile Include="Plugins\org.apache.cordova.core.splashscreen\SplashScreen.cs" />
         <Compile Include="Plugins\org.apache.cordova.core.vibration\Vibration.cs" />
         <Compile Include="Properties\AssemblyInfo.cs" />
+        <Page Include="Plugins\com.polyvi.xface.extension.zbar\XBarCode.xaml">
+            <SubType>Designer</SubType>
+            <Generator>MSBuild:Compile</Generator>
+        </Page>
     </ItemGroup>
     <ItemGroup>
         <ApplicationDefinition Include="App.xaml">
@@ -262,6 +266,24 @@
     </ItemGroup>
     <ItemGroup>
         <Compile Include="Plugins\com.polyvi.xface.extension.telephony\XTelephonyExt.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.polyvi.xface.extension.zbar\XZBarExt.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.polyvi.xface.extension.zbar\XBarCodeTask.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Compile Include="Plugins\com.polyvi.xface.extension.zbar\XBarCode.cs" />
+    </ItemGroup>
+    <ItemGroup />
+    <ItemGroup>
+        <Compile Include="Plugins\com.polyvi.xface.extension.zbar\XPhotoCameraLuminanceSource.cs" />
+    </ItemGroup>
+    <ItemGroup>
+        <Reference Include="Silverlight_ZXing_Core">
+            <HintPath>Plugins\com.polyvi.xface.extension.zbar\Silverlight_ZXing_Core.dll</HintPath>
+        </Reference>
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\org.apache.cordova.core.device\www\device.js" />
@@ -427,6 +449,9 @@
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\com.polyvi.xface.extension.telephony\www\Telephony.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.polyvi.xface.extension.zbar\www\BarcodeScanner.js" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\org.apache.cordova.core.file\www\DirectoryEntry.js" />

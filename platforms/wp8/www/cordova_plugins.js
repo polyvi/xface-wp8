@@ -387,6 +387,13 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins\\com.polyvi.xface.extension.zbar\\www\\BarcodeScanner.js",
+        "id": "com.polyvi.xface.extension.zbar.BarcodeScanner",
+        "clobbers": [
+            "window.xFace.BarcodeScanner"
+        ]
+    },
+    {
         "file": "plugins\\org.apache.cordova.core.file\\www\\DirectoryEntry.js",
         "id": "org.apache.cordova.core.file.DirectoryEntry",
         "clobbers": [
