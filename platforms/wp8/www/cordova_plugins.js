@@ -394,6 +394,27 @@ module.exports = [
         ]
     },
     {
+        "file": "plugins\\com.polyvi.xface.extension.zip\\www\\Zip.js",
+        "id": "com.polyvi.xface.extension.zip.Zip",
+        "clobbers": [
+            "window.xFace.Zip"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.zip\\www\\ZipError.js",
+        "id": "com.polyvi.xface.extension.zip.ZipError",
+        "clobbers": [
+            "ZipError"
+        ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.zip\\www\\ZipOptions.js",
+        "id": "com.polyvi.xface.extension.zip.ZipOptions",
+        "clobbers": [
+            "ZipOptions"
+        ]
+    },
+    {
         "file": "plugins\\org.apache.cordova.core.file\\www\\DirectoryEntry.js",
         "id": "org.apache.cordova.core.file.DirectoryEntry",
         "clobbers": [

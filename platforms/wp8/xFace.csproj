@@ -286,6 +286,9 @@
         </Reference>
     </ItemGroup>
     <ItemGroup>
+        <Compile Include="Plugins\com.polyvi.xface.extension.zip\XZipExt.cs" />
+    </ItemGroup>
+    <ItemGroup>
         <Content Include="www\plugins\org.apache.cordova.core.device\www\device.js" />
     </ItemGroup>
     <ItemGroup>
@@ -452,6 +455,15 @@
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\com.polyvi.xface.extension.zbar\www\BarcodeScanner.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.polyvi.xface.extension.zip\www\Zip.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.polyvi.xface.extension.zip\www\ZipError.js" />
+    </ItemGroup>
+    <ItemGroup>
+        <Content Include="www\plugins\com.polyvi.xface.extension.zip\www\ZipOptions.js" />
     </ItemGroup>
     <ItemGroup>
         <Content Include="www\plugins\org.apache.cordova.core.file\www\DirectoryEntry.js" />

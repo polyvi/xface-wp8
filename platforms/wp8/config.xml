@@ -101,4 +101,7 @@
     <feature name="Telephony">
         <param name="wp-package" value="Telephony" />
     </feature>
+    <feature name="Zip">
+        <param name="wp-package" value="Zip" />
+    </feature>
 </widget>
