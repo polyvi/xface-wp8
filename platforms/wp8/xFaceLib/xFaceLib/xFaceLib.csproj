@@ -194,9 +194,6 @@
     <Compile Include="..\src\runtime\XWebApplication.cs">
       <Link>runtime\XWebApplication.cs</Link>
     </Compile>
-    <Compile Include="..\src\runtime\XWhitelist.cs">
-      <Link>runtime\XWhitelist.cs</Link>
-    </Compile>
     <Compile Include="..\src\SplashScreenControl\XSplashScreenControl.cs">
       <Link>SplashScreenControl\XSplashScreenControl.cs</Link>
       <DependentUpon>XSplashScreenControl.xaml</DependentUpon>
