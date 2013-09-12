@@ -52,8 +52,8 @@
     <feature name="Notification">
         <param name="wp-package" value="Notification" />
     </feature>
-    <feature name="Media">
-        <param name="wp-package" value="Media" />
+    <feature name="Capture">
+        <param name="wp-package" value="Capture" />
     </feature>
     <feature name="FileTransfer">
         <param name="wp-package" value="FileTransfer" />
