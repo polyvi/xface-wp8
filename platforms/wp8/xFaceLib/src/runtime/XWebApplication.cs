@@ -184,6 +184,12 @@ namespace xFaceLib.runtime
             XLog.WriteInfo("==ScriptNotify");
             XLog.WriteInfo("-------------" + commandStr + "-------------------");
 
+            //忽略 Cordova 已经处理的js command
+            if ( (commandStr.IndexOf("XHRLOCAL") == 0) || (commandStr.IndexOf("Orientation") == 0) || (commandStr.IndexOf("ConsoleLog") == 0) )
+            {
+                return;
+            }
+
             //处理 DOMStorage
             if (commandStr.IndexOf("DOMStorage") == 0)
             {
