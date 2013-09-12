@@ -170,13 +170,6 @@ module.exports = [
         ]
     },
     {
-        "file": "plugins\\org.apache.cordova.core.file-transfer\\www\\wp\\FileTransfer.js",
-        "id": "org.apache.cordova.core.file-transfer.FileTransfer1",
-        "clobbers": [
-            "window.FileTransfer"
-        ]
-    },
-    {
         "file": "plugins\\org.apache.cordova.core.vibration\\www\\vibration.js",
         "id": "org.apache.cordova.core.vibration.notification",
         "merges": [
