@@ -104,4 +104,7 @@
     <feature name="Zip">
         <param name="wp-package" value="Zip" />
     </feature>
+    <feature name="AdvancedFileTransfer">
+        <param name="wp-package" value="AdvancedFileTransfer" />
+    </feature>
 </widget>

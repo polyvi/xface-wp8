@@ -539,6 +539,13 @@ module.exports = [
         "clobbers": [
             "SecurityOptions"
         ]
+    },
+    {
+        "file": "plugins\\com.polyvi.xface.extension.advancedFileTransfer\\www\\AdvancedFileTransfer.js",
+        "id": "com.polyvi.xface.extension.advancedFileTransfer.AdvancedFileTransfer",
+        "clobbers": [
+            "window.xFace.AdvancedFileTransfer"
+        ]
     }
 ]
 });

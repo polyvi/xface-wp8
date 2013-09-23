@@ -1,0 +1,64 @@
+﻿<!DOCTYPE html>
+<html>
+  <head>
+    <meta name="viewport" content="width=device-width,height=device-height,user-scalable=no,maximum-scale=1.0,initial-scale=1.0" />
+    <meta http-equiv="Content-type" content="text/html; charset=utf-8"> <!-- ISO-8859-1 -->
+    <link rel="stylesheet" href="../master.css" type="text/css" media="screen" title="no title" charset="utf-8">
+    <script type="text/javascript" charset="utf-8" src="../cordova-incl.js"></script>
+    <script type="text/javascript" charset="utf-8">
+        window.onerror = error;
+        function error(sMsg, sUrl, sLine) {
+            console.log(sMsg + sUrl + sLine);
+            alert(sMsg);
+        }
+      //var source = "http://c758482.r82.cf2.rackcdn.com/Sublime%20Text%202.0.2%20x64%20Setup.exe";
+      //var target = "/fileloadfile/Sublime.exe";
+      var source = "http://www.polyvi.net:8012/develop/TrafficStats/chmdecoder.zip";
+      var target = "chmdecoder.zip";
+
+      function download(){
+          var fileTransfer = new xFace.AdvancedFileTransfer(source, target);
+        fileTransfer.download(downloadSuccess, downloadFail);
+      };
+
+      function pause(){
+          var fileTransfer = new xFace.AdvancedFileTransfer(source, target);
+        fileTransfer.pause();
+      };
+
+      function cancel(){
+          var fileTransfer = new xFace.AdvancedFileTransfer(source, target);
+        fileTransfer.cancel();
+      };
+
+      function downloadSuccess(result){
+        if(result.status == "unfinished"){
+          var res = "completeSize:" + result.loaded;
+          document.getElementById('status').innerText = "downloading";
+          document.getElementById('result').innerText = res;
+        }else{
+          var res = "file: " + result.name + " has been downloaded";
+          document.getElementById('status').innerText = "download successfully";
+          document.getElementById('result').innerText = res;
+        }
+      };
+
+      function downloadFail(result){
+        var res = "result code " + result.code;
+        document.getElementById('status').innerText = "fail";
+        document.getElementById('result').innerText = res;
+      };
+    </script>
+  </head>
+
+  <body id="stage" class="theme">
+    <h1>AdvancedFileTransfer</h1>
+    <div id="info">
+      status: <span id="status"></span><br/>
+      result: <span id="result"></span><br/>
+    </div>
+      <div class="btn large" onclick="download();">Download</div>
+      <div class="btn large" onclick="pause();">Pause</div>
+      <div class="btn large" onclick="cancel();">Cancel</div>
+  </body>
+</html>

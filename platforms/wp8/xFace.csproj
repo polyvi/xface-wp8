@@ -94,6 +94,13 @@
       <DependentUpon>App.xaml</DependentUpon>
     </Compile>
     <Compile Include="LocalizedStrings.cs" />
+    <Compile Include="Plugins\com.polyvi.xface.extension.advancedFileTransfer\XAdvancedFileTransferExt.cs" />
+    <Compile Include="Plugins\com.polyvi.xface.extension.advancedFileTransfer\XFileDownloader.cs" />
+    <Compile Include="Plugins\com.polyvi.xface.extension.advancedFileTransfer\XFileDownloadInfo.cs" />
+    <Compile Include="Plugins\com.polyvi.xface.extension.advancedFileTransfer\XFileTransferManager.cs" />
+    <Compile Include="Plugins\com.polyvi.xface.extension.advancedFileTransfer\XFileTransferRecorder.cs" />
+    <Compile Include="Plugins\com.polyvi.xface.extension.advancedFileTransfer\XIFileTransfer.cs" />
+    <Compile Include="Plugins\com.polyvi.xface.extension.advancedFileTransfer\XIFileTransferListener.cs" />
     <Compile Include="Resources\AppResources.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -461,6 +468,9 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="www\plugins\com.polyvi.xface.extension.zip\www\ZipOptions.js" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="www\plugins\com.polyvi.xface.extension.advancedFileTransfer\www\AdvancedFileTransfer.js" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="www\plugins\org.apache.cordova.core.file\www\DirectoryEntry.js" />
