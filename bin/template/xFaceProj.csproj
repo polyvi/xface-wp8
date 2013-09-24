@@ -177,4 +177,7 @@
       <Name>xFaceLib</Name>
     </ProjectReference>
   </ItemGroup>
+  <ItemGroup>
+    <Content Include="www\cordova.js" />
+  </ItemGroup>
 </Project>
