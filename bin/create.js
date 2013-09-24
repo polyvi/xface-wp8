@@ -23,7 +23,7 @@
  * USAGE
  *  ./create [path package activity]
 
-    ./bin/create.bat C:\Users\Me\MyTestProj "test.proj" "TestProject"
+    ./bin/create.bat --shared C:\Users\Me\MyTestProj "test.proj" "TestProject"
  */
 
 
@@ -36,13 +36,16 @@ var args = WScript.Arguments;
 var templatePath = "\\template"
 var destPath;
 
+//  Link directly against the shared copy of the xFaceLib instead of a copy of it, default false = copy, true = link share
+var shared = false;
 
 Log("platformRoot = " + platformRoot);
 Log("repoRoot = " + repoRoot);
 
 
 function Usage() {
-    Log("Usage: create PathToNewProject [ PackageName AppName ]");
+    Log("Usage: create [--shared] PathToNewProject [ PackageName AppName ]");
+    Log("	--shared (optional): Link directly against the shared copy of the xFaceLib instead of a copy of it.");
     Log("    PathToNewProject : The path to where you wish to create the project");
     Log("    PackageName      : The namespace for the project (default is xFace.Example)")
     Log("    AppName          : The name of the application (default is xFaceProj)");
@@ -136,10 +139,20 @@ function create(path, namespace, name) {
 
     // Copy the template source files to the new destination
     fso.CopyFolder(platformRoot + templatePath, path);
-    // copy over common files
-    //fso.CopyFolder(repoRoot + "\\common", path);
-    // copy the version file
-    //fso.CopyFile(repoRoot +'\\VERSION',path + "\\" );
+    
+    if(!shared) {
+        // copy over xFaceLib files & create xFaceLib folder
+        fso.CreateFolder(path + "\\xFaceLib");
+        fso.CopyFolder(repoRoot + "\\xFaceLib", path + "\\xFaceLib");
+
+        // copy the cordova-wp8\wp8\template\cordovalib files & create cordova-wp8\wp8\template\cordovalib folder
+        fso.CreateFolder(path + "\\cordova-wp8");
+        fso.CreateFolder(path + "\\cordova-wp8\\wp8");
+        fso.CreateFolder(path + "\\cordova-wp8\\wp8\\template");
+        fso.CreateFolder(path + "\\cordova-wp8\\wp8\\template\\cordovalib");
+        fso.CopyFolder(repoRoot +'\\cordova-wp8\\wp8\\template\\cordovalib', path + "\\cordova-wp8\\wp8\\template\\cordovalib");
+    }
+
 
     // remove template cruft
     deleteFileIfExists(path + "\\__PreviewImage.jpg");
@@ -159,8 +172,14 @@ function create(path, namespace, name) {
 
     replaceInFile(path + "\\LocalizedStrings.cs",/\$safeprojectname\$/g,namespace);
     replaceInFile(path + "\\Resources\\AppResources.Designer.cs",/\$safeprojectname\$/g,namespace);
-    replaceInFile(path + "\\xFaceSolution.sln",/..\\..\\xFaceLib/g,repoRoot + "\\xFaceLib");
-    replaceInFile(path + "\\xFaceProj.csproj",/..\\..\\xFaceLib/g,repoRoot + "\\xFaceLib");
+    //shared need replace sln/.csproj add repoRoot
+    if(shared) {
+        replaceInFile(path + "\\xFaceSolution.sln",/..\\..\\xFaceLib/g,repoRoot + "\\xFaceLib");
+        replaceInFile(path + "\\xFaceProj.csproj",/..\\..\\xFaceLib/g,repoRoot + "\\xFaceLib");
+    } else {
+        replaceInFile(path + "\\xFaceSolution.sln",/..\\..\\xFaceLib/g, "xFaceLib");
+        replaceInFile(path + "\\xFaceProj.csproj",/..\\..\\xFaceLib/g, "xFaceLib");
+    }
     replaceInFile(path + "\\xFaceProj.csproj",/\$safeprojectname\$/g,namespace);
 
     if (name != "xFaceProj") {
@@ -202,22 +221,49 @@ if (args.Count() > 0) {
         Usage();
         WScript.Quit(1);
     }
+    
+    //--shared
+    if (args(0) == "--shared") {
+        shared = true;
+        if (args.Count() > 1) {
+            destPath = args(1);
+        } else {
+            Usage();
+            WScript.Quit(1);
+        }
+        
+        if (fso.FolderExists(destPath)) {
+            Log("Project directory already exists:", true);
+            Log("\t" + destPath, true);
+            Log("CREATE FAILED.", true);
+            WScript.Quit(1);
+        }
+        var packageName = "xFace.Example";
+        if (args.Count() > 2) {
+            packageName = args(2);
+        }
 
-    destPath = args(0);
-    if (fso.FolderExists(destPath)) {
-        Log("Project directory already exists:", true);
-        Log("\t" + destPath, true);
-        Log("CREATE FAILED.", true);
-        WScript.Quit(1);
-    }
-    var packageName = "xFace.Example";
-    if (args.Count() > 1) {
-        packageName = args(1);
-    }
+        var projName = "xFace";
+        if (args.Count() > 3) {
+            projName = args(3);
+        }
+    } else {
+        destPath = args(0);
+        if (fso.FolderExists(destPath)) {
+            Log("Project directory already exists:", true);
+            Log("\t" + destPath, true);
+            Log("CREATE FAILED.", true);
+            WScript.Quit(1);
+        }
+        var packageName = "xFace.Example";
+        if (args.Count() > 1) {
+            packageName = args(1);
+        }
 
-    var projName = "xFace";
-    if (args.Count() > 2) {
-        projName = args(2);
+        var projName = "xFace";
+        if (args.Count() > 2) {
+            projName = args(2);
+        }
     }
 
     create(destPath, packageName, projName);
