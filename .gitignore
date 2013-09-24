@@ -5,8 +5,9 @@
 # 忽略所有 .user 结尾的文件
 *.user
 # 忽略 /bin /obj /out /pkg 目录下的文件
-Bin/
+!bin
+xFaceLib/cordovalib/Bin/
+xFaceLib/xFaceLib/Bin/
 obj/
 out/
 pkg/
-!bin
