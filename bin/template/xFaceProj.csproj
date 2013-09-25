@@ -156,18 +156,6 @@
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
   <ProjectExtensions />
   <ItemGroup>
-    <Content Include="Toolkit.Content\ApplicationBar.Cancel.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Toolkit.Content\ApplicationBar.Check.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Toolkit.Content\ApplicationBar.Delete.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="Toolkit.Content\ApplicationBar.Select.png" />
-  </ItemGroup>
-  <ItemGroup>
     <ProjectReference Include="..\..\xFaceLib\cordovalib\WPCordovaClassLib.csproj">
       <Project>{FC6A1A70-892D-46AD-9E4A-9793F72AF780}</Project>
       <Name>WPCordovaClassLib</Name>
