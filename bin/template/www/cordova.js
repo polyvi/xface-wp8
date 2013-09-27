@@ -1,5 +1,5 @@
 ﻿// Platform: windowsphone
-// 3.0.0-dev-56-g579d990
+// 3.0.0-0-ge670de9
 /*
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  under the License.
 */
 ;(function() {
-var CORDOVA_JS_BUILD_LABEL = '3.0.0-dev-56-g579d990';
+var CORDOVA_JS_BUILD_LABEL = '3.0.0-0-ge670de9';
 // file: lib/scripts/require.js
 
 var require,
@@ -102,6 +102,16 @@ define("cordova", function(require, exports, module) {
 var channel = require('cordova/channel');
 
 /**
+ * Listen for DOMContentLoaded and notify our channel subscribers.
+ */
+document.addEventListener('DOMContentLoaded', function() {
+    channel.onDOMContentLoaded.fire();
+}, false);
+if (document.readyState == 'complete' || document.readyState == 'interactive') {
+    channel.onDOMContentLoaded.fire();
+}
+
+/**
  * Intercept calls to addEventListener + removeEventListener and handle deviceready,
  * resume, and pause events.
  */
@@ -167,11 +177,21 @@ function createEvent(type, data) {
     return event;
 }
 
+if(typeof window.console === "undefined") {
+    window.console = {
+        log:function(){}
+    };
+}
+// there are places in the framework where we call `warn` also, so we should make sure it exists
+if(typeof window.console.warn === "undefined") {
+    window.console.warn = function(msg) {
+        this.log("warn: " + msg);
+    }
+}
 
 var cordova = {
     define:define,
     require:require,
-    version:CORDOVA_JS_BUILD_LABEL,
     /**
      * Methods to add/remove your own addEventListener hijacking on document + window.
      */
@@ -207,16 +227,16 @@ var cordova = {
         var evt = createEvent(type, data);
         if (typeof documentEventHandlers[type] != 'undefined') {
             if( bNoDetach ) {
-                documentEventHandlers[type].fire(evt);
+              documentEventHandlers[type].fire(evt);
             }
             else {
-                setTimeout(function() {
-                    // Fire deviceready on listeners that were registered before cordova.js was loaded.
-                    if (type == 'deviceready') {
-                        document.dispatchEvent(evt);
-                    }
-                    documentEventHandlers[type].fire(evt);
-                }, 0);
+              setTimeout(function() {
+                  // Fire deviceready on listeners that were registered before cordova.js was loaded.
+                  if (type == 'deviceready') {
+                      document.dispatchEvent(evt);
+                  }
+                  documentEventHandlers[type].fire(evt);
+              }, 0);
             }
         } else {
             document.dispatchEvent(evt);
@@ -306,9 +326,18 @@ var cordova = {
     }
 };
 
+// Register pause, resume and deviceready channels as events on document.
+channel.onPause = cordova.addDocumentEventHandler('pause');
+channel.onResume = cordova.addDocumentEventHandler('resume');
+channel.onDeviceReady = cordova.addStickyDocumentEventHandler('deviceready');
 
 module.exports = cordova;
 
+});
+
+define("xFace", function(require, exports, module) {
+    var xFace = cordova;
+    module.exports = xFace;
 });
 
 // file: lib/common/argscheck.js
@@ -329,7 +358,7 @@ var typeMap = {
 };
 
 function extractParamName(callee, argIndex) {
-    return (/.*?\((.*?)\)/).exec(callee)[1].split(', ')[argIndex];
+  return (/.*?\((.*?)\)/).exec(callee)[1].split(', ')[argIndex];
 }
 
 function checkArgs(spec, functionName, args, opt_callee) {
@@ -383,8 +412,8 @@ define("cordova/base64", function(require, exports, module) {
 var base64 = exports;
 
 base64.fromArrayBuffer = function(arrayBuffer) {
-    var array = new Uint8Array(arrayBuffer);
-    return uint8ToBase64(array);
+  var array = new Uint8Array(arrayBuffer);
+  return uint8ToBase64(array);
 };
 
 //------------------------------------------------------------------------------
@@ -406,7 +435,7 @@ var b64_12bitTable = function() {
     }
     b64_12bitTable = function() { return b64_12bit; };
     return b64_12bit;
-};
+}
 
 function uint8ToBase64(rawData) {
     var numBytes = rawData.byteLength;
@@ -473,36 +502,36 @@ function assignOrWrapInDeprecateGetter(obj, key, value, message) {
 function include(parent, objects, clobber, merge) {
     each(objects, function (obj, key) {
         try {
-            var result = obj.path ? require(obj.path) : {};
+          var result = obj.path ? require(obj.path) : {};
 
-            if (clobber) {
-                // Clobber if it doesn't exist.
-                if (typeof parent[key] === 'undefined') {
-                    assignOrWrapInDeprecateGetter(parent, key, result, obj.deprecated);
-                } else if (typeof obj.path !== 'undefined') {
-                    // If merging, merge properties onto parent, otherwise, clobber.
-                    if (merge) {
-                        recursiveMerge(parent[key], result);
-                    } else {
-                        assignOrWrapInDeprecateGetter(parent, key, result, obj.deprecated);
-                    }
-                }
-                result = parent[key];
+          if (clobber) {
+              // Clobber if it doesn't exist.
+              if (typeof parent[key] === 'undefined') {
+                  assignOrWrapInDeprecateGetter(parent, key, result, obj.deprecated);
+              } else if (typeof obj.path !== 'undefined') {
+                  // If merging, merge properties onto parent, otherwise, clobber.
+                  if (merge) {
+                      recursiveMerge(parent[key], result);
+                  } else {
+                      assignOrWrapInDeprecateGetter(parent, key, result, obj.deprecated);
+                  }
+              }
+              result = parent[key];
+          } else {
+            // Overwrite if not currently defined.
+            if (typeof parent[key] == 'undefined') {
+              assignOrWrapInDeprecateGetter(parent, key, result, obj.deprecated);
             } else {
-                // Overwrite if not currently defined.
-                if (typeof parent[key] == 'undefined') {
-                    assignOrWrapInDeprecateGetter(parent, key, result, obj.deprecated);
-                } else {
-                    // Set result to what already exists, so we can build children into it if they exist.
-                    result = parent[key];
-                }
+              // Set result to what already exists, so we can build children into it if they exist.
+              result = parent[key];
             }
+          }
 
-            if (obj.children) {
-                include(result, obj.children, clobber, merge);
-            }
+          if (obj.children) {
+            include(result, obj.children, clobber, merge);
+          }
         } catch(e) {
-            utils.alert('Exception building cordova JS globals: ' + e + ' for key "' + key + '"');
+          utils.alert('Exception building cordova JS globals: ' + e + ' for key "' + key + '"');
         }
     });
 }
@@ -787,6 +816,36 @@ module.exports = channel;
 
 });
 
+// file: lib/common/commandProxy.js
+define("cordova/commandProxy", function(require, exports, module) {
+
+
+// internal map of proxy function
+var CommandProxyMap = {};
+
+module.exports = {
+
+    // example: cordova.commandProxy.add("Accelerometer",{getCurrentAcceleration: function(successCallback, errorCallback, options) {...},...);
+    add:function(id,proxyObj) {
+        console.log("adding proxy for " + id);
+        CommandProxyMap[id] = proxyObj;
+        return proxyObj;
+    },
+
+    // cordova.commandProxy.remove("Accelerometer");
+    remove:function(id) {
+        var proxy = CommandProxyMap[id];
+        delete CommandProxyMap[id];
+        CommandProxyMap[id] = null;
+        return proxy;
+    },
+
+    get:function(service,action) {
+        return ( CommandProxyMap[service] ? CommandProxyMap[service][action] : null );
+    }
+};
+});
+
 // file: lib/windowsphone/exec.js
 define("cordova/exec", function(require, exports, module) {
 
@@ -836,120 +895,6 @@ module.exports = function(success, fail, service, action, args) {
         console.log("Exception calling native with command :: " + command + " :: exception=" + e);
     }
 };
-
-
-});
-
-// file: lib/common/init.js
-define("cordova/init", function(require, exports, module) {
-
-var channel = require('cordova/channel');
-var cordova = require('cordova');
-var modulemapper = require('cordova/modulemapper');
-var platform = require('cordova/platform');
-var pluginloader = require('cordova/pluginloader');
-
-var platformInitChannelsArray = [channel.onNativeReady, channel.onPluginsReady];
-
-function logUnfiredChannels(arr) {
-    for (var i = 0; i < arr.length; ++i) {
-        if (arr[i].state != 2) {
-            console.log('Channel not fired: ' + arr[i].type);
-        }
-    }
-}
-
-window.setTimeout(function() {
-    if (channel.onDeviceReady.state != 2) {
-        console.log('deviceready has not fired after 5 seconds.');
-        logUnfiredChannels(platformInitChannelsArray);
-        logUnfiredChannels(channel.deviceReadyChannelsArray);
-    }
-}, 5000);
-
-// Replace navigator before any modules are required(), to ensure it happens as soon as possible.
-// We replace it so that properties that can't be clobbered can instead be overridden.
-function replaceNavigator(origNavigator) {
-    var CordovaNavigator = function() {};
-    CordovaNavigator.prototype = origNavigator;
-    var newNavigator = new CordovaNavigator();
-    // This work-around really only applies to new APIs that are newer than Function.bind.
-    // Without it, APIs such as getGamepads() break.
-    if (CordovaNavigator.bind) {
-        for (var key in origNavigator) {
-            if (typeof origNavigator[key] == 'function') {
-                newNavigator[key] = origNavigator[key].bind(origNavigator);
-            }
-        }
-    }
-    return newNavigator;
-}
-if (window.navigator) {
-    window.navigator = replaceNavigator(window.navigator);
-}
-
-if (!window.console) {
-    window.console = {
-        log: function(){}
-    };
-}
-if (!window.console.warn) {
-    window.console.warn = function(msg) {
-        this.log("warn: " + msg);
-    };
-}
-
-// Register pause, resume and deviceready channels as events on document.
-channel.onPause = cordova.addDocumentEventHandler('pause');
-channel.onResume = cordova.addDocumentEventHandler('resume');
-channel.onDeviceReady = cordova.addStickyDocumentEventHandler('deviceready');
-
-// Listen for DOMContentLoaded and notify our channel subscribers.
-if (document.readyState == 'complete' || document.readyState == 'interactive') {
-    channel.onDOMContentLoaded.fire();
-} else {
-    document.addEventListener('DOMContentLoaded', function() {
-        channel.onDOMContentLoaded.fire();
-    }, false);
-}
-
-// _nativeReady is global variable that the native side can set
-// to signify that the native code is ready. It is a global since
-// it may be called before any cordova JS is ready.
-if (window._nativeReady) {
-    channel.onNativeReady.fire();
-}
-
-modulemapper.clobbers('cordova', 'cordova');
-modulemapper.clobbers('cordova/exec', 'cordova.exec');
-modulemapper.clobbers('cordova/exec', 'Cordova.exec');
-
-// Call the platform-specific initialization.
-platform.bootstrap && platform.bootstrap();
-
-pluginloader.load(function() {
-    channel.onPluginsReady.fire();
-});
-
-/**
- * Create all cordova objects once native side is ready.
- */
-channel.join(function() {
-    modulemapper.mapModules(window);
-
-    platform.initialize && platform.initialize();
-
-    // Fire event to notify that all objects are created
-    channel.onCordovaReady.fire();
-
-    // Fire onDeviceReady event once page has fully loaded, all
-    // constructors have run and cordova info has been received from native
-    // side.
-    channel.join(function() {
-        require('cordova').fireDocumentEvent('deviceready');
-    }, channel.deviceReadyChannelsArray);
-
-}, platformInitChannelsArray);
 
 
 });
@@ -1050,6 +995,14 @@ exports.getOriginalSymbol = function(context, symbolPath) {
     return obj;
 };
 
+exports.loadMatchingModules = function(matchingRegExp) {
+    for (var k in moduleMap) {
+        if (matchingRegExp.exec(k)) {
+            require(k);
+        }
+    }
+};
+
 exports.reset();
 
 
@@ -1058,11 +1011,19 @@ exports.reset();
 // file: lib/windowsphone/platform.js
 define("cordova/platform", function(require, exports, module) {
 
+var cordova = require('cordova'),
+      exec = require('cordova/exec');
+
 module.exports = {
-    id: 'windowsphone',
-    bootstrap: function() {
-        var cordova = require('cordova'),
-               exec = require('cordova/exec');
+    id: "windowsphone",
+    initialize:function() {
+        var modulemapper = require('cordova/modulemapper');
+
+        modulemapper.loadMatchingModules(/cordova.*\/plugininit$/);
+
+        modulemapper.loadMatchingModules(/cordova.*\/symbols$/);
+
+        modulemapper.mapModules(window);
 
         // Inject a listener for the backbutton, and tell native to override the flag (true/false) when we have 1 or more, or 0, listeners
         var backButtonChannel = cordova.addDocumentEventHandler('backbutton');
@@ -1074,9 +1035,48 @@ module.exports = {
 
 });
 
+// file: lib/common/plugin/echo.js
+define("cordova/plugin/echo", function(require, exports, module) {
+
+var exec = require('cordova/exec'),
+    utils = require('cordova/utils');
+
+/**
+ * Sends the given message through exec() to the Echo plugin, which sends it back to the successCallback.
+ * @param successCallback  invoked with a FileSystem object
+ * @param errorCallback  invoked if error occurs retrieving file system
+ * @param message  The string to be echoed.
+ * @param forceAsync  Whether to force an async return value (for testing native->js bridge).
+ */
+module.exports = function(successCallback, errorCallback, message, forceAsync) {
+    var action = 'echo';
+    var messageIsMultipart = (utils.typeName(message) == "Array");
+    var args = messageIsMultipart ? message : [message];
+
+    if (utils.typeName(message) == 'ArrayBuffer') {
+        if (forceAsync) {
+            console.warn('Cannot echo ArrayBuffer with forced async, falling back to sync.');
+        }
+        action += 'ArrayBuffer';
+    } else if (messageIsMultipart) {
+        if (forceAsync) {
+            console.warn('Cannot echo MultiPart Array with forced async, falling back to sync.');
+        }
+        action += 'MultiPart';
+    } else if (forceAsync) {
+        action += 'Async';
+    }
+
+    exec(successCallback, errorCallback, "Echo", action, args);
+};
+
+
+});
+
 // file: lib/common/pluginloader.js
 define("cordova/pluginloader", function(require, exports, module) {
 
+var channel = require('cordova/channel');
 var modulemapper = require('cordova/modulemapper');
 
 // Helper function to inject a <script> tag.
@@ -1089,7 +1089,7 @@ function injectScript(url, onload, onerror) {
     document.head.appendChild(script);
 }
 
-function onScriptLoadingComplete(moduleList, finishPluginLoading) {
+function onScriptLoadingComplete(moduleList) {
     // Loop through all the plugins and then through their clobbers and merges.
     for (var i = 0, module; module = moduleList[i]; i++) {
         if (module) {
@@ -1122,11 +1122,18 @@ function onScriptLoadingComplete(moduleList, finishPluginLoading) {
     finishPluginLoading();
 }
 
+// Called when:
+// * There are plugins defined and all plugins are finished loading.
+// * There are no plugins to load.
+function finishPluginLoading() {
+    channel.onPluginsReady.fire();
+}
+
 // Handler for the cordova_plugins.js content.
 // See plugman's plugin_loader.js for the details of this object.
 // This function is only called if the really is a plugins array that isn't empty.
 // Otherwise the onerror response handler will just call finishPluginLoading().
-function handlePluginsObject(path, moduleList, finishPluginLoading) {
+function handlePluginsObject(path, moduleList) {
     // Now inject the scripts.
     var scriptCounter = moduleList.length;
 
@@ -1136,7 +1143,7 @@ function handlePluginsObject(path, moduleList, finishPluginLoading) {
     }
     function scriptLoadedCallback() {
         if (!--scriptCounter) {
-            onScriptLoadingComplete(moduleList, finishPluginLoading);
+            onScriptLoadingComplete(moduleList);
         }
     }
 
@@ -1145,17 +1152,17 @@ function handlePluginsObject(path, moduleList, finishPluginLoading) {
     }
 }
 
-function injectPluginScript(pathPrefix, finishPluginLoading) {
+function injectPluginScript(pathPrefix) {
     injectScript(pathPrefix + 'cordova_plugins.js', function(){
         try {
             var moduleList = require("cordova/plugin_list");
-            handlePluginsObject(pathPrefix, moduleList, finishPluginLoading);
+            handlePluginsObject(pathPrefix, moduleList);
         } catch (e) {
             // Error loading cordova_plugins.js, file not found or something
             // this is an acceptable error, pre-3.0.0, so we just move on.
             finishPluginLoading();
         }
-    }, finishPluginLoading); // also, add script load error handler for file not found
+    },finishPluginLoading); // also, add script load error handler for file not found
 }
 
 function findCordovaPath() {
@@ -1175,32 +1182,28 @@ function findCordovaPath() {
 // Tries to load all plugins' js-modules.
 // This is an async process, but onDeviceReady is blocked on onPluginsReady.
 // onPluginsReady is fired when there are no plugins to load, or they are all done.
-exports.load = function(callback) {
+exports.load = function() {
     var pathPrefix = findCordovaPath();
     if (pathPrefix === null) {
         console.log('Could not find cordova.js script tag. Plugin loading may fail.');
         pathPrefix = '';
     }
-    injectPluginScript(pathPrefix, callback);
+    injectPluginScript(pathPrefix);
 };
 
 
 });
 
-// file: lib/common/urlutil.js
-define("cordova/urlutil", function(require, exports, module) {
+// file: lib/common/symbols.js
+define("cordova/symbols", function(require, exports, module) {
 
-var urlutil = exports;
-var anchorEl = document.createElement('a');
+var modulemapper = require('cordova/modulemapper');
 
-/**
- * For already absolute URLs, returns what is passed in.
- * For relative URLs, converts them to absolute ones.
- */
-urlutil.makeAbsolute = function(url) {
-  anchorEl.href = url;
-  return anchorEl.href;
-};
+// Use merges here in case others symbols files depend on this running first,
+// but fail to declare the dependency with a require().
+modulemapper.merges('cordova', 'cordova');
+modulemapper.clobbers('cordova/exec', 'cordova.exec');
+modulemapper.clobbers('cordova/exec', 'Cordova.exec');
 
 });
 
@@ -1374,9 +1377,355 @@ function UUIDcreatePart(length) {
 
 });
 
+// file: lib/common/privateModule.js
+define("xFace/privateModule", function(require, exports, module) {
+
+/*
+ This file was modified from or inspired by Apache Cordova.
+
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements. See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership. The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License. You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied. See the License for the
+ specific language governing permissions and limitations
+ under the License.
+*/
+
+/**
+ * 该模块是私有模块，用于获取当前应用程序的ID，是否处于安全模式等
+ */
+//该变量用于保存当前应用的ID
+var currentAppId = null;
+var appData = null;
+var currentAppWorkspace = null;
+var privateModule = function() {
+};
+
+/**
+ * 由引擎初始化数据
+ */
+privateModule.prototype.initPrivateData = function(initData) {
+    currentAppId = initData[0];
+    currentAppWorkspace = initData[1];
+    appData = initData[2];
+};
+
+privateModule.prototype.getAppId = function() {
+    return currentAppId;
+};
+
+privateModule.prototype.appData = function() {
+    return appData;
+};
+       
+privateModule.prototype.currentAppWorkspace = function() {
+    return currentAppWorkspace;
+};
+       
+privateModule.prototype.updateFileSystemRoot = function(type, fs){
+    if (type != 1 || !module.exports.enableChecksWorkspace) {
+        return;
+    }
+    fs.root.fullPath = currentAppWorkspace;
+};
+
+privateModule.prototype.strStartsWith = function(str, prefix) {
+    return str.indexOf(prefix) === 0;
+};
+       
+privateModule.prototype.strEndsWith = function(str, suffix) {
+    return str.match(suffix+"$")==suffix;
+};
+       
+privateModule.prototype.resolve = function(path) {
+    var parts = path.split('/');
+    var i = 1;
+    while (i < parts.length) {
+       if(i == 0){
+           i++;
+       }
+       // if current part is `..` and previous part is different, remove both of them
+       if (parts[i] === '..' && parts[i-1] !== '..') {
+           parts.splice(i-1, 2);
+           i -= 2;
+       }
+       i++;
+    }
+    if(path.split('/').length > 1 && parts.length == 1){
+       return parts[0] + '/';
+    }else{
+       return parts.join('/');
+    }
+};
+       
+privateModule.prototype.checkPath = function(functionName, basePath, relativePath) {
+    if (!module.exports.enableChecksWorkspace) {
+        return true;
+    }
+    relativePath = relativePath.replace(/\\/g,'/');
+    if (this.strStartsWith(relativePath, basePath)){
+           return true;
+    }
+       
+    var result = null;
+    if(this.strStartsWith(relativePath, '/')){
+       result = basePath + relativePath;
+    }else{
+       result = basePath + '/' + relativePath;
+    }                                   
+    result = this.resolve(result);
+              
+    if (this.strStartsWith(result, basePath)){
+        return true;
+    }else{
+       console.error(functionName + "check path failed:" + result);
+       return false;
+   }
+};
+
+module.exports = new privateModule();
+module.exports.enableChecksWorkspace = true;
+});
+
+// file: lib/common/localStorage.js
+define("xFace/localStorage", function(require, exports, module) {
+var xFace = require('xFace');
+var privateModule = require('xFace/privateModule');
+
+var m_window_addEventListener = window.addEventListener;
+var m_window_removeEventListener = window.removeEventListener;
+
+var m_localStorage_setItem = localStorage.setItem;
+var m_localStorage_getItem = localStorage.getItem;
+var m_localStorage_removeItem = localStorage.removeItem;
+
+var localstorageFunMap = {};
+var keyPrefix = "_";
+var keySeparator = ",";
+
+function getNewKey(appId, key){
+    var newKey = appId + keyPrefix + key;
+    return newKey;
+}
+
+window.addEventListener = function(evt, handler, capture) {
+    var evtLowCase = evt.toLowerCase();
+    if("storage" == evtLowCase){
+            var storageCallback = function(storageEvent){
+            var key = storageEvent.key;
+            var endAppIdIndex = key.indexOf(keyPrefix);
+            var eventAppId = key.substr(0, endAppIdIndex);
+            if(privateModule.getAppId() == eventAppId){
+                handler.call(window, evt, capture);
+            }
+        };
+        localstorageFunMap[handler] = storageCallback;
+        m_window_addEventListener.call(window, evt, storageCallback, capture);
+    } else {
+        m_window_addEventListener.call(window, evt, handler, capture);
+    }
+};
+
+window.removeEventListener = function(evt, handler, capture) {
+    var e = evt.toLowerCase();
+    if("storage" == e){
+        m_document_removeEventListener.call(window, evt, localstorageFunMap[handler], capture);
+    } else {
+        m_window_removeEventListener.call(window, evt, handler, capture);
+    }
+};
+
+localStorage.setItem = function(key, value){
+    var currentAppId = privateModule.getAppId();
+    var newKey = getNewKey(currentAppId, key);
+    m_localStorage_setItem.call(localStorage, newKey, value);
+    //更新以appId为键值的数据，其中存储的是所有属于该app的key值
+    var keyList = m_localStorage_getItem.call(localStorage, currentAppId);
+    if(null === keyList || "" === keyList){
+        keyList = key;
+        m_localStorage_setItem.call(localStorage, currentAppId, keyList);
+    }else{
+        var isNewKey = true;
+        var keyArray = keyList.split(keySeparator);
+        for ( var index = 0; index < keyArray.length; index++){
+            var tempKey = keyArray[index];
+            if(key == tempKey){
+                isNewKey = false;
+                break;
+            }
+        }
+        if(isNewKey){
+            keyList = keyList + keySeparator + key;
+            m_localStorage_setItem.call(localStorage, currentAppId, keyList);
+        }
+    }
+};
+
+localStorage.getItem = function(key){
+    var newKey = getNewKey(privateModule.getAppId(), key);
+    var value = m_localStorage_getItem.call(localStorage, newKey);
+    return value;
+};
+
+localStorage.removeItem = function(key){
+    var currentAppId = privateModule.getAppId();
+    var newKey = getNewKey(currentAppId, key);
+    m_localStorage_removeItem.call(localStorage, newKey);
+    //更新保存的keyList，删除相应的key
+    var keyList = m_localStorage_getItem.call(localStorage, currentAppId);
+    if(null !== keyList){
+        var keyArray = keyList.split(keySeparator);
+        for ( var index = 0; index < keyArray.length; index++){
+            var tempKey = keyArray[index];
+            if(key == tempKey){
+                keyArray.splice(index, 1);
+                break;
+            }
+        }
+        m_localStorage_setItem.call(localStorage, currentAppId, keyArray.join(keySeparator));
+    }
+};
+
+localStorage.key = function(index){
+    var nonNegative = /^\d+(\.\d+)?$/;
+    if(nonNegative.test(index)){
+        var realIndex = Math.floor(index);
+        var keyList = m_localStorage_getItem.call(localStorage, privateModule.getAppId());
+        if((null !== keyList) && ("" !== keyList)){
+            var keyArray = keyList.split(keySeparator);
+            if(realIndex < keyArray.length){
+                var key = keyArray[realIndex];
+                return key;
+            }
+        }
+    }
+    return null;
+};
+
+localStorage.clear = function(){
+    //删除当前的app所有的数据，keyList保存了所有属于该app的key值，根据它的信息
+    //可以删除全部的数据
+    self.clearAppData(privateModule.getAppId());
+};
+
+var self = {
+    //删除指定的appId所对应的应用的数据。
+    clearAppData : function(appId) {
+        var keyList = m_localStorage_getItem.call(localStorage, appId);
+        if(null !== keyList){
+            var keyArray = keyList.split(keySeparator);
+            for ( var index = 0; index < keyArray.length; index++){
+                var key = keyArray[index];
+                var newKey = getNewKey(appId, key);
+                m_localStorage_removeItem.call(localStorage, newKey);
+            }
+        }
+        m_localStorage_removeItem.call(localStorage, appId);
+    },
+    getOriginalLocalStorage : function() {
+        return {'setItem': m_localStorage_setItem, 'getItem': m_localStorage_getItem, 'removeItem': m_localStorage_removeItem};
+    }
+};
+
+module.exports = self;
+});
+
 window.cordova = require('cordova');
+window.xFace = require('xFace');
 // file: lib/scripts/bootstrap.js
 
-require('cordova/init');
+(function (context) {
+    if (context._cordovaJsLoaded) {
+        throw new Error('cordova.js included multiple times.');
+    }
+    context._cordovaJsLoaded = true;
+
+    var channel = require('cordova/channel');
+    var pluginloader = require('cordova/pluginloader');
+
+    var platformInitChannelsArray = [channel.onNativeReady, channel.onPluginsReady];
+
+    function logUnfiredChannels(arr) {
+        for (var i = 0; i < arr.length; ++i) {
+            if (arr[i].state != 2) {
+                console.log('Channel not fired: ' + arr[i].type);
+            }
+        }
+    }
+
+    window.setTimeout(function() {
+        if (channel.onDeviceReady.state != 2) {
+            console.log('deviceready has not fired after 5 seconds.');
+            logUnfiredChannels(platformInitChannelsArray);
+            logUnfiredChannels(channel.deviceReadyChannelsArray);
+        }
+    }, 5000);
+
+    // Replace navigator before any modules are required(), to ensure it happens as soon as possible.
+    // We replace it so that properties that can't be clobbered can instead be overridden.
+    function replaceNavigator(origNavigator) {
+        var CordovaNavigator = function() {};
+        CordovaNavigator.prototype = origNavigator;
+        var newNavigator = new CordovaNavigator();
+        // This work-around really only applies to new APIs that are newer than Function.bind.
+        // Without it, APIs such as getGamepads() break.
+        if (CordovaNavigator.bind) {
+            for (var key in origNavigator) {
+                if (typeof origNavigator[key] == 'function') {
+                    newNavigator[key] = origNavigator[key].bind(origNavigator);
+                }
+            }
+        }
+        return newNavigator;
+    }
+    if (context.navigator) {
+        context.navigator = replaceNavigator(context.navigator);
+    }
+
+    // _nativeReady is global variable that the native side can set
+    // to signify that the native code is ready. It is a global since
+    // it may be called before any cordova JS is ready.
+    if (window._nativeReady) {
+        channel.onNativeReady.fire();
+    }
+
+    /**
+     * Create all cordova objects once native side is ready.
+     */
+    channel.join(function() {
+        // Call the platform-specific initialization
+        require('cordova/platform').initialize();
+
+        // Fire event to notify that all objects are created
+        channel.onCordovaReady.fire();
+
+        // Fire onDeviceReady event once page has fully loaded, all
+        // constructors have run and cordova info has been received from native
+        // side.
+        // This join call is deliberately made after platform.initialize() in
+        // order that plugins may manipulate channel.deviceReadyChannelsArray
+        // if necessary.
+        channel.join(function() {
+            var data = require('xFace/privateModule').appData();
+            require('cordova').fireDocumentEvent('deviceready', {"data":data});
+        }, channel.deviceReadyChannelsArray);
+
+    }, platformInitChannelsArray);
+
+    // Don't attempt to load when running unit tests.
+    if (typeof XMLHttpRequest != 'undefined') {
+        pluginloader.load();
+    }
+}(window));
 
 })();
