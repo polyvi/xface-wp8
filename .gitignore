@@ -1,6 +1,4 @@
-﻿# 忽略所有 .reviewboardrc 结尾的文件
-*.reviewboardrc
-# 忽略所有 .suo 结尾的文件
+﻿# 忽略所有 .suo 结尾的文件
 *.suo
 # 忽略所有 .user 结尾的文件
 *.user

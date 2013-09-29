@@ -1,0 +1,9 @@
+#
+# Settings for post-review (used for uploading diffs to reviews.apache.org).
+#
+REPOSITORY = 'git@git.polyvi.com:xface-wp.git'
+REVIEWBOARD_URL = 'http://review.polyvi.com/reviews/'
+GUESS_FIELDS = 'true'
+TARGET_GROUPS = 'xFaceApolloCCGroup'
+OPEN_BROWSER = 'true'
+
