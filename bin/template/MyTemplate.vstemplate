@@ -1,0 +1,78 @@
+<VSTemplate Version="3.0.0" xmlns="http://schemas.microsoft.com/developer/vstemplate/2005" Type="Project">
+	<TemplateData>
+		<Name>xFaceWP8_3_0_0dev</Name>
+		<Description>&lt;No description available&gt;</Description>
+		<ProjectType>CSharp</ProjectType>
+		<ProjectSubType>
+		</ProjectSubType>
+		<SortOrder>1000</SortOrder>
+		<CreateNewFolder>true</CreateNewFolder>
+		<DefaultName>xFaceWP8_3.0.0dev</DefaultName>
+		<ProvideDefaultName>true</ProvideDefaultName>
+		<LocationField>Enabled</LocationField>
+		<EnableLocationBrowseButton>true</EnableLocationBrowseButton>
+		<Icon>__TemplateIcon.ico</Icon>
+	</TemplateData>
+	<TemplateContent>
+		<Project TargetFileName="xFace.csproj" File="xFace.csproj" ReplaceParameters="true">
+			<ProjectItem ReplaceParameters="true" TargetFileName="App.xaml">App.xaml</ProjectItem>
+			<ProjectItem ReplaceParameters="true" TargetFileName="App.xaml.cs">App.xaml.cs</ProjectItem>
+			<Folder Name="Assets" TargetFolderName="Assets">
+				<ProjectItem ReplaceParameters="false" TargetFileName="AlignmentGrid.png">AlignmentGrid.png</ProjectItem>
+				<ProjectItem ReplaceParameters="false" TargetFileName="ApplicationIcon.png">ApplicationIcon.png</ProjectItem>
+				<Folder Name="data" TargetFolderName="data">
+					<Folder Name="spectest" TargetFolderName="spectest">
+						<ProjectItem ReplaceParameters="true" TargetFileName="app.xml">app.xml</ProjectItem>
+						<ProjectItem ReplaceParameters="true" TargetFileName="cordova.js">cordova.js</ProjectItem>
+						<Folder Name="css" TargetFolderName="css">
+							<ProjectItem ReplaceParameters="true" TargetFileName="index.css">index.css</ProjectItem>
+						</Folder>
+						<Folder Name="img" TargetFolderName="img">
+							<ProjectItem ReplaceParameters="false" TargetFileName="logo.png">logo.png</ProjectItem>
+						</Folder>
+						<ProjectItem ReplaceParameters="true" TargetFileName="index.html">index.html</ProjectItem>
+						<Folder Name="js" TargetFolderName="js">
+							<ProjectItem ReplaceParameters="true" TargetFileName="index.js">index.js</ProjectItem>
+						</Folder>
+					</Folder>
+				</Folder>
+				<Folder Name="Tiles" TargetFolderName="Tiles">
+					<ProjectItem ReplaceParameters="false" TargetFileName="FlipCycleTileLarge.png">FlipCycleTileLarge.png</ProjectItem>
+					<ProjectItem ReplaceParameters="false" TargetFileName="FlipCycleTileMedium.png">FlipCycleTileMedium.png</ProjectItem>
+					<ProjectItem ReplaceParameters="false" TargetFileName="FlipCycleTileSmall.png">FlipCycleTileSmall.png</ProjectItem>
+					<ProjectItem ReplaceParameters="false" TargetFileName="IconicTileMediumLarge.png">IconicTileMediumLarge.png</ProjectItem>
+					<ProjectItem ReplaceParameters="false" TargetFileName="IconicTileSmall.png">IconicTileSmall.png</ProjectItem>
+				</Folder>
+			</Folder>
+			<ProjectItem ReplaceParameters="true" TargetFileName="config.xml">config.xml</ProjectItem>
+			<Folder Name="Images" TargetFolderName="Images">
+				<ProjectItem ReplaceParameters="false" TargetFileName="appbar.back.rest.png">appbar.back.rest.png</ProjectItem>
+				<ProjectItem ReplaceParameters="false" TargetFileName="appbar.close.rest.png">appbar.close.rest.png</ProjectItem>
+				<ProjectItem ReplaceParameters="false" TargetFileName="appbar.feature.video.rest.png">appbar.feature.video.rest.png</ProjectItem>
+				<ProjectItem ReplaceParameters="false" TargetFileName="appbar.next.rest.png">appbar.next.rest.png</ProjectItem>
+				<ProjectItem ReplaceParameters="false" TargetFileName="appbar.save.rest.png">appbar.save.rest.png</ProjectItem>
+				<ProjectItem ReplaceParameters="false" TargetFileName="appbar.stop.rest.png">appbar.stop.rest.png</ProjectItem>
+			</Folder>
+			<ProjectItem ReplaceParameters="true" TargetFileName="LocalizedStrings.cs">LocalizedStrings.cs</ProjectItem>
+			<Folder Name="Properties" TargetFolderName="Properties">
+				<ProjectItem ReplaceParameters="true" TargetFileName="AppManifest.xml">AppManifest.xml</ProjectItem>
+				<ProjectItem ReplaceParameters="true" TargetFileName="AssemblyInfo.cs">AssemblyInfo.cs</ProjectItem>
+				<ProjectItem ReplaceParameters="true" TargetFileName="WMAppManifest.xml">WMAppManifest.xml</ProjectItem>
+			</Folder>
+			<Folder Name="Resources" TargetFolderName="Resources">
+				<ProjectItem ReplaceParameters="true" TargetFileName="AppResources.resx">AppResources.resx</ProjectItem>
+				<ProjectItem ReplaceParameters="true" TargetFileName="AppResources.Designer.cs">AppResources.Designer.cs</ProjectItem>
+			</Folder>
+			<ProjectItem ReplaceParameters="false" TargetFileName="SplashScreenImage.jpg">SplashScreenImage.jpg</ProjectItem>
+			<ProjectItem ReplaceParameters="false" TargetFileName="SplashScreenImage.screen-720p.jpg">SplashScreenImage.screen-720p.jpg</ProjectItem>
+			<ProjectItem ReplaceParameters="false" TargetFileName="SplashScreenImage.screen-WVGA.jpg">SplashScreenImage.screen-WVGA.jpg</ProjectItem>
+			<ProjectItem ReplaceParameters="false" TargetFileName="SplashScreenImage.screen-WXGA.jpg">SplashScreenImage.screen-WXGA.jpg</ProjectItem>
+			<Folder Name="Toolkit.Content" TargetFolderName="Toolkit.Content">
+				<ProjectItem ReplaceParameters="false" TargetFileName="ApplicationBar.Cancel.png">ApplicationBar.Cancel.png</ProjectItem>
+				<ProjectItem ReplaceParameters="false" TargetFileName="ApplicationBar.Check.png">ApplicationBar.Check.png</ProjectItem>
+				<ProjectItem ReplaceParameters="false" TargetFileName="ApplicationBar.Delete.png">ApplicationBar.Delete.png</ProjectItem>
+				<ProjectItem ReplaceParameters="false" TargetFileName="ApplicationBar.Select.png">ApplicationBar.Select.png</ProjectItem>
+			</Folder>
+		</Project>
+	</TemplateContent>
+</VSTemplate>
