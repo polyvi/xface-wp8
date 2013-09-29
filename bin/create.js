@@ -30,8 +30,8 @@
 var fso=WScript.CreateObject("Scripting.FileSystemObject");
 var wscript_shell = WScript.CreateObject("WScript.Shell");
 // working dir
-var platformRoot = WScript.ScriptFullName.split('\\create.js').join('');
-var repoRoot =  fso.GetParentFolderName(platformRoot);
+var templateRoot = WScript.ScriptFullName.split('\\create.js').join('');
+var repoRoot =  fso.GetParentFolderName(templateRoot);
 var args = WScript.Arguments;
 var templatePath = "\\template"
 var destPath;
@@ -39,7 +39,7 @@ var destPath;
 //  Link directly against the shared copy of the xFaceLib instead of a copy of it, default false = copy, true = link share
 var shared = false;
 
-Log("platformRoot = " + platformRoot);
+Log("templateRoot = " + templateRoot);
 Log("repoRoot = " + repoRoot);
 
 
@@ -138,8 +138,11 @@ function create(path, namespace, name) {
     Log("\tPath : " + path);
 
     // Copy the template source files to the new destination
-    fso.CopyFolder(platformRoot + templatePath, path);
-    
+    fso.CopyFolder(templateRoot + templatePath, path);
+
+    // copy the xFaceLib\xFaceLib\xface.js file to project
+    fso.CopyFile(repoRoot +'\\xFaceLib\\xFaceLib\\xface.js', path + "\\xface3\\helloxface\\" );
+
     if(!shared) {
         // copy over xFaceLib files & create xFaceLib folder
         fso.CreateFolder(path + "\\xFaceLib");

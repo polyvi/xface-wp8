@@ -120,7 +120,7 @@
     <None Include="Properties\WMAppManifest.xml">
       <SubType>Designer</SubType>
     </None>
-    <Content Include="Assets\data\**\*.*" />
+    <Content Include="xface3\**\*.*" />
     <Content Include="SplashScreenImage.screen-720p.jpg" />
     <Content Include="SplashScreenImage.screen-WVGA.jpg" />
     <Content Include="SplashScreenImage.screen-WXGA.jpg" />
@@ -164,8 +164,5 @@
       <Project>{D01A27BC-9837-4CD5-BEA5-4BD36FC83154}</Project>
       <Name>xFaceLib</Name>
     </ProjectReference>
-  </ItemGroup>
-  <ItemGroup>
-    <Content Include="www\cordova.js" />
   </ItemGroup>
 </Project>

@@ -1,16 +1,16 @@
-using System;
+ï»¿using System;
 
 namespace xFaceLib.Util
 {
     public class XConstant
     {
         /// <summary>
-        ///  Ä¬ÈÏbuffer³¤¶È
+        ///  é»˜è®¤bufferé•¿åº¦
         /// </summary>
         public const int BUFFER_LEN = 2048;
 
         /// <summary>
-        ///  Ò»ÃëÄÚµÄºÁÃëÊı
+        ///  ä¸€ç§’å†…çš„æ¯«ç§’æ•°
         /// </summary>
         public const int MILLISECONDS_PER_SECOND = 1000;
 
@@ -35,147 +35,147 @@ namespace xFaceLib.Util
         public const String CONTENT_SCHEME = "content:";
 
         /// <summary>
-        ///  »ñÈ¡Ô¤ÖÃ°üsms scheme
+        ///  è·å–é¢„ç½®åŒ…sms scheme
         /// </summary>
         public const String SCHEME_SMS = "sms:";
 
         /// <summary>
-        ///  appµÄÄ¬ÈÏÆô¶¯Ò³Ãæ
+        ///  appçš„é»˜è®¤å¯åŠ¨é¡µé¢
         /// </summary>
         public const String DEFAULT_START_PAGE_NAME = "index.html";
 
         /// <summary>
-        /// playerÄ£Ê½ Ä¬ÈÏAPPID
+        /// playeræ¨¡å¼ é»˜è®¤APPID
         /// </summary>
         public const string DEFAULT_APP_ID_FOR_PLAYER = "app";
 
         /// <summary>
-        /// xapp°üÀàĞÍ
+        /// xappåŒ…ç±»å‹
         /// </summary>
         public const string APP_TYPE_XAPP = "xapp";
 
         /// <summary>
-        /// napp°üÀàĞÍ
+        /// nappåŒ…ç±»å‹
         /// </summary>
         public const string APP_TYPE_NAPP = "napp";
 
         /// <summary>
-        ///  portal°²×°³É¹¦
+        ///  portalå®‰è£…æˆåŠŸ
         /// </summary>
         public const int PORTAL_INSTALL_SUCCESS = 1;
 
         /// <summary>
-        ///  portal°²×°Ê§°Ü
+        ///  portalå®‰è£…å¤±è´¥
         /// </summary>
         public const int PORTAL_INSTALL_FAIL = 0;
 
         /// <summary>
-        ///  assetsÄ¿Â¼ÏÂĞèÒª½âÑ¹µÄzip°üÃû
+        ///  assetsç›®å½•ä¸‹éœ€è¦è§£å‹çš„zipåŒ…å
         /// </summary>
         public const String ASSET_PACKAGE_FILE_NAME = "xFaceInstalledPackage.zip";
 
         /// <summary>
-        ///  ÏµÍ³ÅäÖÃÎÄ¼şÃû³Æ
+        ///  ç³»ç»Ÿé…ç½®æ–‡ä»¶åç§°
         /// </summary>
         public const String CONFIG_FILE_NAME = "config.xml";
 
         /// <summary>
-        ///  Ô¤°²×°µÄappËùÔÚÄ¿Â¼Ãû³Æ
+        ///  é¢„å®‰è£…çš„appæ‰€åœ¨ç›®å½•åç§°
         /// </summary>
         public const String PREINSTALL_PACKAGE_DIR_NAME = "pre_install";
 
         /// <summary>
-        ///  Ä¬ÈÏappÀàĞÍ
+        ///  é»˜è®¤appç±»å‹
         /// </summary>
         public const String APP_TYPE_DEFAULT = "app";
 
         /// <summary>
-        ///  ×é¼şÓ¦ÓÃÀàĞÍ
+        ///  ç»„ä»¶åº”ç”¨ç±»å‹
         /// </summary>
         public const String APP_TYPE_COMPONENT = "component";
 
         /// <summary>
-        ///  Ó¦ÓÃµÄÅäÖÃÎÄ¼şÃû³Æ
+        ///  åº”ç”¨çš„é…ç½®æ–‡ä»¶åç§°
         /// </summary>
         public const String APP_CONFIG_FILE_NAME = "app.xml";
 
         /// <summary>
-        ///  Ó¦ÓÃµÄ¹¤×÷Ä¿Â¼Ãû³Æ
+        ///  åº”ç”¨çš„å·¥ä½œç›®å½•åç§°
         /// </summary>
         public const String APP_WORK_DIR_NAME = "workspace";
 
         /// <summary>
-        ///  ´æ´¢Ó¦ÓÃÊı¾İµÄÄ¿Â¼Ãû³Æ
+        ///  å­˜å‚¨åº”ç”¨æ•°æ®çš„ç›®å½•åç§°
         /// </summary>
         public const String APP_DATA_DIR_NAME = "data";
 
         /// <summary>
-        ///  ÀëÏßÓ¦ÓÃ»º´æÂ·¾¶
+        ///  ç¦»çº¿åº”ç”¨ç¼“å­˜è·¯å¾„
         /// </summary>
         public const String APP_CACHE_PATH = "app_cache";
 
         /// <summary>
-        ///  Ô¤ÖÃÓ¦ÓÃ°üÄ¿Â¼Ãû³Æ
+        ///  é¢„ç½®åº”ç”¨åŒ…ç›®å½•åç§°
         /// </summary>
         public const String PRE_SET_APP_PACKAGE_DIR_NAME = "pre_set";
 
         /// <summary>
-        ///  ¼ÓÃÜÊı¾İ°üÄ¿Â¼Ãû³Æ
+        ///  åŠ å¯†æ•°æ®åŒ…ç›®å½•åç§°
         /// </summary>
         public const String ENCRYPT_CODE_DIR_NAME = "encrypt_code";
 
         /// <summary>
-        ///  °²×°°üµÄºó×ºÃû
+        ///  å®‰è£…åŒ…çš„åç¼€å
         /// </summary>
         public const String APP_PACKAGE_SUFFIX = ".zip";
 
         /// <summary>
-        ///  native°²×°°üµÄºó×ºÃû
+        ///  nativeå®‰è£…åŒ…çš„åç¼€å
         /// </summary>
         public const String NATIVE_APP_SUFFIX_NPA = ".npa";
 
         /// <summary>
-        ///  °²×°°üµÄºó×ºÃû,ÀëÉ¢ÎÄ¼ş·½Ê½
+        ///  å®‰è£…åŒ…çš„åç¼€å,ç¦»æ•£æ–‡ä»¶æ–¹å¼
         /// </summary>
         public const String APP_PACKAGE_SUFFIX_XPA = ".xpa";
 
         /// <summary>
-        /// °²×°°üµÄºó×ºÃû,SingleFile·½Ê½
+        /// å®‰è£…åŒ…çš„åç¼€å,SingleFileæ–¹å¼
         /// </summary>
         public const String APP_PACKAGE_SUFFIX_XSPA = ".xspa";
 
         /// <summary>
-        ///  js¿ò¼ÜÊµÏÖÎÄ¼şµÄÎÄ¼şÃû
+        ///  jsæ¡†æ¶å®ç°æ–‡ä»¶çš„æ–‡ä»¶å
         /// </summary>
         public const String XFACE_JS_FILE_NAME = "xface.js";
 
         /// <summary>
-        ///  jsµ÷ÊÔÅäÖÃÎÄ¼ş
+        ///  jsè°ƒè¯•é…ç½®æ–‡ä»¶
         /// </summary>
         public const String DEBUG_JS_FILE_NAME = "xdebug.js";
 
         /// <summary>
-        ///  Ä¬ÈÏ´íÎóÎÄ¼şÃû
+        ///  é»˜è®¤é”™è¯¯æ–‡ä»¶å
         /// </summary>
         public const String ERROR_PAGE_NAME = "xFaceError.html";
 
         /// <summary>
-        ///  appÆô¶¯²ÎÊı
+        ///  appå¯åŠ¨å‚æ•°
         /// </summary>
         public const String TAG_APP_START_PARAMS = "start_params";
 
         /// <summary>
-        ///  ×Ö·ûÍ¨Åä·û
+        ///  å­—ç¬¦é€šé…ç¬¦
         /// </summary>
         public const String WILDCARDS = "*";
 
         /// <summary>
-        ///  ×é¼şpatch°ü»ù´¡Ãû£¬patch°üÃûÓĞPATCH_NAMEºÍVersion×é³É
+        ///  ç»„ä»¶patchåŒ…åŸºç¡€åï¼ŒpatchåŒ…åæœ‰PATCH_NAMEå’ŒVersionç»„æˆ
         /// </summary>
         public const String PATCH_NAME = "patch";
 
         /// <summary>
-        ///  ×é¼ş°²×°°üµÄºó×º
+        ///  ç»„ä»¶å®‰è£…åŒ…çš„åç¼€
         /// </summary>
         public const String PACKAGE_SUFFIX = ".zip";
 
@@ -186,16 +186,16 @@ namespace xFaceLib.Util
         public const String ATTR_IS_UPDATE = "isUpdated";
         public const String BASE_NAME = "base";
 
-        public const String PRE_INSTALL_SOURCE_ROOT = "Assets\\data\\";
+        public const String PRE_INSTALL_SOURCE_ROOT = "xface3\\";
         /// <summary>
-        ///  Ó¦ÓÃÔÚ¹¤×÷Ä¿Â¼ÖĞÄÚÖÃÊı¾İ°üÃû
+        ///  åº”ç”¨åœ¨å·¥ä½œç›®å½•ä¸­å†…ç½®æ•°æ®åŒ…å
         /// </summary>
         public const String APP_DATA_PACKAGE_NAME_IN_WORKSAPCE = "workspace.zip";
 
         public const String PUSH_NOTIFICATION_URI = "push_notification_uri";
 
         /// <summary>
-        /// ÏµÍ³×´Ì¬À¸ ÊúÆÁ¸ß¶È
+        /// ç³»ç»ŸçŠ¶æ€æ  ç«–å±é«˜åº¦
         /// </summary>
         public const int SYSTEMTRAY_HEIGHT = 32;
     }

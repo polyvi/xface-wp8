@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="spectest" version="1.0" xmlns="http://www.w3.org/ns/widgets">
+<widget id="helloxface" version="1.0" xmlns="http://www.w3.org/ns/widgets">
 
-  <name short="spectest">spectest</name>
+  <name short="helloxface">helloxface</name>
   <icon src="icon.png" />
   <content encoding="UTF-8" src="index.html" />
 

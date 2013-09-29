@@ -22,7 +22,7 @@
         <preference name="UpdateAddress" value="" />
     </xFace>
     <pre_install_packages>
-        <app_package id= "spectest">spectest</app_package>
+        <app_package id= "helloxface">helloxface</app_package>
     </pre_install_packages>
     <!-- Cordova config -->
     <!-- Cordova Whitelist -->
