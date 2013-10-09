@@ -101,21 +101,21 @@ namespace xFaceLib.runtime
 
         /// <summary>
         ///系统工作空间(相对于独立存储的相对路径)
-        ///形如：~/xFace/
+        ///形如：~/xface3/
         /// </summary>
         private string systemWorkspace;
         public string SystemWorkspace { get { return systemWorkspace; } }
 
         /// <summary>
         /// 应用安装目录(相对于独立存储的相对路径)
-        /// 形如：~/xFace/apps/
+        /// 形如：~/xface3/apps/
         /// </summary>
         private string appInstallationDir;
         public string AppInstallationDir { get { return appInstallationDir; } }
 
         /// <summary>
         /// 应用图标所在目录(相对于独立存储的相对路径)
-        /// 形如：~/xFace/app_icons/
+        /// 形如：~/xface3/app_icons/
         /// </summary>
         private string appIconsDir;
         public string AppIconsDir { get { return appIconsDir; } }   
@@ -213,8 +213,8 @@ namespace xFaceLib.runtime
 
         private string GetSystemWorkspace()
         {
-            //xFace的工作空间路径形如：C:\Data\Programs\productId\Local\xFace\
-            string workSpace = "xFace\\";
+            //xFace的工作空间路径形如：C:\Data\Programs\productId\Local\xface3\
+            string workSpace = "xface3\\";
             if (IsPlayerMode)
             {
                 workSpace = "xFace_Player\\";
@@ -232,7 +232,7 @@ namespace xFaceLib.runtime
 
         private string GetAppIconsDir()
         {
-            // 应用图标路径形如：C:\Data\Programs\productId\Local\xFace\app_icons\
+            // 应用图标路径形如：C:\Data\Programs\productId\Local\xface3\app_icons\
             string workSpace = this.systemWorkspace;
             string appIconPath = workSpace + "app_icons\\";
             using (IsolatedStorageFile isoStorage = IsolatedStorageFile.GetUserStoreForApplication())
@@ -247,7 +247,7 @@ namespace xFaceLib.runtime
 
         private string GetAppInstallationDir()
         {
-            // 应用安装路径形如：C:\Data\Programs\productId\Local\xFace\apps\
+            // 应用安装路径形如：C:\Data\Programs\productId\Local\xface3\apps\
             string workSpace = this.systemWorkspace;
             string installPath = workSpace + "apps\\";
             using (IsolatedStorageFile isoStorage = IsolatedStorageFile.GetUserStoreForApplication())
