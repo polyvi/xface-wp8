@@ -102,6 +102,7 @@ namespace xFaceLib.runtime
             //设置privateModule 的初值
             string appId = AppInfo.AppId;
             string workspace = GetWorkSpace();
+            workspace = workspace.Replace('\\', '/');
             var scriptInvoker = new XSafeBrowserScriptInvoker();
             string appIdResult = "(function() { try { cordova.require('xFace/privateModule').initPrivateData([\"" + appId + "\",\"" + workspace + "\",\"" + startParams + "\"]);}catch(e){console.log('exception in initPrivateData:' + e);}})();";
             if (!scriptInvoker.Exec(browser, "execScript", new string[] { appIdResult }))
