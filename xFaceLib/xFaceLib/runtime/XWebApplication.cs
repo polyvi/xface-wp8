@@ -4,6 +4,7 @@ using Microsoft.Phone.Controls;
 using xFaceLib.Util;
 using xFaceLib.Log;
 using WPCordovaClassLib.Cordova.JSON;
+using WPCordovaClassLib.Cordova;
 
 namespace xFaceLib.runtime
 {
@@ -50,6 +51,8 @@ namespace xFaceLib.runtime
             this.AppView = AppView;
             this.AppView.IsVaild = true;
             domStorageHelper = domStorage;
+            XNativeExecution xFaceExec = new XNativeExecution(this.AppView.Browser, this);
+            this.AppView.CDView.nativeExecution = (NativeExecution)xFaceExec;
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
                 this.AppView.Browser.Loaded += XAppWebView_Loaded;

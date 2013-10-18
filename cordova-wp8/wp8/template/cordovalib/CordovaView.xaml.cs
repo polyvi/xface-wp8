@@ -71,7 +71,7 @@ namespace WPCordovaClassLib
         /// <summary>
         /// Handles native api calls
         /// </summary>
-        private NativeExecution nativeExecution;
+        public NativeExecution nativeExecution {set; get;}
 
         protected BrowserMouseHelper bmHelper;
 
