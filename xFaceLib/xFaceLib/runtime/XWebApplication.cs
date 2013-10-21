@@ -25,12 +25,6 @@ namespace xFaceLib.runtime
         public event EventHandler<string> AppClose;
         public event EventHandler<string> AppSendMessage;
 
-
-        /// <summary>
-        /// DOMStorage 负责处理localstorage
-        /// </summary>
-        private XDOMStorageHelper domStorageHelper;
-
         public XWebApplication(XAppInfo applicationInfo)
             : base(applicationInfo)
         {
@@ -46,11 +40,10 @@ namespace xFaceLib.runtime
             this.mode.LoadApp(this);
         }
 
-        public void SetApp(XAppWebView AppView, XDOMStorageHelper domStorage)
+        public void SetApp(XAppWebView AppView)
         {
             this.AppView = AppView;
             this.AppView.IsVaild = true;
-            domStorageHelper = domStorage;
             XNativeExecution xFaceExec = new XNativeExecution(this.AppView.Browser, this);
             this.AppView.CDView.nativeExecution = (NativeExecution)xFaceExec;
             Deployment.Current.Dispatcher.BeginInvoke(() =>
@@ -194,13 +187,6 @@ namespace xFaceLib.runtime
                 return;
             }
 
-            //处理 DOMStorage
-            if (commandStr.IndexOf("DOMStorage") == 0)
-            {
-                this.domStorageHelper.HandleStorageCommand(commandStr, (WebBrowser)sender);
-                return;
-            }
-
             //FIXME:处理xFace特有的js command
             XCommand command = XCommand.parse(commandStr);
             SendCommand(command);
@@ -220,7 +206,6 @@ namespace xFaceLib.runtime
         private void XAppWebView_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
             XLog.WriteInfo("XAppWebView_Navigated :: " + e.Uri.ToString());
-            domStorageHelper.InjectScript((WebBrowser)sender);
         }
         #endregion
 

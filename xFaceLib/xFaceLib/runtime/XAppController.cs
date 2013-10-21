@@ -1,7 +1,6 @@
 using System;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Controls.Primitives;
 using Microsoft.Phone.Controls;
 using System.ComponentModel;
 using System.Windows.Threading;
@@ -23,11 +22,6 @@ namespace xFaceLib.runtime
         public XAppWebView CurrentAppView = null;
 
         /// <summary>
-        /// DOMStorage
-        /// </summary>
-        private XDOMStorageHelper domStorageHelper;
-
-        /// <summary>
         /// xFace page的backkey事件
         /// </summary>
         private event EventHandler<CancelEventArgs> BackKeyEventHandler;
@@ -35,7 +29,6 @@ namespace xFaceLib.runtime
         public XAppController(Grid layoutRoot)
         {
             this.layoutRoot = layoutRoot;
-            this.domStorageHelper = new XDOMStorageHelper();
         }
 
         public void CreateView(XWebApplication app)
@@ -46,7 +39,7 @@ namespace xFaceLib.runtime
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
                 //注册WebApp关联View
-                app.SetApp(appView, domStorageHelper);
+                app.SetApp(appView);
                 this.layoutRoot.Children.Add(appView.CDView);
                 appView.CDView.Browser.LoadCompleted += AppLoadCompleteHandler;
                 appView.CDView.Browser.NavigationFailed += AppLoadFailedHandler;

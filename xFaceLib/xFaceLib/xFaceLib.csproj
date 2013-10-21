@@ -112,7 +112,6 @@
     <Compile Include="runtime\XAppWebView.cs" />
     <Compile Include="runtime\XBaseCommand.cs" />
     <Compile Include="runtime\XCommand.cs" />
-    <Compile Include="runtime\XDOMStorageHelper.cs" />
     <Compile Include="runtime\XNativeExecution.cs" />
     <Compile Include="runtime\XGeneralSystemBootstrap.cs" />
     <Compile Include="runtime\XJavaScriptEvaluator.cs" />
