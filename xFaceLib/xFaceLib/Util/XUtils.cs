@@ -435,16 +435,18 @@ namespace xFaceLib.Util
         /// <param name="path">目标目录(相对于独立存储的相对路径)</param>
         public static void copyEmbeddedJsFile(String path)
         {
-            //TODO: 拷贝www目录下的cordova.js cordova_plugins.js plugins 到应用安装目录
-            string cordovajs = "www\\" + "cordova.js";
-            string cordova_pluginsjs = "www\\" + "cordova_plugins.js";
-            string pluginsFolder = "www\\" + "plugins";
+            //拷贝defaultApp目录下的xface.js cordova_plugins.js plugins 到应用安装目录
+            List<PreInstalPackageItem> items = XSystemConfiguration.GetInstance().PrepackedApps;
+            string defaultAppId = items[0].PackageId;
+            string cordovajs = "xface3\\" + defaultAppId + "\\xface.js";
+            string cordova_pluginsjs = "xface3\\" + defaultAppId + "\\cordova_plugins.js";
+            string pluginsFolder = "xface3\\" + defaultAppId + "\\plugins";
 
             string abscordovajs = XUtils.BuildabsPathOnInstallationFolder(cordovajs); ;
             string abscordova_pluginsjs = XUtils.BuildabsPathOnInstallationFolder(cordova_pluginsjs); ;
             string abspluginsFolder = XUtils.BuildabsPathOnInstallationFolder(pluginsFolder); ;
 
-            string destcordovajs = path + "\\" + "cordova.js";
+            string destcordovajs = path + "\\" + "xface.js";
             string destcordova_pluginsjs = path + "\\" + "cordova_plugins.js";
             string absdestcordovajs = XUtils.BuildabsPathOnIsolatedStorage(destcordovajs);
             string absdestcordova_pluginsjs = XUtils.BuildabsPathOnIsolatedStorage(destcordova_pluginsjs);
@@ -453,7 +455,50 @@ namespace xFaceLib.Util
             File.Copy(abscordovajs, absdestcordovajs, true);
             File.Copy(abscordova_pluginsjs, absdestcordova_pluginsjs, true);
             //拷贝plugins目录
-            //Directory.Move(abspluginsFolder, absdestpluginsFolder);
+            CopyDirectoryFromInStallToIsolatedStorage(abspluginsFolder, absdestpluginsFolder);
+        }
+
+        public static void CopyDirectoryFromInStallToIsolatedStorage(string installSourceDir, string destDir)
+        {
+            string path;
+            if (installSourceDir.EndsWith("\\"))
+            {
+                path = installSourceDir;
+            }
+            else
+            {
+                path = installSourceDir + "\\";
+            }
+
+            bool bExists = Directory.Exists(destDir);
+            if (!bExists)
+            {
+                Directory.CreateDirectory(destDir);
+            }
+            if (!destDir.EndsWith("\\"))
+            {
+                destDir += "\\";
+            }
+
+            string[] files = Directory.GetFiles(path);
+
+            if (files.Length > 0)
+            {
+                foreach (string file in files)
+                {
+                    string fileName = Path.GetFileName(file);
+                    File.Copy(path + fileName, destDir + fileName, true);
+                }
+            }
+            string[] dirs = Directory.GetDirectories(path);
+            if (dirs.Length > 0)
+            {
+                foreach (string dir in dirs)
+                {
+                    string dirName = dir.Substring((Path.GetDirectoryName(dir) + "\\").Length);
+                    CopyDirectoryFromInStallToIsolatedStorage(path + dirName, destDir + dirName);
+                }
+            }
         }
 
         /// <summary>
