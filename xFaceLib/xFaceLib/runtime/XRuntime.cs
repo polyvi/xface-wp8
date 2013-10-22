@@ -22,8 +22,6 @@ namespace xFaceLib.runtime
 
         private XSystemBootstrap xFaceBoot;
 
-        private XPushNotificationHelper push;
-
         /// <summary>
         /// 应用管理器
         /// </summary>
@@ -72,8 +70,7 @@ namespace xFaceLib.runtime
         private  void doInitialization()
         {
             UmengSDK.UmengAnalytics.onLaunching("51c2954456240b164f085721");
-            //初始化 push notification 相关
-            this.push = new XPushNotificationHelper();
+
             //异步系统环境准备
              Task.Run(() =>
             {
