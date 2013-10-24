@@ -177,7 +177,7 @@ namespace WPCordovaClassLib.Cordova.Commands
 #if CORDOVA_CLASSLIB
             return "/WPCordovaClassLib;component/";
 #else
-            return "./";
+            return "/";
 #endif
         }
     }
