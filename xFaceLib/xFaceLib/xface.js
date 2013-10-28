@@ -1,5 +1,5 @@
 ﻿// Platform: windowsphone
-// 3.2.0-dev-01ea617
+// 3.2.0-dev-be15823
 /*
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  under the License.
 */
 ;(function() {
-var CORDOVA_JS_BUILD_LABEL = '3.2.0-dev-01ea617';
+var CORDOVA_JS_BUILD_LABEL = '3.2.0-dev-be15823';
 // file: lib/scripts/require.js
 
 /*jshint -W079 */
@@ -1451,7 +1451,8 @@ var Workspace= function() {
 };
 
 Workspace.prototype.updateFileSystemRoot = function(type, fs){
-    if (type != 1 || !module.exports.enableWorkspaceCheck) {
+    //TODO:考虑LocalFileSystem为TEMPORARY的情况
+    if (!module.exports.enableWorkspaceCheck) {
         return;
     }
     fs.root.fullPath = privateModule.appWorkspace();
@@ -1474,9 +1475,12 @@ Workspace.prototype.toPath = function(url) {
     // path为"file://localhost/user/..", 不同的平台执行urlUtil.makeAbsolute(path)后,返回的url可能有以下形式：
     // 1）file://localhost/user/..
     // 2）file:///user/..
+    // 3）file://\\\\localhost  windows phone执行urlUtil.makeAbsolute(path)返回的URL形式
     if(this.strStartsWith(url, 'file://localhost')) {
         return url.replace('file://localhost', '');
-    } else if(-1 != url.indexOf("://")) {
+    } else if (this.strStartsWith(url, 'file://\\\\localhost')) {
+        return url.replace('file://\\\\localhost', '');
+    } else if (-1 != url.indexOf("://")) {
         //remove scheme(e.g., file://)
         return url.substring(url.indexOf("://") + 3, url.length);
     } else {
@@ -1494,6 +1498,16 @@ Workspace.prototype.isAbsolutePath = function(path){
     return this.strStartsWith(path, '/');
 };
 
+Workspace.prototype.buildPath = function(aString, bString){
+    var path = null;
+    if(this.strEndsWith(aString, '/')){
+        path = aString + bString;
+    }else{
+        path = aString + '/' + bString;
+    }
+    return path;
+};
+
 Workspace.prototype.resolvePath = function(path){
     var result = this.toURL(path);
     result = urlUtil.makeAbsolute(result);
@@ -1503,9 +1517,24 @@ Workspace.prototype.resolvePath = function(path){
     return result;
 };
 
+/**
+ * 检查workspace
+ *
+ * workspace检查逻辑如下：
+ * 1）当enableWorkspaceCheck为false时，直接返回relativePath
+ * 2）iOS平台，当relativePath包含'assets-library://'前缀时，直接返回relativePath
+ * 3）根据basePath对relativePath进行resolve,如果resolved结果以'basePath'为前缀，返回resolved结果，否则返回null
+ * @return 满足workspace检查条件，返回非空串；否则，返回null
+ */
 Workspace.prototype.checkWorkspace = function(basePath, relativePath, functionName) {
     if (!module.exports.enableWorkspaceCheck) {
-        return true;
+        return relativePath;
+    }
+
+    if('ios' === require('cordova/platform').id){
+        if(this.strStartsWith(relativePath, 'assets-library://')){
+            return relativePath;
+        }
     }
 
     var result = null;
@@ -1519,22 +1548,18 @@ Workspace.prototype.checkWorkspace = function(basePath, relativePath, functionNa
         }
     }else{
         // relativePath为相对路径时，对其进行resolve
-        if(this.strStartsWith(relativePath, '/')){
-            result = basePath + relativePath;
-        }else{
-            result = basePath + '/' + relativePath;
-        }
+        result = this.buildPath(basePath, result);
         result = this.resolvePath(result);
     }
-
+    result = result.replace(/\\/g,'/');
     if (this.strStartsWith(result, basePath)){
-        return true;
+        return result;
     }else{
         // Don't log when running unit tests.
         if (typeof jasmine == 'undefined') {
             console.error(functionName + " check workspace failed:" + result);
         }
-        return false;
+        return null;
     }
 };
 
