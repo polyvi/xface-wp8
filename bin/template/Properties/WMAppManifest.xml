@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <Deployment xmlns="http://schemas.microsoft.com/windowsphone/2012/deployment" AppPlatformVersion="8.0">
   <DefaultLanguage xmlns="" code="en-US" />
-  <App xmlns="" ProductID="{b2e2570e-92cc-47a2-9c28-c837d53e439f}" Title="$safeprojectname$" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="$safeprojectname$ author" Description="Sample description" Publisher="$safeprojectname$" PublisherID="{c23c72f3-516f-4628-9187-f0444ae055f4}">
+  <App xmlns="" ProductID="{$guid1$}" Title="$safeprojectname$" RuntimeType="Silverlight" Version="1.0.0.0" Genre="apps.normal" Author="$safeprojectname$ author" Description="Sample description" Publisher="$safeprojectname$" PublisherID="{c23c72f3-516f-4628-9187-f0444ae055f4}">
     <IconPath IsRelative="true" IsResource="false">Assets\ApplicationIcon.png</IconPath>
     <Capabilities>
       <Capability Name="ID_CAP_WEBBROWSERCOMPONENT" />
