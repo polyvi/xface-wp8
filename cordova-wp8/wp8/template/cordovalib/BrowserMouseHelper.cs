@@ -67,8 +67,8 @@ namespace WPCordovaClassLib
             var border1 = VisualTreeHelper.GetChild(border0, 0);
             var panZoom = VisualTreeHelper.GetChild(border1, 0);
             var grid = VisualTreeHelper.GetChild(panZoom, 0);             
-            var grid2 = VisualTreeHelper.GetChild(grid, 0);
-            border = VisualTreeHelper.GetChild(grid2, 0) as Border;
+            //var grid2 = VisualTreeHelper.GetChild(grid, 0);
+            //border = VisualTreeHelper.GetChild(grid2, 0) as Border;
             
             if (border != null)
             {

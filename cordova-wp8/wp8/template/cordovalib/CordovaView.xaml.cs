@@ -71,7 +71,7 @@ namespace WPCordovaClassLib
         /// <summary>
         /// Handles native api calls
         /// </summary>
-        private NativeExecution nativeExecution;
+        public NativeExecution nativeExecution {set; get;}
 
         protected BrowserMouseHelper bmHelper;
 
@@ -379,7 +379,7 @@ namespace WPCordovaClassLib
             {
                 try
                 {
-                    CordovaBrowser.InvokeScript("eval", new string[] { "cordova.fireDocumentEvent('backbutton', {}, true);" });
+                    CordovaBrowser.InvokeScript("eval", new string[] { "cordova.fireDocumentEvent('backbutton');" });
                     e.Cancel = true;
                 }
                 catch (Exception ex)

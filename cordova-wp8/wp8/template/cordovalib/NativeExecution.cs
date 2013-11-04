@@ -75,7 +75,7 @@ namespace WPCordovaClassLib.Cordova
         /// Executes command and returns result back.
         /// </summary>
         /// <param name="commandCallParams">Command to execute</param>
-        public void ProcessCommand(CordovaCommandCall commandCallParams)
+        public virtual void ProcessCommand(CordovaCommandCall commandCallParams)
         {
 
             if (commandCallParams == null)
