@@ -389,22 +389,13 @@ namespace WPCordovaClassLib
             }
             else
             {
-                try
+                if (CordovaBrowser.CanGoBack)
                 {
-                    PageDidChange = false;
-
-                    Uri uriBefore = this.Browser.Source;
-                    // calling js history.back with result in a page change if history was valid.
-                    CordovaBrowser.InvokeScript("eval", new string[] { "(function(){window.history.back();})()" });
-
-                    Uri uriAfter = this.Browser.Source;
-
-                    e.Cancel = PageDidChange || (uriBefore != uriAfter);
+                    CordovaBrowser.GoBack();
+                    e.Cancel = true;
+                    return;
                 }
-                catch (Exception)
-                {
-                    e.Cancel = false; // exit the app ... ?
-                }
+                // exit the app ... ?
             }
         }
 
