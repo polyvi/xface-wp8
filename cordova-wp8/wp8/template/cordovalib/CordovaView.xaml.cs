@@ -374,7 +374,21 @@ namespace WPCordovaClassLib
 
         void page_BackKeyPress(object sender, CancelEventArgs e)
         {
+            PhoneApplicationPage page = sender as PhoneApplicationPage;
+            if (page != null)
+            {
+                Grid layoutRoot = page.FindName("LayoutRoot") as Grid;
+                if (layoutRoot.Children.Count > 0)
+                {
+                    string type = layoutRoot.Children[layoutRoot.Children.Count - 1].ToString();
 
+                    if (type.Contains("NotificationBox"))
+                    {
+                        //top View is alert! do nothing
+                        return;
+                    }
+                }
+            }
             if (OverrideBackButton)
             {
                 try
