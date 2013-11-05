@@ -16,6 +16,15 @@ namespace xFaceLib.SplashScreenControl
         }
 
         /// <summary>
+        /// 设置是否显示进度条
+        /// </summary>
+        /// <param name="need"></param>
+        public void SetNeedProgressBar(bool need)
+        {
+            this.progressBar1.IsIndeterminate = need;
+        }
+
+        /// <summary>
         /// 设置在splash上显示 xFace引擎的版本号和产品描述
         /// </summary>
         /// <param name="version">xFace引擎的版本号</param>
@@ -36,6 +45,10 @@ namespace xFaceLib.SplashScreenControl
         public void SetSplashImage(string imagePath)
         {
             this.SplashImage.Source = new BitmapImage(new Uri(imagePath, UriKind.RelativeOrAbsolute));
+            this.SplashImage.HorizontalAlignment = System.Windows.HorizontalAlignment.Stretch;
+            this.SplashImage.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
+            this.SplashImage.Width = System.Windows.Application.Current.Host.Content.ActualWidth;
+            this.SplashImage.Height = System.Windows.Application.Current.Host.Content.ActualHeight;
         }
     }
 }
