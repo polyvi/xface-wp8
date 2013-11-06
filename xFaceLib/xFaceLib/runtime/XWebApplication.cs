@@ -99,6 +99,7 @@ namespace xFaceLib.runtime
             string appId = AppInfo.AppId;
             string workspace = GetWorkSpace();
             workspace = workspace.Replace('\\', '/');
+            workspace = "/" + workspace;
             var scriptInvoker = new XSafeBrowserScriptInvoker();
             string appIdResult = "(function() { try { cordova.require('xFace/privateModule').initPrivateData([\"" + appId + "\",\"" + workspace + "\",\"" + startParams + "\"]);}catch(e){console.log('exception in initPrivateData:' + e);}})();";
             if (!scriptInvoker.Exec(browser, "execScript", new string[] { appIdResult }))
