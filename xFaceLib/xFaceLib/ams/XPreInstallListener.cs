@@ -8,12 +8,12 @@ using xFaceLib.Log;
 namespace xFaceLib.ams
 {
     /// <summary>
-    /// Ô¤×°¼àÌıÆ÷£¬ÓÃÓÚ¼àÌıÔ¤×°°²×°¹ı³Ì
+    /// é¢„è£…ç›‘å¬å™¨ï¼Œç”¨äºç›‘å¬é¢„è£…å®‰è£…è¿‡ç¨‹
     /// </summary>
     public class XPreInstallListener
     {
         /// <summary>
-        /// app ¹ÜÀíÆ÷
+        /// app ç®¡ç†å™¨
         /// </summary>
         private XAppManagement ams;
 
@@ -23,23 +23,20 @@ namespace xFaceLib.ams
         }
 
         /// <summary>
-        /// °²×°Ê§°Ü±»µ÷ÓÃ
+        /// å®‰è£…å¤±è´¥è¢«è°ƒç”¨
         /// </summary>
         public void onFailure()
         {
             XLog.WriteError("PreInstall error! ");
         }
 
-        /**
-        * °²×°³É¹¦ »Øµ÷±»µ÷ÓÃ
-        * @param startApp Æô¶¯appµÄid
-        */
         /// <summary>
-        /// °²×°³É¹¦±»µ÷ÓÃ
+        /// å®‰è£…æˆåŠŸè¢«è°ƒç”¨
         /// </summary>
         public void OnSuccess()
         {
-            ams.StartDefaultApp(null);
-        }        
+            string StartParams = XStartParams.GetStartParams();
+            ams.StartDefaultApp(XStartParams.Parse(StartParams));
+        }
     }
 }

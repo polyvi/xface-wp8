@@ -20,6 +20,7 @@ namespace xFaceLib.runtime
             //FIXME：目前无法判断应用是否已安装，故每次直接调用加载应用，如未安装系统会去查找；
             //remote-pkg所设置的参数暂未使用
             String url = AppInfo.Entry;
+            //FIXME: 无法通过返回值判断启动是否成功！ 无论成功失败都返回true!
             bool ret = await Windows.System.Launcher.LaunchUriAsync(new System.Uri(url));
         }
     }

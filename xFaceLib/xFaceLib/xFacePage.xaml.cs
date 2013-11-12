@@ -39,8 +39,7 @@ namespace xFaceLib
             if (queryStrings.ContainsKey("Msg"))
             {
                 var value = NavigationContext.QueryString["Msg"];
-                //todo:startparams的解析与保存
-
+                XStartParams.SaveStartParams(value);
             }
             base.OnNavigatedTo(e);
             UmengSDK.UmengAnalytics.onPageStart("xFacePage");

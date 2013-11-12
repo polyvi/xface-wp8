@@ -6,67 +6,71 @@ using xFaceLib.runtime;
 namespace xFaceLib.ams
 {
     /// <summary>
-    /// ״̬�����
+    /// 状态的类别
     /// </summary>
     public enum InstallStatus : int
     {
-        INSTALL_INITIALIZE,             /** ��װ��ʼ�� */
-        INSTALL_UNZIP_PACKAGE,          /** ������� */
-        INSTALL_WRITE_CONFIGURATION,    /** д���õĹ��� */
-        INSTALL_FINISHED,               /** ��װ��� */
+        INSTALL_INITIALIZE,             /** 安装初始化 */
+        INSTALL_UNZIP_PACKAGE,          /** 解包过程 */
+        INSTALL_WRITE_CONFIGURATION,    /** 写配置的过程 */
+        INSTALL_FINISHED,               /** 安装完成 */
     };
 
     /// <summary>
-    /// Ӧ�ð�װ/ж��/���²���������
+    /// 应用安装/卸载/更新操作错误码
     /// </summary>
     public enum AMS_ERROR : int
     {
         ERROR_BASE,             /** not used */
-        NO_SRC_PACKAGE,         /** Ӧ�ð�װ�������� */
-        APP_ALREADY_EXISTED,    /** Ӧ���Ѿ����� */
-        IO_ERROR,               /**IO �쳣���� */
-        NO_TARGET_APP,          /** û���ҵ���������Ŀ��Ӧ�� */
-        NO_APP_CONFIG_FILE,     /** ������Ӧ�������ļ� */
-        RESERVED,               /** �����ֶ�, ���ݾɵ�REMOVE_APP_FAILED*/
-        UNKNOWN,                /** δ֪���� */
+        NO_SRC_PACKAGE,         /** 应用安装包不存在 */
+        APP_ALREADY_EXISTED,    /** 应用已经存在 */
+        IO_ERROR,               /**IO 异常错误 */
+        NO_TARGET_APP,          /** 没有找到待操作的目标应用 */
+        NO_APP_CONFIG_FILE,     /** 不存在应用配置文件 */
+        RESERVED,               /** 保留字段, 兼容旧的REMOVE_APP_FAILED*/
+        APP_NOT_FOUND,          /** 应用不存在 */
+        APP_ALREADY_RUNNING,    /** 应用已经启动 */
+        APP_ENTRY_ERR,          /** 应用入口错误 */
+        START_NATIVE_APP_ERR,   /** 启动native应用错误 */
+        UNKNOWN,                /** 未知错误 */
     };
 
     /// <summary>
-    /// ams��������
+    /// ams操作类型
     /// </summary>
     public enum AMS_OPERATION_TYPE : int
     {
         OPERATION_NONE,
-        OPERATION_TYPE_INSTALL,     /** ��װ�������� */
-        OPERATION_TYPE_UPDATE,      /** ���²������� */
-        OPERATION_TYPE_UNINSTALL,   /** ж�ز������� */
+        OPERATION_TYPE_INSTALL,     /** 安装操作类型 */
+        OPERATION_TYPE_UPDATE,      /** 更新操作类型 */
+        OPERATION_TYPE_UNINSTALL,   /** 卸载操作类型 */
     };
 
     /// <summary>
-    /// ����Ӧ�ð�װ���ȼ����������ӿڣ�����װ���ȼ�״̬֪ͨ
+    /// 定义应用安装进度监听器基本接口，负责安装进度及状态通知
     /// </summary>
     public abstract class XInstallListener
     {
         /// <summary>
-        /// ���°�װ����
+        /// 更新安装进度
         /// </summary>
-        /// <param name="type">���ͱ�ʶ����װ/ж��</param>
-        /// <param name="progressState">����״̬</param>
+        /// <param name="type">类型标识：安装/卸载</param>
+        /// <param name="progressState">进度状态</param>
         public abstract void OnProgressUpdated(AMS_OPERATION_TYPE type, InstallStatus progressState);
 
         /// <summary>
-        /// ��װ����ص�
+        /// 安装错误回调
         /// </summary>
-        /// <param name="type">���ͱ�ʶ����װ/ж��</param>
-        /// <param name="appId">Ӧ��id</param>
-        /// <param name="errorState">������</param>
+        /// <param name="type">类型标识：安装/卸载</param>
+        /// <param name="appId">应用id</param>
+        /// <param name="errorState">错误码</param>
         public abstract void OnError(AMS_OPERATION_TYPE type, String appId, AMS_ERROR errorState);
 
         /// <summary>
-        /// ��װ�ɹ��ص�
+        /// 安装成功回调
         /// </summary>
-        /// <param name="type">���ͱ�ʶ����װ/ж��</param>
-        /// <param name="appId">Ӧ��id</param>
+        /// <param name="type">类型标识：安装/卸载</param>
+        /// <param name="appId">应用id</param>
         public abstract void OnSuccess(AMS_OPERATION_TYPE type, String appId);
     }
 }

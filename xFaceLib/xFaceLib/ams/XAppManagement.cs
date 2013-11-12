@@ -66,20 +66,32 @@ namespace xFaceLib.ams
         /// </summary>
         /// <param name="appId">应用id</param>
         /// <param name="appparams">应用参数</param>
-        /// <returns>启动应用是否成功</returns>
-        public bool StartApp(String appId, String appparams)
+        /// <returns>启动应用的错误码</returns>
+        public AMS_ERROR StartApp(String appId, XStartParams appparams)
         {
             XApplication app = this.GetAppList().GetAppById(appId);
             if (null == app)
             {
                 XLog.WriteError("failed to startapp! can't find app by id:" + appId);
-                return false;
+                return AMS_ERROR.APP_NOT_FOUND;
             }
 
-            app.startParams = appparams;
+            if (!IsValidAppEntry(app.AppInfo.Entry))
+            {
+                XLog.WriteError("failed to startapp! app entry can't be NullOrEmpty by id:" + appId);
+                return AMS_ERROR.APP_ENTRY_ERR;
+            }
+
+            String startData = null;
+            if (null != appparams)
+            {
+                startData = appparams.Data;
+            }
+
             //TODO: 对于active app是否应该bringtoTop
             if (app is XNativeApplication)
             {
+                //FIXME: 对于启动nativeApp 成功与否系统会做出提示
                 app.Load();
             }
             else
@@ -100,10 +112,34 @@ namespace xFaceLib.ams
                     };
                     ((XWebApplication)app).AppSendMessage += AppSendMsgHandler;
 
+                    String pageEntry = null;
+                    if (null != appparams)
+                    {
+                        pageEntry = appparams.PageEntry;
+                    }
+                    if (pageEntry != null && pageEntry != string.Empty)
+                    {
+                        app.AppInfo.Entry = pageEntry;
+                        if (IsValidAppEntry(app.AppInfo.Entry))
+                        {
+                            XLog.WriteError("failed to startapp! app entry can't be NullOrEmpty by id:" + appId);
+                            return AMS_ERROR.APP_ENTRY_ERR;
+                        }
+                    }
+                    if (startData != null)
+                    {
+                        ((XWebApplication)app).SetData(XConstant.TAG_APP_START_PARAMS, startData);
+                    }
                     this.amsDelegate.StartApp((XWebApplication)app);
                 }
+                else
+                {
+                    XLog.WriteError("failed to startapp! app already running by id:" + appId);
+                    return AMS_ERROR.APP_ALREADY_RUNNING;
+                }
             }
-            return true;
+            //没错误
+            return AMS_ERROR.ERROR_BASE;
         }
 
         /// <summary>
@@ -187,7 +223,7 @@ namespace xFaceLib.ams
         /// 启动默认的app
         /// </summary>
         /// <param name="startParams">启动参数</param>
-        public void StartDefaultApp(String startParams)
+        public void StartDefaultApp(XStartParams startParams)
         {
             XWebApplication defaultApp = (XWebApplication)this.GetAppList().GetAppById(GetDefaultAppId());
             defaultApp.IsDefaultApp = true;
@@ -335,5 +371,23 @@ namespace xFaceLib.ams
                      "} \n" +
                   "})()";
         }
+
+        private bool IsValidAppEntry(string entry)
+        {
+            try
+            {
+                Uri url = new Uri(entry, UriKind.RelativeOrAbsolute);
+                return true;
+            }
+            catch (UriFormatException)
+            {
+                return false;
+            }
+            catch (ArgumentNullException)
+            {
+                return false;
+            }
+        }
+
     }
 }

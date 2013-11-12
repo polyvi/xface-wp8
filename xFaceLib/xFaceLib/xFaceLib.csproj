@@ -118,6 +118,7 @@
     <Compile Include="runtime\XNativeApplication.cs" />
     <Compile Include="runtime\XPlayerSystemBootstrap.cs" />
     <Compile Include="runtime\XRuntime.cs" />
+    <Compile Include="runtime\XStartParams.cs" />
     <Compile Include="runtime\XSystemBootstrap.cs" />
     <Compile Include="runtime\XSystemConfiguration.cs" />
     <Compile Include="runtime\XUriMapper.cs" />

@@ -52,7 +52,8 @@ namespace xFaceLib.runtime
             else
             {
                 //start defaultApp
-                appManagement.StartDefaultApp(null);
+                string StartParams = XStartParams.GetStartParams();
+                appManagement.StartDefaultApp(XStartParams.Parse(StartParams));
             }
         }
 

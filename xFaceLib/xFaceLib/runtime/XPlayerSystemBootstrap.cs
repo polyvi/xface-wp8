@@ -53,7 +53,8 @@ namespace xFaceLib.runtime
             XApplicationList list = appManagement.GetAppList();
             list.Add(app);
             list.MarkAsDefaultApp(app.AppInfo.AppId);
-            appManagement.StartDefaultApp("");
+            string StartParams = XStartParams.GetStartParams();
+            appManagement.StartDefaultApp(XStartParams.Parse(StartParams));
         }
 
         /// <summary>

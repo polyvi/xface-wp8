@@ -5,6 +5,7 @@ using xFaceLib.Util;
 using xFaceLib.Log;
 using WPCordovaClassLib.Cordova.JSON;
 using WPCordovaClassLib.Cordova;
+using System.Collections.Generic;
 
 namespace xFaceLib.runtime
 {
@@ -25,10 +26,16 @@ namespace xFaceLib.runtime
         public event EventHandler<string> AppClose;
         public event EventHandler<string> AppSendMessage;
 
+        /// <summary>
+        ///用于存放App的通信数据
+        /// </summary>
+        private Dictionary<String, Object> datas;
+
         public XWebApplication(XAppInfo applicationInfo)
             : base(applicationInfo)
         {
             this.jsEvaluator = new XJavaScriptEvaluator(this);
+            this.datas = new Dictionary<string, Object>();
         }
 
 
@@ -94,6 +101,11 @@ namespace xFaceLib.runtime
         /// <param name="browser"></param>
         private void OnPageLoadCompleted(WebBrowser browser)
         {
+            string param = (String) GetData(XConstant.TAG_APP_START_PARAMS);
+            if (param != null)
+            {
+                RemoveData(XConstant.TAG_APP_START_PARAMS);
+            }
             //由于app 的localstorage以appId目录存储,需要在onDeviceready fire前初始化privateModule
             //设置privateModule 的初值
             string appId = AppInfo.AppId;
@@ -101,7 +113,7 @@ namespace xFaceLib.runtime
             workspace = workspace.Replace('\\', '/');
             workspace = "/" + workspace;
             var scriptInvoker = new XSafeBrowserScriptInvoker();
-            string appIdResult = "(function() { try { cordova.require('xFace/privateModule').initPrivateData([\"" + appId + "\",\"" + workspace + "\",\"" + startParams + "\"]);}catch(e){console.log('exception in initPrivateData:' + e);}})();";
+            string appIdResult = "(function() { try { cordova.require('xFace/privateModule').initPrivateData([\"" + appId + "\",\"" + workspace + "\",\"" + param + "\"]);}catch(e){console.log('exception in initPrivateData:' + e);}})();";
             if (!scriptInvoker.Exec(browser, "execScript", new string[] { appIdResult }))
             {
                 XLog.WriteError("calling js to initPrivateData. Did you include cordova.js in your html script tag?");
@@ -210,5 +222,41 @@ namespace xFaceLib.runtime
         }
         #endregion
 
+        /// <summary>
+        /// 存放app的数据
+        /// </summary>
+        /// <param name="key">键值</param>
+        /// <param name="value">数据</param>
+        public void SetData(String key, Object value)
+        {
+            datas.Add(key, value);
+        }
+
+        /// <summary>
+        /// 删除数据
+        /// </summary>
+        /// <param name="key">键值</param>
+        public void RemoveData(String key)
+        {
+            datas.Remove(key);
+        }
+
+        /// <summary>
+        /// 获得存放app的数据
+        /// </summary>
+        /// <param name="key">键值</param>
+        /// <returns>数据，不存在返回null</returns>
+        public Object GetData(String key)
+        {
+            Object value = null;
+            if (datas.TryGetValue(key, out value))
+            {
+                return value;
+            }
+            else
+            {
+                return null;
+            }
+        }
     }
 }
