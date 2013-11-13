@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Xml;
 using System.Xml.Linq;
 using System.IO.IsolatedStorage;
+using System.Linq;
 
 namespace xFaceLib.runtime
 {
@@ -147,9 +148,18 @@ namespace xFaceLib.runtime
         {
             Stream xFaceXml = Application.GetResourceStream(new Uri("config.xml", UriKind.Relative)).Stream;
             XDocument doc = XDocument.Load(xFaceXml);
-            XElement xFace = doc.Root.Element("xFace");
+            XElement widgetElement = doc.Root;
+
+            var values = from results in widgetElement.Descendants()
+                         where results.Name.LocalName == "xFace"
+                         select results;
+            XElement xFace = values.FirstOrDefault();
             ParsexFaceInfo(xFace);
-            XElement packages = doc.Root.Element("pre_install_packages");
+
+            values = from results in widgetElement.Descendants()
+                         where results.Name.LocalName == "pre_install_packages"
+                         select results;
+            XElement packages = values.FirstOrDefault();
             LoadPreinstallApp(packages);
         }
 
@@ -187,13 +197,14 @@ namespace xFaceLib.runtime
         /// <returns>对应的value值</returns>
         private String parsePrefValue(XElement xFaceElement,String attrName)
         {
-            foreach (XElement itemnode in xFaceElement.Descendants("preference"))
+            var itemnodes = from results in xFaceElement.Descendants()
+                         where results.Name.LocalName == "preference" && (results.Attribute("name").Value == attrName)
+                         select results;
+
+            var itemnode = itemnodes.FirstOrDefault();
+            if (itemnode != null)
             {
-                string name = itemnode.Attribute("name").Value;
-                if (name.Equals(attrName))
-                {
-                    return itemnode.Attribute("value").Value;
-                }
+                return itemnode.Attribute("value").Value;
             }
             return null;
         }
@@ -202,7 +213,11 @@ namespace xFaceLib.runtime
         {
             this.prepackedApps = new List<PreInstalPackageItem>();
 
-            foreach (XElement itemnode in pre_install_packages.Descendants("app_package"))
+            var itemnodes = from results in pre_install_packages.Descendants()
+                         where results.Name.LocalName == "app_package"
+                         select results;
+
+            foreach (XElement itemnode in itemnodes)
             {
                 string packageName = itemnode.Value;
                 String appId = itemnode.Attribute("id").Value;
