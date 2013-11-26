@@ -74,15 +74,7 @@ namespace xFaceLib.runtime
             //异步系统环境准备
              Task.Run(() =>
             {
-                if (XSystemConfiguration.GetInstance().IsPlayerMode)
-                {
-                    this.xFaceBoot = new XPlayerSystemBootstrap();
-                }
-                else
-                {
-                    this.xFaceBoot = new XGeneralSystemBootstrap();
-                }
-
+                this.xFaceBoot = XSystemBootstrapFactory.CreateSystemBootstrap();
                 this.xFaceBoot.FinishToPrepareWorkEnvironment += FinishToPrepareWorkEnvironment;
                 this.xFaceBoot.FailToPrepareWorkEnvironment += FailToPrepareWorkEnvironment;
                 xFaceBoot.PrepareWorkEnvironment();
