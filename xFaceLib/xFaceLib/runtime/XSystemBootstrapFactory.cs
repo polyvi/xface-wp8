@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Reflection;
 
 namespace xFaceLib.runtime
 {
@@ -6,7 +7,15 @@ namespace xFaceLib.runtime
     {
         public static XSystemBootstrap CreateSystemBootstrap()
         {
-            Type t = Type.GetType("xFaceLib.runtime.XPlayerSystemBootstrap");
+            Type t = null;
+            foreach (Assembly a in AppDomain.CurrentDomain.GetAssemblies())
+            {
+                t = a.GetType("xFaceLib.runtime.XPlayerSystemBootstrap");
+                if (t != null)
+                {
+                    break;
+                }
+            }
             if (null == t)
             {
                 return new XGeneralSystemBootstrap();
