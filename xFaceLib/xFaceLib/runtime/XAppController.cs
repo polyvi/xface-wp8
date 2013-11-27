@@ -41,6 +41,7 @@ namespace xFaceLib.runtime
                 //注册WebApp关联View
                 app.SetApp(appView);
                 this.layoutRoot.Children.Add(appView.CDView);
+                appView.CDView.UpdateLayout();
                 appView.CDView.Browser.LoadCompleted += AppLoadCompleteHandler;
                 appView.CDView.Browser.NavigationFailed += AppLoadFailedHandler;
             });
