@@ -41,11 +41,13 @@ namespace xFaceLib.Util
                 return;
             }
             var splash = new XSplashScreenControl();
-            if(XSystemConfiguration.GetInstance().IsPlayerMode)
+
+            XSystemBootstrap boot = XSystemBootstrapFactory.CreateSystemBootstrap();
+            if (boot.GetType().ToString().Equals("xFaceLib.runtime.XPlayerSystemBootstrap"))
             {
                 string version = XSystemConfiguration.GetInstance().XFaceVersion + " " + XSystemConfiguration.GetInstance().BuildNumber;
                 string product = XDocument.Load("WMAppManifest.xml").Root.Element("App").Attribute("Description").Value;
-                splash.SetDisplayInfo("version: "+version, "Product: "+product);
+                splash.SetDisplayInfo("version: " + version, "Product: " + product);
             }
 
             switch (XResolutionHelper.CurrentResolution)

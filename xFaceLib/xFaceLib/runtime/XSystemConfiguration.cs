@@ -89,12 +89,6 @@ namespace xFaceLib.runtime
         public bool IsCheck { get { return isCheck; } }
 
         /// <summary>
-        /// 是否以player模式启动
-        /// </summary>
-        private bool isPlayerMode;
-        public bool IsPlayerMode { get { return isPlayerMode; } }
-
-        /// <summary>
         /// 所有预置安装包的包名
         /// </summary>
         private List<PreInstalPackageItem> prepackedApps;
@@ -182,7 +176,6 @@ namespace xFaceLib.runtime
                 this.autoHideSplashScreen = Convert.ToBoolean(parsePrefValue(xFaceElement, "AutoHideSplashScreen"));
             }
             this.workDir = int.Parse(parsePrefValue(xFaceElement, "WorkDir"));
-            this.isPlayerMode = Convert.ToBoolean(parsePrefValue(xFaceElement, "UsePlayerMode"));
             this.xFaceVersion = parsePrefValue(xFaceElement, "EngineVersion");
             this.buildNumber = parsePrefValue(xFaceElement, "EngineBuild");
             this.updateAddress = parsePrefValue(xFaceElement, "UpdateAddress");
@@ -230,9 +223,10 @@ namespace xFaceLib.runtime
         {
             //xFace的工作空间路径形如：C:\Data\Programs\productId\Local\xface3\
             string workSpace = "xface3\\";
-            if (IsPlayerMode)
+            XSystemBootstrap boot = XSystemBootstrapFactory.CreateSystemBootstrap();
+            if (boot.GetType().ToString().Equals("xFaceLib.runtime.XPlayerSystemBootstrap"))
             {
-                workSpace = "xFace_Player\\";
+                workSpace = "xface_player\\";
             }
             //返回 相对IsolatedStorage 的相对路径
             using (IsolatedStorageFile isoStorage = IsolatedStorageFile.GetUserStoreForApplication())

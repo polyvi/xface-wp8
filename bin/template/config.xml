@@ -15,8 +15,6 @@
         <preference name="WorkDir" value="3" />
         <preference name="EngineVersion" value="3.1.0" />
         <preference name="EngineBuild" value="12345" />
-        <!-- 配置xFace启动模式，true为Player模式从SD卡拷贝应用资源启动，false为普通模式，应用资源打包到程序 -->
-        <preference name="UsePlayerMode" value="false" />
         <!-- 配置检测更新的服务器地址 -->
         <preference name="CheckUpdate" value="false" />
         <preference name="UpdateAddress" value="" />
