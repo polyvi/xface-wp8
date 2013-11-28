@@ -23,7 +23,6 @@ namespace xFaceLib.Log
 
         public override void LogWarn(String log)
         {
-            UmengSDK.UmengAnalytics.onEvent("DEBUGLOG", log);
             Debug.WriteLine("Warn: " + log);
             WirteToFile("Warn: " + log);
         }
@@ -36,7 +35,6 @@ namespace xFaceLib.Log
 
         public override void LogError(String log)
         {
-            UmengSDK.UmengAnalytics.onEvent("DEBUGLOG", log);
             Debug.WriteLine("Error: " + log);
             WirteToFile("Error: " + log);
         }

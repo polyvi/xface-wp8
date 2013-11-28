@@ -34,7 +34,7 @@ namespace xFaceLib.runtime
         public XRuntime(Grid layoutRoot)
         {
             StartupMode mode = PhoneApplicationService.Current.StartupMode;
-
+            var umengExt = WPCordovaClassLib.Cordova.CommandFactory.CreateByServiceName("XUmengExt");
             //if resume:do nothing
             if (mode == StartupMode.Launch)
             {
@@ -69,8 +69,6 @@ namespace xFaceLib.runtime
         /// </summary>
         private  void doInitialization()
         {
-            UmengSDK.UmengAnalytics.onLaunching("51c2954456240b164f085721");
-
             //异步系统环境准备
              Task.Run(() =>
             {
@@ -185,13 +183,11 @@ namespace xFaceLib.runtime
         private void AppLaunching(object sender, LaunchingEventArgs e)
         {
             XLog.WriteInfo("AppLaunching");
-            UmengSDK.UmengAnalytics.onLaunching("51c2954456240b164f085721");
         }
 
         private void AppActivated(object sender, Microsoft.Phone.Shell.ActivatedEventArgs e)
         {
             XLog.WriteInfo("AppActivated");
-            UmengSDK.UmengAnalytics.onActivated("51c2954456240b164f085721");
         }
 
         #endregion

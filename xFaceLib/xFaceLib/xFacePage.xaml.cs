@@ -30,7 +30,6 @@ namespace xFaceLib
         protected override void OnNavigatedFrom(System.Windows.Navigation.NavigationEventArgs e)
         {
             base.OnNavigatedFrom(e);
-            UmengSDK.UmengAnalytics.onPageEnd("xFacePage");
         }
         protected override void OnNavigatedTo(System.Windows.Navigation.NavigationEventArgs e)
         {
@@ -42,7 +41,6 @@ namespace xFaceLib
                 XStartParams.SaveStartParams(value);
             }
             base.OnNavigatedTo(e);
-            UmengSDK.UmengAnalytics.onPageStart("xFacePage");
         }
     }
 }
