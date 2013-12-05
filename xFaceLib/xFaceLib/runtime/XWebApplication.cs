@@ -38,15 +38,6 @@ namespace xFaceLib.runtime
             this.datas = new Dictionary<string, Object>();
         }
 
-
-        /// <summary>
-        /// app 加载应用启动
-        /// </summary>
-        public override void Load()
-        {
-            this.mode.LoadApp(this);
-        }
-
         public void SetApp(XAppWebView AppView)
         {
             this.AppView = AppView;

@@ -29,8 +29,6 @@ namespace xFaceLib.runtime
         public XAppManagement AppManagement
         { get { return appManagement; } }
 
-        private bool isxFaceInited = false;
-
         public XRuntime(Grid layoutRoot)
         {
             StartupMode mode = PhoneApplicationService.Current.StartupMode;
@@ -112,7 +110,6 @@ namespace xFaceLib.runtime
             //初始化完成，启动default app
             //startDefaultApp
             this.xFaceBoot.Boot(appManagement);
-            isxFaceInited = true;
         }
 
         private void CheckVersion(XApplication app)

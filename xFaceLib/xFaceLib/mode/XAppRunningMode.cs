@@ -71,14 +71,5 @@ namespace xFaceLib.mode
             url = url.Replace('\\', '/');
             return url;
         }
-
-        /// <summary>
-        /// 加载应用
-        /// </summary>
-        /// <param name="app"></param>
-        public void LoadApp(XApplication app)
-        {
-            //app.AppView.LoadApp(GetURL(app));
-        }
     }
 }
