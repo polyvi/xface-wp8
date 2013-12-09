@@ -365,7 +365,7 @@ namespace xFaceLib.ams
         {
             return "(function() { \n" +
                      "try { \n" +
-                         "cordova.require('com.polyvi.xface.core.xapp.app').fireAppEvent(" + arg + "); \n" +
+                         "cordova.require('com.polyvi.xface.extension.ams.app').fireAppEvent(" + arg + "); \n" +
                      "} catch (e) { \n" +
                          "console.log('exception in fireAppEvent:' + e);\n" +
                      "} \n" +
