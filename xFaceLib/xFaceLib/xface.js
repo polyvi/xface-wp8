@@ -1,5 +1,5 @@
 ﻿// Platform: windowsphone
-// 3.2.0-dev-be15823
+// 3.3.0-dev-945bf33
 /*
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  under the License.
 */
 ;(function() {
-var CORDOVA_JS_BUILD_LABEL = '3.2.0-dev-be15823';
+var CORDOVA_JS_BUILD_LABEL = '3.3.0-dev-945bf33';
 // file: lib/scripts/require.js
 
 /*jshint -W079 */
@@ -850,6 +850,36 @@ module.exports = function(success, fail, service, action, args) {
 
 });
 
+// file: lib/common/exec/proxy.js
+define("cordova/exec/proxy", function(require, exports, module) {
+
+
+// internal map of proxy function
+var CommandProxyMap = {};
+
+module.exports = {
+
+    // example: cordova.commandProxy.add("Accelerometer",{getCurrentAcceleration: function(successCallback, errorCallback, options) {...},...);
+    add:function(id,proxyObj) {
+        console.log("adding proxy for " + id);
+        CommandProxyMap[id] = proxyObj;
+        return proxyObj;
+    },
+
+    // cordova.commandProxy.remove("Accelerometer");
+    remove:function(id) {
+        var proxy = CommandProxyMap[id];
+        delete CommandProxyMap[id];
+        CommandProxyMap[id] = null;
+        return proxy;
+    },
+
+    get:function(service,action) {
+        return ( CommandProxyMap[service] ? CommandProxyMap[service][action] : null );
+    }
+};
+});
+
 // file: lib/common/init.js
 define("cordova/init", function(require, exports, module) {
 
@@ -1073,7 +1103,11 @@ module.exports = {
     id: 'windowsphone',
     bootstrap: function() {
         var cordova = require('cordova'),
+        modulemapper = require('cordova/modulemapper'),
                exec = require('cordova/exec');
+
+        // TODO: Extract this as a proper plugin.
+        modulemapper.clobbers('xFace/xapp', 'xFace.app');
 
         // Inject a listener for the backbutton, and tell native to override the flag (true/false) when we have 1 or more, or 0, listeners
         var backButtonChannel = cordova.addDocumentEventHandler('backbutton');
@@ -1082,6 +1116,50 @@ module.exports = {
         };
     }
 };
+
+});
+
+// file: lib/common/plugin/privateModule.js
+define("xFace/plugin/privateModule", function(require, exports, module) {
+
+/*
+ This file was modified from or inspired by Apache Cordova.
+
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements. See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership. The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License. You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied. See the License for the
+ specific language governing permissions and limitations
+ under the License.
+*/
+
+var exec = require('cordova/exec');
+var privateModule = function(){};
+
+ /**
+  * 该接口用于js调用native功能（没有返回值）
+  */
+ privateModule.prototype.execCommand = function(type, args) {
+    if(type === "xFace_close_application:") {
+        exec(null, null, null, "closeApplication", args);
+       } else if(type === "xFace_app_send_message:") {
+        exec(null, null, null, "appSendMessage", args);
+    } else {
+        console.log("Command[" + type + "] is not supported in privateModule.js! ");
+    }
+ };
+
+module.exports = new privateModule();
 
 });
 
@@ -1573,6 +1651,54 @@ define("xFace", function(require, exports, module) {
 
 var xFace = require('cordova');
 module.exports = xFace;
+});
+
+// file: lib/common/xapp.js
+define("xFace/xapp", function(require, exports, module) {
+
+/*
+ This file was modified from or inspired by Apache Cordova.
+
+ Licensed to the Apache Software Foundation (ASF) under one
+ or more contributor license agreements. See the NOTICE file
+ distributed with this work for additional information
+ regarding copyright ownership. The ASF licenses this file
+ to you under the Apache License, Version 2.0 (the
+ "License"); you may not use this file except in compliance
+ with the License. You may obtain a copy of the License at
+
+    http://www.apache.org/licenses/LICENSE-2.0
+
+ Unless required by applicable law or agreed to in writing,
+ software distributed under the License is distributed on an
+ "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY
+ KIND, either express or implied. See the License for the
+ specific language governing permissions and limitations
+ under the License.
+*/
+
+/**
+ * @module app
+ */
+var exec = require('cordova/exec');
+
+var app =
+{
+    /**
+     * 关闭当前应用app（Android, iOS, WP8）
+     * 如果当前只有一个app,在android/WP8平台上则退出xFace;在iOS平台上由于系统限制不退出xFace!!
+     * @example
+            xFace.app.close();
+     * @method close
+     * @platform Android, iOS, WP8
+     * @since 3.0.0
+     */
+    close:function() {
+        require('xFace/plugin/privateModule').execCommand("xFace_close_application:", []);
+    }
+};
+module.exports = app;
+
 });
 
 window.cordova = require('cordova');
