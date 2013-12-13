@@ -53,7 +53,10 @@ namespace xFaceLib.runtime
                     }
                 }
             }
-
+            if (null == page && null == data)
+            {
+                data = startparams;
+            }
             return new XStartParams(page, data);
         }
 
