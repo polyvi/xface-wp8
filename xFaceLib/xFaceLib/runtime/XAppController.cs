@@ -56,7 +56,7 @@ namespace xFaceLib.runtime
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
                 XAppWebView appView = app.AppView;
-                this.layoutRoot.Children.Remove(appView.Browser);
+                this.layoutRoot.Children.Remove(appView.CDView);
                 appView.IsVaild = false;
                 app.AppView = null;
             });

@@ -139,6 +139,9 @@ namespace xFaceLib.runtime
                     if (null != AppClose)
                     {
                         AppClose(this, AppInfo.AppId);
+                        //清空注册的handle
+                        AppClose = null;
+                        AppSendMessage = null;
                     }
                 }
                 else
