@@ -31,6 +31,11 @@ namespace xFaceLib.runtime
         /// </summary>
         private Dictionary<String, Object> datas;
 
+        /// <summary>
+        /// APP 存放键值对的共享区
+        /// </summary>
+        private XDOMStorageHelper DOMStorageHelper;
+
         public XWebApplication(XAppInfo applicationInfo)
             : base(applicationInfo)
         {
@@ -44,6 +49,8 @@ namespace xFaceLib.runtime
             this.AppView.IsVaild = true;
             XNativeExecution xFaceExec = new XNativeExecution(this.AppView.Browser, this);
             this.AppView.CDView.nativeExecution = (NativeExecution)xFaceExec;
+            DOMStorageHelper = new XDOMStorageHelper();
+            DOMStorageHelper.Browser = this.AppView.Browser;
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
                 this.AppView.Browser.Loaded += XAppWebView_Loaded;
@@ -194,6 +201,13 @@ namespace xFaceLib.runtime
                 return;
             }
 
+            //DOMStorage
+            if ((commandStr.IndexOf("DOMStorage") == 0))
+            {
+                DOMStorageHelper.HandleCommand(commandStr);
+                return;
+            }
+
             //FIXME:处理xFace特有的js command
             XCommand command = XCommand.parse(commandStr);
             SendCommand(command);
@@ -212,6 +226,7 @@ namespace xFaceLib.runtime
 
         private void XAppWebView_Navigated(object sender, System.Windows.Navigation.NavigationEventArgs e)
         {
+            DOMStorageHelper.InjectScript();
             XLog.WriteInfo("XAppWebView_Navigated :: " + e.Uri.ToString());
         }
         #endregion
