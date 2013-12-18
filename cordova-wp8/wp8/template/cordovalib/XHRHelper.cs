@@ -183,6 +183,7 @@ namespace WPCordovaClassLib.CordovaLib
                     var alias = this;
 
                     var root = window.location.href.split('#')[0];   // remove hash
+                    root = root.replace(/\\/g,'/');
                     var basePath = root.substr(0,root.lastIndexOf('/')) + '/';
 
                     var resolvedUrl = this._url.split('//').join('/').split('#')[0]; // remove hash
