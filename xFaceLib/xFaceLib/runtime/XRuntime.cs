@@ -47,11 +47,6 @@ namespace xFaceLib.runtime
             this.appController.ShowSplashIfNeeded();
         }
 
-        public void HandleBackKeyPress(object sender, CancelEventArgs e)
-        {
-            this.appController.HandleBackKeyPress(sender, e);
-        }
-
         public void PageLoaded(object sender, System.Windows.RoutedEventArgs e)
         {
             PhoneApplicationPage page = (PhoneApplicationPage)sender;

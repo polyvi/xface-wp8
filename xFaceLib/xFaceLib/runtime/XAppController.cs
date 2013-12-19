@@ -21,11 +21,6 @@ namespace xFaceLib.runtime
         /// </summary>
         public XAppWebView CurrentAppView = null;
 
-        /// <summary>
-        /// xFace page的backkey事件
-        /// </summary>
-        private event EventHandler<CancelEventArgs> BackKeyEventHandler;
-
         public XAppController(Grid layoutRoot)
         {
             this.layoutRoot = layoutRoot;
@@ -74,25 +69,6 @@ namespace xFaceLib.runtime
             }
             XSplashScreen splash = XSplashScreen.GetInstance();
             splash.ShowxFaceSplash();
-        }
-
-        public void HandleBackKeyPress(object sender, CancelEventArgs e)
-        {
-            XLog.WriteInfo("backkey press ");
-            if (layoutRoot.Children.Count > 0)
-            {
-                string type = layoutRoot.Children[layoutRoot.Children.Count - 1].ToString();
-
-                if (type.Contains("XNotificationBox"))
-                {
-                    //alert 存在交由alert处理不在传递
-                    return;
-                }
-            }
-            if (BackKeyEventHandler != null)
-            {
-                BackKeyEventHandler(sender, e);
-            }
         }
 
         /// <summary>

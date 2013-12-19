@@ -20,8 +20,6 @@ namespace xFaceLib
 
             //runtime的初始化
             this.runtime = new XRuntime(this.LayoutRoot);
-            //backPress
-            this.BackKeyPress += this.runtime.HandleBackKeyPress;
             //xFacePage Loaded
             this.Loaded += this.runtime.PageLoaded;
         }
