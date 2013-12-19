@@ -98,7 +98,6 @@
     <Compile Include="mode\XLocalMode.cs" />
     <Compile Include="mode\XOnlineMode.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="ResolutionHelper.cs" />
     <Compile Include="runtime\XAmsDelegate.cs" />
     <Compile Include="runtime\XAppConfigParser.cs" />
     <Compile Include="runtime\XAppConfigParserFactory.cs" />
