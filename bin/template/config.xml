@@ -8,12 +8,12 @@
         <preference name="FullScreen" value="false" />
         <preference name="ShowSplashScreen" value="true" />
         <!-- 配置splash显示的时间 单位ms -->
-        <preference name="SplashScreenDelayDuration" value="500" />
+        <preference name="SplashScreenDelayDuration" value="2000" />
         <!-- 配置splash是否自动隐藏 -->
         <preference name="AutoHideSplashScreen" value="true" />
         <!-- 工作目录设定策略，1：仅手机内存;2：仅外部存储（FlashROM及SD/TF扩展卡）;3：外部存储优先 -->
         <preference name="WorkDir" value="3" />
-        <preference name="EngineVersion" value="3.1.0" />
+        <preference name="EngineVersion" value="3.2.x" />
         <preference name="EngineBuild" value="12345" />
         <!-- 配置检测更新的服务器地址 -->
         <preference name="CheckUpdate" value="false" />

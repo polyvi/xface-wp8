@@ -35,10 +35,14 @@ namespace xFaceLib.runtime
             {
                 //注册WebApp关联View
                 app.SetApp(appView);
+                if (app.IsDefaultApp)
+                {
+                    //DefaultApp才注册load/fail handle处理 splash关闭
+                    appView.CDView.Browser.Loaded += AppLoadedHandler;
+                    appView.CDView.Browser.NavigationFailed += AppLoadFailedHandler;
+                }
                 this.layoutRoot.Children.Add(appView.CDView);
                 appView.CDView.UpdateLayout();
-                appView.CDView.Browser.LoadCompleted += AppLoadCompleteHandler;
-                appView.CDView.Browser.NavigationFailed += AppLoadFailedHandler;
             });
         }
 
@@ -94,15 +98,14 @@ namespace xFaceLib.runtime
 
             XSplashScreen splash = XSplashScreen.GetInstance();
             splash.Hide();
-            //SystemTray
-            Microsoft.Phone.Shell.SystemTray.IsVisible = true;
+
         }
 
-        private void AppLoadCompleteHandler(object sender, System.Windows.Navigation.NavigationEventArgs e)
+        private void AppLoadedHandler(object sender, RoutedEventArgs e)
         {
             TryStopShowingSplash();
             WebBrowser browser = (WebBrowser)sender;
-            browser.LoadCompleted -= AppLoadCompleteHandler;
+            browser.Loaded -= AppLoadedHandler;
             browser.NavigationFailed -= AppLoadFailedHandler;
             browser.Visibility = Visibility.Visible;
         }
@@ -111,6 +114,7 @@ namespace xFaceLib.runtime
         {
             TryStopShowingSplash();
             WebBrowser browser = (WebBrowser)sender;
+            browser.Loaded -= AppLoadedHandler;
             browser.NavigationFailed -= AppLoadFailedHandler;
             browser.Visibility = Visibility.Visible;
         }
