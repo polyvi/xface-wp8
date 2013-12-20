@@ -35,36 +35,6 @@ namespace xFaceLib.runtime
         public string LogLevel { get { return logLevel; } }
 
         /// <summary>
-        /// 配置是否显示全屏
-        /// </summary>
-        private bool isFullscreen;
-        public bool IsFullscreen { get { return isFullscreen; } }
-
-        /// <summary>
-        /// 配置splash显示
-        /// </summary>
-        private bool isShowSplash;
-        public bool IsShowSplash { get { return isShowSplash; } }
-
-        /// <summary>
-        /// 配置splash显示的时间 单位ms
-        /// </summary>
-        private int splashShowTime;
-        public int SplashShowTime { get { return splashShowTime; } }
-
-        /// <summary>
-        /// 配置splash是否自动隐藏
-        /// </summary>
-        private bool autoHideSplashScreen;
-        public bool AutoHideSplashScreen { get { return autoHideSplashScreen; } }
-
-        /// <summary>
-        /// 工作目录设定策略，1：仅手机内存;2：仅外部存储（FlashROM及SD/TF扩展卡）;3：外部存储优先
-        /// </summary>
-        private int workDir;
-        public int WorkDir { get { return workDir; } }
-
-        /// <summary>
         /// xFace引擎版本号
         /// </summary>
         private string xFaceVersion;
@@ -75,18 +45,6 @@ namespace xFaceLib.runtime
         /// </summary>
         private string buildNumber;
         public string BuildNumber { get { return buildNumber; } }
-
-        /// <summary>
-        /// 配置检测更新的服务器地址
-        /// </summary>
-        private string updateAddress;
-        public string UpdateAddress { get { return updateAddress; } }
-
-        /// <summary>
-        /// 是否检查
-        /// </summary>
-        private bool isCheck;
-        public bool IsCheck { get { return isCheck; } }
 
         /// <summary>
         /// 所有预置安装包的包名
@@ -144,13 +102,9 @@ namespace xFaceLib.runtime
             XDocument doc = XDocument.Load(xFaceXml);
             XElement widgetElement = doc.Root;
 
-            var values = from results in widgetElement.Descendants()
-                         where results.Name.LocalName == "xFace"
-                         select results;
-            XElement xFace = values.FirstOrDefault();
-            ParsexFaceInfo(xFace);
+            ParsexFacePreferenceInfo(widgetElement);
 
-            values = from results in widgetElement.Descendants()
+            var values = from results in widgetElement.Descendants()
                          where results.Name.LocalName == "pre_install_packages"
                          select results;
             XElement packages = values.FirstOrDefault();
@@ -160,37 +114,22 @@ namespace xFaceLib.runtime
         /// <summary>
         /// 解析系统配置 获取xFace的信息 如版本号/build号等
         /// </summary>
-        private void ParsexFaceInfo(XElement xFaceElement)
+        private void ParsexFacePreferenceInfo(XElement widgetElement)
         {
-            this.logLevel = parsePrefValue(xFaceElement, "LogLevel");
-            this.isFullscreen = Convert.ToBoolean(parsePrefValue(xFaceElement, "FullScreen"));
-            this.isShowSplash = Convert.ToBoolean(parsePrefValue(xFaceElement, "ShowSplashScreen"));
-            this.splashShowTime = int.Parse(parsePrefValue(xFaceElement, "SplashScreenDelayDuration"));
-            //AutoHideSplashScreen 没有配置默认为true
-            if (null == parsePrefValue(xFaceElement, "AutoHideSplashScreen"))
-            {
-                this.autoHideSplashScreen = true;
-            }
-            else
-            {
-                this.autoHideSplashScreen = Convert.ToBoolean(parsePrefValue(xFaceElement, "AutoHideSplashScreen"));
-            }
-            this.workDir = int.Parse(parsePrefValue(xFaceElement, "WorkDir"));
-            this.xFaceVersion = parsePrefValue(xFaceElement, "EngineVersion");
-            this.buildNumber = parsePrefValue(xFaceElement, "EngineBuild");
-            this.updateAddress = parsePrefValue(xFaceElement, "UpdateAddress");
-            this.isCheck = Convert.ToBoolean(parsePrefValue(xFaceElement, "CheckUpdate"));
+            this.logLevel = parsePrefValue(widgetElement, "LogLevel");
+            this.xFaceVersion = parsePrefValue(widgetElement, "EngineVersion");
+            this.buildNumber = parsePrefValue(widgetElement, "EngineBuild");
         }
 
         /// <summary>
         /// 解析preference标签中相应name的value值
         /// </summary>
-        /// <param name="xFaceElement">xFace元素</param>
+        /// <param name="widgetElement">widgetElement元素</param>
         /// <param name="attrName">查找的name值</param>
         /// <returns>对应的value值</returns>
-        private String parsePrefValue(XElement xFaceElement,String attrName)
+        private String parsePrefValue(XElement widgetElement, String attrName)
         {
-            var itemnodes = from results in xFaceElement.Descendants()
+            var itemnodes = from results in widgetElement.Descendants()
                          where results.Name.LocalName == "preference" && (results.Attribute("name").Value == attrName)
                          select results;
 

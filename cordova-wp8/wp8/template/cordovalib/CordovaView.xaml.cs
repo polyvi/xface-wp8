@@ -375,6 +375,10 @@ namespace WPCordovaClassLib
                     {
                         SystemTray.SetIsVisible(page, false);
                     }
+                    else
+                    {
+                        SystemTray.SetIsVisible(page, true);
+                    }
                 }
             }
         }

@@ -44,7 +44,7 @@ namespace xFaceLib.runtime
             }
 
             this.appController = new XAppController(layoutRoot);
-            this.appController.ShowSplashIfNeeded();
+            this.appController.ShowSplash();
         }
 
         public void PageLoaded(object sender, System.Windows.RoutedEventArgs e)
