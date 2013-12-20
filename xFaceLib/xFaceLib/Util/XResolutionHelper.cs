@@ -2,7 +2,7 @@
 
 namespace xFaceLib.Util
 {
-    public enum Resolutions { WVGA, WXGA, HD720p };
+    public enum Resolutions { WVGA, WXGA, HD720p, HD1080p };
 
     public static class XResolutionHelper
     {
@@ -30,6 +30,14 @@ namespace xFaceLib.Util
             }
         }
 
+        private static bool Is1080p
+        {
+            get
+            {
+                return System.Windows.Application.Current.Host.Content.ScaleFactor == 225;
+            }
+        }
+
         public static Resolutions CurrentResolution
         {
             get
@@ -37,6 +45,7 @@ namespace xFaceLib.Util
                 if (IsWvga) return Resolutions.WVGA;
                 else if (IsWxga) return Resolutions.WXGA;
                 else if (Is720p) return Resolutions.HD720p;
+                else if (Is1080p) return Resolutions.HD1080p;
                 else throw new InvalidOperationException("Unknown resolution");
             }
         }

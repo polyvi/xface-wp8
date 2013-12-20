@@ -50,21 +50,7 @@ namespace xFaceLib.Util
                 splash.SetDisplayInfo("version: " + version, "Product: " + product);
             }
 
-            switch (XResolutionHelper.CurrentResolution)
-            {
-                case Resolutions.HD720p:
-                    splash.SetSplashImage("../SplashScreenImage.screen-720p.jpg");
-                    break;
-                case Resolutions.WVGA:
-                    splash.SetSplashImage("../SplashScreenImage.screen-WVGA.jpg");
-                    break;
-                case Resolutions.WXGA:
-                    splash.SetSplashImage("../SplashScreenImage.screen-WXGA.jpg");
-                    break;
-                default:
-                    splash.SetSplashImage("../SplashScreenImage.screen-720p.jpg");
-                    break;
-            }
+            DetermineSplashImage(splash);
             this.popup.Child = splash;
             this.popup.IsOpen = true;
         }
@@ -89,21 +75,7 @@ namespace xFaceLib.Util
             //文件不存在 使用默认splash
             if (!File.Exists(imagePath))
             {
-                switch (XResolutionHelper.CurrentResolution)
-                {
-                    case Resolutions.HD720p:
-                        splash.SetSplashImage("../SplashScreenImage.screen-720p.jpg");
-                        break;
-                    case Resolutions.WVGA:
-                        splash.SetSplashImage("../SplashScreenImage.screen-WVGA.jpg");
-                        break;
-                    case Resolutions.WXGA:
-                        splash.SetSplashImage("../SplashScreenImage.screen-WXGA.jpg");
-                        break;
-                    default:
-                        splash.SetSplashImage("../SplashScreenImage.screen-720p.jpg");
-                        break;
-                }
+                DetermineSplashImage(splash);
             }
             else
             {
@@ -137,6 +109,32 @@ namespace xFaceLib.Util
                 return;
             }
             this.popup.IsOpen = false;
+        }
+
+        /// <summary>
+        /// 根据设备分辨率决定splashImage
+        /// </summary>
+        /// <param name="splash">splash控件</param>
+        private void DetermineSplashImage(XSplashScreenControl splash)
+        {
+            switch (XResolutionHelper.CurrentResolution)
+            {
+                case Resolutions.HD1080p:
+                    splash.SetSplashImage("../SplashScreenImage-1080p.jpg");
+                    break;
+                case Resolutions.HD720p:
+                    splash.SetSplashImage("../SplashScreenImage-720p.jpg");
+                    break;
+                case Resolutions.WVGA:
+                    splash.SetSplashImage("../SplashScreenImage-WVGA.jpg");
+                    break;
+                case Resolutions.WXGA:
+                    splash.SetSplashImage("../SplashScreenImage-WXGA.jpg");
+                    break;
+                default:
+                    splash.SetSplashImage("../SplashScreenImage-1080p.jpg");
+                    break;
+            }
         }
     }
 }

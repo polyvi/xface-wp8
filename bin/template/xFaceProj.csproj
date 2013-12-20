@@ -120,11 +120,10 @@
       <SubType>Designer</SubType>
     </None>
     <Content Include="xface3\**\*.*" />
-    <Content Include="SplashScreenImage.jpg" />
-    <Content Include="SplashScreenImage.screen-720p.jpg" />
-    <Content Include="SplashScreenImage.screen-WVGA.jpg" />
-    <Content Include="SplashScreenImage.screen-WXGA.jpg" />
-    <Content Include="SplashScreenImage.screen-1080p.jpg" />
+    <Content Include="SplashScreenImage-720p.jpg" />
+    <Content Include="SplashScreenImage-WVGA.jpg" />
+    <Content Include="SplashScreenImage-WXGA.jpg" />
+    <Content Include="SplashScreenImage-1080p.jpg" />
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Resources\AppResources.resx">

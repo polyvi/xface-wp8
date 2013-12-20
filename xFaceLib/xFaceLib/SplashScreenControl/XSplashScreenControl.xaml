@@ -10,7 +10,7 @@
     d:DesignHeight="480" d:DesignWidth="480" Background="White">
 
         <Grid x:Name="LayoutRoot" Background="White" Width="480" Height="Auto">
-            <Image Height="Auto" HorizontalAlignment="Left" Margin="0,0,0,0" Name="SplashImage" Stretch="Fill" VerticalAlignment="Top" Width="480" Source="../SplashScreenImage.screen-720p.jpg" />
+            <Image Height="Auto" HorizontalAlignment="Left" Margin="0,0,0,0" Name="SplashImage" Stretch="Fill" VerticalAlignment="Top" Width="480" Source="../SplashScreenImage-1080p.jpg" />
             <TextBlock HorizontalAlignment="Left" Margin="100,486,0,106" Name="Info" Text="" Width="auto" Foreground="White" FontSize="22" />
             <ProgressBar HorizontalAlignment="Left" Margin="47,692,0,89" Name="progressBar1" Width="383" Background="#19000000" Foreground="White"  />
         </Grid>
