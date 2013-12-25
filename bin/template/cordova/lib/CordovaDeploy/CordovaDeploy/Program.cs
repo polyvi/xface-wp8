@@ -162,13 +162,13 @@ namespace CordovaDeploy
                 return;    // Logging of errors is done in ReadAppId
             }
 
-            if (File.Exists(root + @"\ApplicationIcon.png"))
+            if (File.Exists(root + @"\Assets\ApplicationIcon.png"))
             {
-                iconFilePath = root + @"\ApplicationIcon.png";
+                iconFilePath = root + @"\Assets\ApplicationIcon.png";
             }
             else
             {
-                Log(string.Format("Error: could not find application icon at {0}", root + @"\ApplicationIcon.png"), true);
+                Log(string.Format("Error: could not find application icon at {0}", root + @"\Assets\ApplicationIcon.png"), true);
                 ReadWait();
                 return;
             }
@@ -359,13 +359,13 @@ namespace CordovaDeploy
                 return;    // Logging of errors is done in ReadAppId
             }
 
-            if (File.Exists(root + @"\ApplicationIcon.png"))
+            if (File.Exists(root + @"\Assets\ApplicationIcon.png"))
             {
-                iconFilePath = root + @"\ApplicationIcon.png";
+                iconFilePath = root + @"\Assets\ApplicationIcon.png";
             }
             else
             {
-                Log(string.Format("Error: could not find application icon at {0}", root + @"\ApplicationIcon.png"), true);
+                Log(string.Format("Error: could not find application icon at {0}", root + @"\Assets\ApplicationIcon.png"), true);
                 ReadWait();
                 return;
             }
