@@ -1,5 +1,5 @@
 ﻿// Platform: windowsphone
-// 3.3.0-dev-945bf33
+// 3.3.0-dev-80644fd
 /*
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements.  See the NOTICE file
@@ -19,8 +19,8 @@
  under the License.
 */
 ;(function() {
-var CORDOVA_JS_BUILD_LABEL = '3.3.0-dev-945bf33';
-// file: lib/scripts/require.js
+var CORDOVA_JS_BUILD_LABEL = '3.3.0-dev-80644fd';
+// file: src/scripts/require.js
 
 /*jshint -W079 */
 /*jshint -W020 */
@@ -34,7 +34,7 @@ var require,
         requireStack = [],
     // Map of module ID -> index into requireStack of modules currently being built.
         inProgressModules = {},
-        SEPERATOR = ".";
+        SEPARATOR = ".";
 
 
 
@@ -44,7 +44,7 @@ var require,
                 var resultantId = id;
                 //Its a relative path, so lop off the last portion and add the id (minus "./")
                 if (id.charAt(0) === ".") {
-                    resultantId = module.id.slice(0, module.id.lastIndexOf(SEPERATOR)) + SEPERATOR + id.slice(2);
+                    resultantId = module.id.slice(0, module.id.lastIndexOf(SEPARATOR)) + SEPARATOR + id.slice(2);
                 }
                 return require(resultantId);
             };
@@ -98,7 +98,7 @@ if (typeof module === "object" && typeof require === "function") {
     module.exports.define = define;
 }
 
-// file: lib/cordova.js
+// file: src/cordova.js
 define("cordova", function(require, exports, module) {
 
 
@@ -316,7 +316,7 @@ module.exports = cordova;
 
 });
 
-// file: lib/common/argscheck.js
+// file: src/common/argscheck.js
 define("cordova/argscheck", function(require, exports, module) {
 
 var exec = require('cordova/exec');
@@ -383,7 +383,7 @@ moduleExports.enableChecks = true;
 
 });
 
-// file: lib/common/base64.js
+// file: src/common/base64.js
 define("cordova/base64", function(require, exports, module) {
 
 var base64 = exports;
@@ -439,7 +439,7 @@ function uint8ToBase64(rawData) {
 
 });
 
-// file: lib/common/builder.js
+// file: src/common/builder.js
 define("cordova/builder", function(require, exports, module) {
 
 var utils = require('cordova/utils');
@@ -508,7 +508,7 @@ function include(parent, objects, clobber, merge) {
                 include(result, obj.children, clobber, merge);
             }
         } catch(e) {
-            utils.alert('Exception building cordova JS globals: ' + e + ' for key "' + key + '"');
+            utils.alert('Exception building Cordova JS globals: ' + e + ' for key "' + key + '"');
         }
     });
 }
@@ -552,7 +552,7 @@ exports.replaceHookForTesting = function() {};
 
 });
 
-// file: lib/common/channel.js
+// file: src/common/channel.js
 define("cordova/channel", function(require, exports, module) {
 
 var utils = require('cordova/utils'),
@@ -797,7 +797,7 @@ module.exports = channel;
 
 });
 
-// file: lib/windowsphone/exec.js
+// file: src/windowsphone/exec.js
 define("cordova/exec", function(require, exports, module) {
 
 var cordova = require('cordova');
@@ -850,7 +850,7 @@ module.exports = function(success, fail, service, action, args) {
 
 });
 
-// file: lib/common/exec/proxy.js
+// file: src/common/exec/proxy.js
 define("cordova/exec/proxy", function(require, exports, module) {
 
 
@@ -880,7 +880,7 @@ module.exports = {
 };
 });
 
-// file: lib/common/init.js
+// file: src/common/init.js
 define("cordova/init", function(require, exports, module) {
 
 var channel = require('cordova/channel');
@@ -995,7 +995,7 @@ channel.join(function() {
 
 });
 
-// file: lib/common/modulemapper.js
+// file: src/common/modulemapper.js
 define("cordova/modulemapper", function(require, exports, module) {
 
 var builder = require('cordova/builder'),
@@ -1096,7 +1096,7 @@ exports.reset();
 
 });
 
-// file: lib/windowsphone/platform.js
+// file: src/windowsphone/platform.js
 define("cordova/platform", function(require, exports, module) {
 
 module.exports = {
@@ -1119,7 +1119,7 @@ module.exports = {
 
 });
 
-// file: lib/common/plugin/privateModule.js
+// file: src/common/plugin/privateModule.js
 define("xFace/plugin/privateModule", function(require, exports, module) {
 
 /*
@@ -1149,24 +1149,25 @@ var privateModule = function(){};
  /**
   * 该接口用于js调用native功能（没有返回值）
   */
- privateModule.prototype.execCommand = function(type, args) {
+privateModule.prototype.execCommand = function(type, args) {
     if(type === "xFace_close_application:") {
         exec(null, null, null, "closeApplication", args);
-       } else if(type === "xFace_app_send_message:") {
+    } else if(type === "xFace_app_send_message:") {
         exec(null, null, null, "appSendMessage", args);
     } else {
         console.log("Command[" + type + "] is not supported in privateModule.js! ");
     }
- };
+};
 
 module.exports = new privateModule();
 
 });
 
-// file: lib/common/pluginloader.js
+// file: src/common/pluginloader.js
 define("cordova/pluginloader", function(require, exports, module) {
 
 var modulemapper = require('cordova/modulemapper');
+var urlutil = require('cordova/urlutil');
 
 // Helper function to inject a <script> tag.
 function injectScript(url, onload, onerror) {
@@ -1235,11 +1236,14 @@ function handlePluginsObject(path, moduleList, finishPluginLoading) {
 }
 
 function injectPluginScript(pathPrefix, finishPluginLoading) {
-    injectScript(pathPrefix + 'cordova_plugins.js', function(){
+    var pluginPath = pathPrefix + 'cordova_plugins.js';
+
+    injectScript(pluginPath, function() {
         try {
             var moduleList = require("cordova/plugin_list");
             handlePluginsObject(pathPrefix, moduleList, finishPluginLoading);
-        } catch (e) {
+        }
+        catch (e) {
             // Error loading cordova_plugins.js, file not found or something
             // this is an acceptable error, pre-3.0.0, so we just move on.
             finishPluginLoading();
@@ -1262,8 +1266,6 @@ function findCordovaPath() {
                 if(-1 != index){
                     index = path.lastIndexOf('/', index);
                     path = path.substring(0, index) + '/Documents/xface3/js_core/';
-                }else if(-1 != path.indexOf('xface_player')){
-                    path = path.substring(0, path.indexOf('xface_player')) + 'xface_player/js_core/';
                 }else if(-1 != path.indexOf('Documents')){
                     path = path.substring(0, path.indexOf('Documents')) + 'Documents/xface3/js_core/';
                 }
@@ -1289,7 +1291,7 @@ exports.load = function(callback) {
 
 });
 
-// file: lib/common/privateModule.js
+// file: src/common/privateModule.js
 define("xFace/privateModule", function(require, exports, module) {
 
 /**
@@ -1329,24 +1331,24 @@ module.exports = new privateModule();
 
 });
 
-// file: lib/common/urlutil.js
+// file: src/common/urlutil.js
 define("cordova/urlutil", function(require, exports, module) {
 
-var urlutil = exports;
-var anchorEl = document.createElement('a');
 
 /**
  * For already absolute URLs, returns what is passed in.
  * For relative URLs, converts them to absolute ones.
  */
-urlutil.makeAbsolute = function(url) {
+exports.makeAbsolute = function makeAbsolute(url) {
+    var anchorEl = document.createElement('a');
     anchorEl.href = url;
     return anchorEl.href;
 };
 
+
 });
 
-// file: lib/common/utils.js
+// file: src/common/utils.js
 define("cordova/utils", function(require, exports, module) {
 
 var utils = exports;
@@ -1516,7 +1518,7 @@ function UUIDcreatePart(length) {
 
 });
 
-// file: lib/common/workspace.js
+// file: src/common/workspace.js
 define("xFace/workspace", function(require, exports, module) {
 
 /**
@@ -1546,6 +1548,9 @@ Workspace.prototype.strEndsWith = function(str, suffix) {
 };
 
 Workspace.prototype.toURL = function(path) {
+    if(isAndroid()){
+        path = path.replace('file://','');
+    }
     return "file://localhost" + path;
 };
 
@@ -1554,26 +1559,35 @@ Workspace.prototype.toPath = function(url) {
     // 1）file://localhost/user/..
     // 2）file:///user/..
     // 3）file://\\\\localhost  windows phone执行urlUtil.makeAbsolute(path)返回的URL形式
+    var path;
     if(this.strStartsWith(url, 'file://localhost')) {
-        return url.replace('file://localhost', '');
+        path = url.replace('file://localhost', '');
     } else if (this.strStartsWith(url, 'file://\\\\localhost')) {
-        return url.replace('file://\\\\localhost', '');
+        path = url.replace('file://\\\\localhost', '');
     } else if (-1 != url.indexOf("://")) {
         //remove scheme(e.g., file://)
-        return url.substring(url.indexOf("://") + 3, url.length);
+        path = url.substring(url.indexOf("://") + 3, url.length);
     } else {
         // Don't log when running unit tests.
         if (typeof jasmine == 'undefined') {
             console.log(url + ' is not an url!');
         }
-        return url;
+        path = url;
     }
+    if(isAndroid()){
+        path = "file://" + path;
+    }
+    return path;
 };
+
+function isAndroid(){
+    return 'android' === require('cordova/platform').id;
+}
 
 Workspace.prototype.isAbsolutePath = function(path){
     // FIXME:Confirm this is right on all platforms
     // Absolute path starts with a slash
-    return this.strStartsWith(path, '/');
+    return this.strStartsWith(path, '/') || this.strStartsWith(path, 'file://') ;
 };
 
 Workspace.prototype.buildPath = function(aString, bString){
@@ -1646,14 +1660,14 @@ module.exports.enableWorkspaceCheck = true;
 
 });
 
-// file: lib/xFace.js
+// file: src/xFace.js
 define("xFace", function(require, exports, module) {
 
 var xFace = require('cordova');
 module.exports = xFace;
 });
 
-// file: lib/common/xapp.js
+// file: src/common/xapp.js
 define("xFace/xapp", function(require, exports, module) {
 
 /*
@@ -1703,7 +1717,7 @@ module.exports = app;
 
 window.cordova = require('cordova');
 window.xFace = require('xFace');
-// file: lib/scripts/bootstrap.js
+// file: src/scripts/bootstrap.js
 
 require('cordova/init');
 
