@@ -73,9 +73,10 @@ namespace xFaceLib.ams
                                     ex is ArgumentException || ex is IOException || ex is ArgumentOutOfRangeException ||
                                     ex is NotSupportedException)
                                 {
-                                    XLog.WriteError("Copy icon Error :" + ex.Message);
-                                    preInsallListener.onFailure();
-                                    return null;
+                                    //icon 拷贝失败 处理为安装成功， 报警告错
+                                    XLog.WriteWarn("Copy icon Error :" + ex.Message);
+                                    preInsallListener.OnSuccess();
+                                    return startAppId;
                                 }
                                 throw ex;
                             }
