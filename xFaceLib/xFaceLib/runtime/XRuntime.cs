@@ -16,6 +16,11 @@ namespace xFaceLib.runtime
     public class XRuntime : XAmsDelegate
     {
         /// <summary>
+        /// page上用于布局控件的容器
+        /// </summary>
+        private readonly Grid layoutRoot;
+
+        /// <summary>
         /// app应用视图控制器
         /// </summary>
         private XAppController appController;
@@ -31,6 +36,7 @@ namespace xFaceLib.runtime
 
         public XRuntime(Grid layoutRoot)
         {
+            this.layoutRoot = layoutRoot;
             StartupMode mode = PhoneApplicationService.Current.StartupMode;
             var umengExt = WPCordovaClassLib.Cordova.CommandFactory.CreateByServiceName("XUmengExt");
             //if resume:do nothing
@@ -44,7 +50,6 @@ namespace xFaceLib.runtime
             }
 
             this.appController = new XAppController(layoutRoot);
-            this.appController.ShowSplash();
         }
 
         public void PageLoaded(object sender, System.Windows.RoutedEventArgs e)
@@ -66,6 +71,7 @@ namespace xFaceLib.runtime
              Task.Run(() =>
             {
                 this.xFaceBoot = XSystemBootstrapFactory.CreateSystemBootstrap();
+                this.xFaceBoot.AddVersionLabel(this.layoutRoot);
                 this.xFaceBoot.FinishToPrepareWorkEnvironment += FinishToPrepareWorkEnvironment;
                 this.xFaceBoot.FailToPrepareWorkEnvironment += FailToPrepareWorkEnvironment;
                 xFaceBoot.PrepareWorkEnvironment();

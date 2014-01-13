@@ -2,6 +2,7 @@
 using Windows.Storage;
 using System.IO;
 using System.Diagnostics;
+using System.Windows.Controls;
 using System.Collections.Generic;
 using System.Resources;
 using xFaceLib.Util;
@@ -34,6 +35,13 @@ namespace xFaceLib.runtime
         /// </summary>
         /// <param name="runtime"></param>
         public virtual void Boot(XAppManagement appManagement)
+        { }
+
+        /// <summary>
+        /// 1. 显示产品名和版本号
+        /// </summary>
+        /// <param name="layoutRoot">page上用于布局控件的容器</param>
+        public virtual void AddVersionLabel(Grid layoutRoot)
         { }
 
         public void FireFinishToPrepareWorkEnvironment(string result)

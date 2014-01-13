@@ -35,12 +35,6 @@ namespace xFaceLib.runtime
             {
                 //注册WebApp关联View
                 app.SetApp(appView);
-                if (app.IsDefaultApp)
-                {
-                    //DefaultApp才注册load/fail handle处理 splash关闭
-                    appView.CDView.Browser.LoadCompleted += AppLoadCompleteHandler;
-                    appView.CDView.Browser.NavigationFailed += AppLoadFailedHandler;
-                }
                 this.layoutRoot.Children.Add(appView.CDView);
                 appView.CDView.UpdateLayout();
             });
@@ -59,43 +53,6 @@ namespace xFaceLib.runtime
                 appView.IsVaild = false;
                 app.AppView = null;
             });
-        }
-
-        /// <summary>
-        /// 显示splash
-        /// </summary>
-        public void ShowSplash()
-        {
-            XSplashScreen splash = XSplashScreen.GetInstance();
-            splash.ShowxFaceSplash();
-        }
-
-        /// <summary>
-        /// 停止显示splash
-        /// </summary>
-        private void HideSplash()
-        {
-            XSplashScreen splash = XSplashScreen.GetInstance();
-            splash.Hide();
-
-        }
-
-        private void AppLoadCompleteHandler(object sender, System.Windows.Navigation.NavigationEventArgs e)
-        {
-            HideSplash();
-            WebBrowser browser = (WebBrowser)sender;
-            browser.LoadCompleted -= AppLoadCompleteHandler;
-            browser.NavigationFailed -= AppLoadFailedHandler;
-            browser.Visibility = Visibility.Visible;
-        }
-
-        private void AppLoadFailedHandler(object sender, System.Windows.Navigation.NavigationFailedEventArgs e)
-        {
-            HideSplash();
-            WebBrowser browser = (WebBrowser)sender;
-            browser.LoadCompleted -= AppLoadCompleteHandler;
-            browser.NavigationFailed -= AppLoadFailedHandler;
-            browser.Visibility = Visibility.Visible;
         }
 
     }

@@ -129,7 +129,6 @@
     <Compile Include="Util\XFile.cs" />
     <Compile Include="Util\XResolutionHelper.cs" />
     <Compile Include="Util\XSafeBrowserScriptInvoker.cs" />
-    <Compile Include="Util\XSplashScreen.cs" />
     <Compile Include="Util\XSystemTask.cs" />
     <Compile Include="Util\XUtils.cs" />
     <Compile Include="xFacePage.xaml.cs">

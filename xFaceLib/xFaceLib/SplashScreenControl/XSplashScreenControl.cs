@@ -3,6 +3,7 @@ using System.IO;
 using System.Windows.Controls;
 using System.Windows.Documents;
 using System.Windows.Media.Imaging;
+using xFaceLib.Util;
 
 namespace xFaceLib.SplashScreenControl
 {
@@ -11,7 +12,7 @@ namespace xFaceLib.SplashScreenControl
         public XSplashScreenControl()
         {
             InitializeComponent();
-
+            DetermineSplashImage();
             this.progressBar1.IsIndeterminate = true;
         }
 
@@ -49,6 +50,31 @@ namespace xFaceLib.SplashScreenControl
             this.SplashImage.VerticalAlignment = System.Windows.VerticalAlignment.Stretch;
             this.SplashImage.Width = System.Windows.Application.Current.Host.Content.ActualWidth;
             this.SplashImage.Height = System.Windows.Application.Current.Host.Content.ActualHeight;
+        }
+
+        /// <summary>
+        /// 根据设备分辨率决定splashImage
+        /// </summary>
+        private void DetermineSplashImage()
+        {
+            switch (XResolutionHelper.CurrentResolution)
+            {
+                case Resolutions.HD1080p:
+                    SetSplashImage("../SplashScreenImage-1080p.jpg");
+                    break;
+                case Resolutions.HD720p:
+                    SetSplashImage("../SplashScreenImage-720p.jpg");
+                    break;
+                case Resolutions.WVGA:
+                    SetSplashImage("../SplashScreenImage-WVGA.jpg");
+                    break;
+                case Resolutions.WXGA:
+                    SetSplashImage("../SplashScreenImage-WXGA.jpg");
+                    break;
+                default:
+                    SetSplashImage("../SplashScreenImage-1080p.jpg");
+                    break;
+            }
         }
     }
 }

@@ -11,13 +11,18 @@
     Foreground="{StaticResource PhoneForegroundBrush}"
     SupportedOrientations="PortraitOrLandscape" Orientation="Portrait"
     mc:Ignorable="d"
+    xmlns:my="clr-namespace:xFaceLib.SplashScreenControl"
     shell:SystemTray.IsVisible="False">
 
     <!--LayoutRoot is the root grid where all page content is placed-->
-    <Grid x:Name="LayoutRoot" Background="White">
+    <Grid x:Name="LayoutRoot" Background="Black">
         <Grid.RowDefinitions>
             <RowDefinition Height="*"/>
         </Grid.RowDefinitions>
+        <my:XSplashScreenControl HorizontalAlignment="Stretch" 
+                   Margin="0,0,0,0"
+                   x:Name="splash"
+                   VerticalAlignment="Stretch" />
     </Grid>
 
 </phone:PhoneApplicationPage>

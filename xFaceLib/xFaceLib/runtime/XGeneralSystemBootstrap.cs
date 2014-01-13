@@ -4,6 +4,7 @@ using System.IO;
 using System.Diagnostics;
 using System.Collections.Generic;
 using System.Resources;
+using System.Windows.Controls;
 using xFaceLib.Util;
 using xFaceLib.ams;
 using xFaceLib.Log;
@@ -55,6 +56,15 @@ namespace xFaceLib.runtime
                 string StartParams = XStartParams.GetStartParams();
                 appManagement.StartDefaultApp(XStartParams.Parse(StartParams));
             }
+        }
+
+        /// <summary>
+        /// 1. 显示产品名和版本号
+        /// </summary>
+        /// <param name="layoutRoot">page上用于布局控件的容器</param>
+        public override void AddVersionLabel(Grid layoutRoot)
+        {
+            //do nothing
         }
 
         /// <summary>
