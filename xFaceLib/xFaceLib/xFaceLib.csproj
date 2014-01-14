@@ -124,6 +124,7 @@
     <Compile Include="runtime\XUriMapper.cs" />
     <Compile Include="runtime\XWebApplication.cs" />
     <Compile Include="SplashScreenControl\XSplashScreenControl.cs" />
+    <Compile Include="toast\XToastPrompt.cs" />
     <Compile Include="Util\XApplicationPersistence.cs" />
     <Compile Include="Util\XConstant.cs" />
     <Compile Include="Util\XFile.cs" />
@@ -187,6 +188,11 @@
       <Generator>MSBuild:Compile</Generator>
       <SubType>Designer</SubType>
     </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <Reference Include="Coding4Fun.Toolkit.Controls">
+      <HintPath>toast\Coding4Fun.Toolkit.Controls.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).$(TargetFrameworkVersion).Overrides.targets" />
   <Import Project="$(MSBuildExtensionsPath)\Microsoft\$(TargetFrameworkIdentifier)\$(TargetFrameworkVersion)\Microsoft.$(TargetFrameworkIdentifier).CSharp.targets" />
