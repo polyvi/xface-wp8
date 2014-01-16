@@ -1,7 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Xml;
-using System.Xml.Linq;
+﻿using System.Xml.Linq;
+using xFaceLib.Log;
 
 namespace xFaceLib.runtime
 {
@@ -114,11 +112,7 @@ namespace xFaceLib.runtime
         {
             if (null == this.appInfo.AppId || string.IsNullOrEmpty(this.appInfo.Entry))
             {
-                System.Windows.Deployment.Current.Dispatcher.BeginInvoke(() =>
-                {
-                    System.Windows.MessageBox.Show("Failed to get app config from app.xml, please set app id and content properly!");
-
-                });
+                XLog.WriteError("Failed to get app config from app.xml, please set app id and content properly!");
                 return false;
             }
             return true;

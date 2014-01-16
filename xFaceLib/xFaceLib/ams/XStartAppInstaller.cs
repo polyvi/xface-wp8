@@ -6,6 +6,8 @@ using System.IO;
 using xFaceLib.runtime;
 using xFaceLib.Util;
 using xFaceLib.Log;
+using xFaceLib.toast;
+using xFaceLib.Resources;
 
 namespace xFaceLib.ams
 {
@@ -32,6 +34,7 @@ namespace xFaceLib.ams
             PreInstalPackageItem startAppInfo = GetStartAppItem();
             if (null == startAppInfo)
             {
+                XToastPrompt.GetInstance().Toast(xFaceLibResources.No_StartApp_In_Config);
                 XLog.WriteError("error config.xml");
                 return null;
             }
@@ -44,6 +47,7 @@ namespace xFaceLib.ams
             String appDirNameInAsset = XConstant.PRE_INSTALL_SOURCE_ROOT
                     + startAppInfo.PackageId;
             XApplication app = BuildApplication(info, appDirNameInAsset);
+            if (null == app) return null;
             ams.MarkAsDefaultApp(app.AppInfo.AppId);
             return app.AppInfo.AppId;
         }
@@ -55,16 +59,18 @@ namespace xFaceLib.ams
         /// <returns></returns>
         private XAppInfo CheckDefaultAppId(PreInstalPackageItem startAppInfo)
         {
-            // 解析app的app.xml            
+            // 解析app的app.xml
             XAppInfo info = GetInfoFromXml(startAppInfo);
             if (null == info)
             {
+                XToastPrompt.GetInstance().Toast(xFaceLibResources.Read_App_Config_Error);
                 return null;
             }
             String id = info.AppId;
             String defaultId = ams.GetDefaultAppId();
             if (null != defaultId && null != id && !id.Equals(defaultId))
             {
+                XToastPrompt.GetInstance().Toast(xFaceLibResources.Update_DefaultApp_Id_NoMatch_Error);
                 XLog.WriteError("update failure.startapp id is different.");
                 return null;
             }
@@ -104,6 +110,7 @@ namespace xFaceLib.ams
                     ex is ArgumentException || ex is IOException || ex is ArgumentOutOfRangeException ||
                     ex is NotSupportedException)
                 {
+                    XToastPrompt.GetInstance().Toast(xFaceLibResources.Copy_AppConfig_Error);
                     XLog.WriteError(string.Format("Copy xml file {0} to {1} occur Exception {2}", absSourceFileName, absdestFileName, ex.Message));
                     return null;
                 }
@@ -163,7 +170,8 @@ namespace xFaceLib.ams
 
             if (null == info)
             {
-                XLog.WriteError("app app.xml error.");
+                XToastPrompt.GetInstance().Toast(xFaceLibResources.Read_App_Config_Error);
+                XLog.WriteError("PreInstal " + app.PackageName + " app.xml error.");
                 return null;
             }
             String appDirNameInAsset = XConstant.PRE_INSTALL_SOURCE_ROOT

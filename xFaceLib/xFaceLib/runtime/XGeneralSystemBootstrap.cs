@@ -1,15 +1,6 @@
-﻿using System;
-using Windows.Storage;
-using System.IO;
-using System.Diagnostics;
-using System.Collections.Generic;
-using System.Resources;
-using System.Windows.Controls;
-using xFaceLib.Util;
+﻿using System.Windows.Controls;
 using xFaceLib.ams;
-using xFaceLib.Log;
 using System.IO.IsolatedStorage;
-using System.Xml;
 using System.Xml.Linq;
 
 namespace xFaceLib.runtime

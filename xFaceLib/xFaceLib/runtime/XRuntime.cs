@@ -10,6 +10,8 @@ using System.Collections.Generic;
 using xFaceLib.ams;
 using xFaceLib.Util;
 using xFaceLib.Log;
+using xFaceLib.toast;
+using xFaceLib.Resources;
 
 namespace xFaceLib.runtime
 {
@@ -85,15 +87,7 @@ namespace xFaceLib.runtime
 
         private void FailToPrepareWorkEnvironment(object sender, string reult)
         {
-            //TODO 环境初始化准备失败
-            Deployment.Current.Dispatcher.BeginInvoke(() =>
-            {
-                MessageBoxResult result = MessageBox.Show("xFace 初始化失败", "", MessageBoxButton.OKCancel);
-                if (result == MessageBoxResult.OK)
-                {
-                    throw new Exception("init failed");//退出
-                }
-            });
+            XToastPrompt.GetInstance().Toast(xFaceLibResources.System_Initialize_Error);
         }
 
         /// <summary>
@@ -125,10 +119,7 @@ namespace xFaceLib.runtime
 
                     if (appEngineVersion > sysEngineVersion)
                     {
-                        Deployment.Current.Dispatcher.BeginInvoke(() =>
-                        {
-                            MessageBox.Show("Engine is older than what app requires, may cause issues, please update!");
-                        });
+                        XToastPrompt.GetInstance().Toast(xFaceLibResources.Engine_Version_TooLow_Error);
                     }
                 }
                 catch (FormatException ex)

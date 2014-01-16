@@ -35,7 +35,13 @@ namespace xFaceLib.ams
                 foreach (PreInstalPackageItem app in apps)
                 {
                     XApplication application = BuildApplication(app);
-                    if (application != null)
+
+                    if (application == null)
+                    {
+                        //某个app预安装失败，暂处理为 不终止安装， 打印log错误
+                        XLog.WriteError("PreInstall " + app.PackageName + " failed!");
+                    }
+                    else
                     {
                         String appId = application.AppInfo.AppId;
                         String iconname = application.AppInfo.Icon;

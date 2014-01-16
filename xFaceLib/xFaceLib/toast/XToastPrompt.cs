@@ -16,13 +16,15 @@ namespace xFaceLib.toast
             return instance;
         }
 
-        public void Toast(string content, string title = "")
+        public void Toast(string content, string title = "", int timeout = 3000)
         {
             Deployment.Current.Dispatcher.BeginInvoke(() =>
             {
                 ToastPrompt toast = new ToastPrompt();
                 toast.Title = title;
                 toast.Message = content;
+                toast.MillisecondsUntilHidden = timeout;
+                toast.TextWrapping = TextWrapping.Wrap;
                 toast.Show();
             });
         }

@@ -2,7 +2,6 @@
 using System.IO;
 using System.Windows;
 using System.Collections.Generic;
-using System.Xml;
 using System.Xml.Linq;
 using System.IO.IsolatedStorage;
 using System.Linq;
@@ -151,7 +150,7 @@ namespace xFaceLib.runtime
 
             foreach (XElement itemnode in itemnodes)
             {
-                string packageName = itemnode.Value;
+                string packageName = itemnode.Attribute("name").Value;
                 String appId = itemnode.Attribute("id").Value;
                 this.prepackedApps.Add(new PreInstalPackageItem(packageName,
                     appId));

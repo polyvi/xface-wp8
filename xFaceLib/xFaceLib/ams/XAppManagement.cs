@@ -5,6 +5,8 @@ using xFaceLib.Util;
 using System.IO.IsolatedStorage;
 using xFaceLib.Log;
 using WPCordovaClassLib.Cordova.Commands;
+using xFaceLib.toast;
+using xFaceLib.Resources;
 
 namespace xFaceLib.ams
 {
@@ -226,6 +228,11 @@ namespace xFaceLib.ams
         public void StartDefaultApp(XStartParams startParams)
         {
             XWebApplication defaultApp = (XWebApplication)this.GetAppList().GetAppById(GetDefaultAppId());
+            if (defaultApp == null)
+            {
+                XToastPrompt.GetInstance().Toast(xFaceLibResources.Start_DefaultApp_Error);
+                return;
+            }
             defaultApp.IsDefaultApp = true;
             //TODO 注册AMS 扩展
             var amsExt = WPCordovaClassLib.Cordova.CommandFactory.CreateByServiceName("AMS");
@@ -233,7 +240,11 @@ namespace xFaceLib.ams
             {
                 amsExt.InvokeMethodNamed("init", this);
             }
-            StartApp(defaultApp.AppInfo.AppId, startParams);
+            ;
+            if (AMS_ERROR.ERROR_BASE != StartApp(defaultApp.AppInfo.AppId, startParams))
+            {
+                XToastPrompt.GetInstance().Toast(xFaceLibResources.Start_DefaultApp_Error);
+            }
         }
 
         /// <summary>

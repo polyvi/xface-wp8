@@ -1,8 +1,4 @@
-using System;
-using System.IO;
 using xFaceLib.runtime;
-using xFaceLib.Util;
-using System.IO.IsolatedStorage;
 using xFaceLib.Log;
 
 namespace xFaceLib.ams
