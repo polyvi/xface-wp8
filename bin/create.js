@@ -184,6 +184,7 @@ function create(path, namespace, name) {
         replaceInFile(path + "\\xFaceProj.csproj",/..\\..\\xFaceLib/g, "xFaceLib");
     }
     replaceInFile(path + "\\xFaceProj.csproj",/\$safeprojectname\$/g,namespace);
+    replaceInFile(path + "\\xFaceProj.csproj",/\$projectname\$/g,name);
 
     if (name != "xFaceProj") {
         var valid_name = name.replace(/(\.\s|\s\.|\s+|\.+)/g, '_');

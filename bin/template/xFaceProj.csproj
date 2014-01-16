@@ -19,7 +19,7 @@
     </SupportedCultures>
     <XapOutputs>true</XapOutputs>
     <GenerateSilverlightManifest>true</GenerateSilverlightManifest>
-    <XapFilename>xFace_$(Configuration)_$(Platform).xap</XapFilename>
+    <XapFilename>$projectname$_$(Configuration)_$(Platform).xap</XapFilename>
     <SilverlightManifestTemplate>Properties\AppManifest.xml</SilverlightManifestTemplate>
     <SilverlightAppEntry>$safeprojectname$.App</SilverlightAppEntry>
     <ValidateXaml>true</ValidateXaml>
