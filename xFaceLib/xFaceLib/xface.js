@@ -1,5 +1,5 @@
 ﻿// Platform: windowsphone
-// 3.3.0-dev-80644fd
+// 3.3.0-dev-65b28c3
 /*
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  under the License.
 */
 ;(function() {
-var CORDOVA_JS_BUILD_LABEL = '3.3.0-dev-80644fd';
+var CORDOVA_JS_BUILD_LABEL = '3.3.0-dev-65b28c3';
 // file: src/scripts/require.js
 
 /*jshint -W079 */
@@ -800,7 +800,8 @@ module.exports = channel;
 // file: src/windowsphone/exec.js
 define("cordova/exec", function(require, exports, module) {
 
-var cordova = require('cordova');
+var cordova = require('cordova'),
+    base64 = require('cordova/base64');
 
 /**
  * Execute a cordova command.  It is up to the native side whether this action
@@ -827,6 +828,12 @@ module.exports = function(success, fail, service, action, args) {
     // generate a new command string, ex. DebugConsole/log/DebugConsole23/["wtf dude?"]
     for(var n = 0; n < args.length; n++)
     {
+        // special case for ArrayBuffer which could not be stringified out of the box
+        if(args[n] instanceof ArrayBuffer)
+        {
+            args[n] = base64.fromArrayBuffer(args[n]);
+        }
+
         if(typeof args[n] !== "string")
         {
             args[n] = JSON.stringify(args[n]);
