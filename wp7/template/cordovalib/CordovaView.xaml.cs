@@ -1,42 +1,31 @@
 /*
-	Licensed under the Apache License, Version 2.0 (the "License");
-	you may not use this file except in compliance with the License.
-	You may obtain a copy of the License at
+    Licensed under the Apache License, Version 2.0 (the "License");
+    you may not use this file except in compliance with the License.
+    You may obtain a copy of the License at
 
-	http://www.apache.org/licenses/LICENSE-2.0
+    http://www.apache.org/licenses/LICENSE-2.0
 
-	Unless required by applicable law or agreed to in writing, software
-	distributed under the License is distributed on an "AS IS" BASIS,
-	WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
-	See the License for the specific language governing permissions and
-	limitations under the License.
+    Unless required by applicable law or agreed to in writing, software
+    distributed under the License is distributed on an "AS IS" BASIS,
+    WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
+    See the License for the specific language governing permissions and
+    limitations under the License.
 */
 
+using Microsoft.Phone.Controls;
+using Microsoft.Phone.Shell;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
+using System.Diagnostics;
+using System.IO;
+using System.IO.IsolatedStorage;
 using System.Linq;
-using System.Net;
 using System.Windows;
 using System.Windows.Controls;
-using System.Windows.Documents;
-using System.Windows.Input;
-using System.Windows.Media;
-using System.Windows.Media.Animation;
-using System.Windows.Shapes;
-using Microsoft.Phone.Controls;
-using System.IO.IsolatedStorage;
 using System.Windows.Resources;
-using System.Windows.Interop;
-using System.Runtime.Serialization.Json;
-using System.IO;
-using System.ComponentModel;
 using System.Xml.Linq;
-using WPCordovaClassLib.Cordova.Commands;
-using System.Diagnostics;
-using System.Text;
 using WPCordovaClassLib.Cordova;
-using System.Threading;
-using Microsoft.Phone.Shell;
 using WPCordovaClassLib.Cordova.JSON;
 using WPCordovaClassLib.CordovaLib;
 
@@ -376,7 +365,7 @@ namespace WPCordovaClassLib
                 }
                 catch (Exception ex)
                 {
-                    Console.WriteLine("Exception while invoking backbutton into cordova view: " + ex.Message);
+                    Debug.WriteLine("Exception while invoking backbutton into cordova view: " + ex.Message);
                 }
             }
             else
@@ -408,7 +397,7 @@ namespace WPCordovaClassLib
             {
                 CordovaBrowser.InvokeScript("execScript", new string[] { nativeReady });
             }
-            catch (Exception ex)
+            catch (Exception)
             {
                 Debug.WriteLine("Error calling js to fire nativeReady event. Did you include cordova.js in your html script tag?");
             }
@@ -491,10 +480,10 @@ namespace WPCordovaClassLib
         {
             try
             {
-                Uri newLoc = new Uri(url,UriKind.RelativeOrAbsolute);
+                Uri newLoc = new Uri(url, UriKind.RelativeOrAbsolute);
                 CordovaBrowser.Navigate(newLoc);
             }
-            catch(Exception)
+            catch (Exception)
             {
 
             }
