@@ -1,5 +1,5 @@
 ﻿// Platform: windowsphone
-// 3.2.0-rc2
+// 3.3.0-dev-65b28c3
 /*
  Licensed to the Apache Software Foundation (ASF) under one
  or more contributor license agreements.  See the NOTICE file
@@ -19,7 +19,7 @@
  under the License.
 */
 ;(function() {
-var CORDOVA_JS_BUILD_LABEL = '3.2.0-rc2';
+var CORDOVA_JS_BUILD_LABEL = '3.3.0-dev-65b28c3';
 // file: src/scripts/require.js
 
 /*jshint -W079 */
