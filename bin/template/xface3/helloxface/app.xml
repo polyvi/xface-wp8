@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<widget id="helloxface" version="1.0" xmlns="http://www.w3.org/ns/widgets">
+<widget id="helloxface" version="2.0" xmlns="http://www.w3.org/ns/widgets">
 
   <name short="helloxface">helloxface</name>
   <icon src="icon.png" />
@@ -14,6 +14,6 @@
 
   <author email="foo-bar@polyvi.com/" href="http://polyvi.com/">polyvi</author>
 
-  <license> Copyright 2012-2013, Polyvi Inc. </license>
+  <license> Copyright 2012-2014, Polyvi Inc. </license>
 
 </widget>
