@@ -8,3 +8,12 @@
  *  sync update config.xml
  *  Squashed 'cordova-wp8/' changes from b348feb..ea66780
  *  Update JS snapshot to version 3.3.0-dev (via xsrc)
+
+
+## 3.2.0 (Thu Apr 03 2014)
+
+
+ *  Update JS snapshot to version 3.2.0 (via xsrc)
+ *  Update default app and resources.
+ *  Update JS snapshot to version 3.3.0-dev (via xsrc)
+ *  Set VERSION to 3.3.0-dev (via xsrc)
